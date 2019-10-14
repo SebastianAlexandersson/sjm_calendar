@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <h1>hello</h1>
+    <main class="main-page">
+      <h1>hello</h1>
+    </main>
   </div>
 </template>
 
@@ -54,6 +56,37 @@ a {
 
 #app {
   flex-grow: 1 auto;
+}
+.main-page {
+  width: 100%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .main-page {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .main-page {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .main-page {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .main-page {
+    max-width: 1140px;
+  }
 }
 
 input[type="search"]::-webkit-search-cancel-button,
