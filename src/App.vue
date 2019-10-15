@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <main class="main-page">
-      <h1>hello</h1>
+      <Calendar />
     </main>
   </div>
 </template>
