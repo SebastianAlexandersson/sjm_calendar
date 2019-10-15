@@ -48,7 +48,7 @@ export default {
 }
 
 html {
-  @import url("https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro&display=swap");
+  @import url("https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro&display=swap")
 }
 
 body {
