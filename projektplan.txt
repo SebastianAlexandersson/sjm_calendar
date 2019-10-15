@@ -1,0 +1,7 @@
+SJM - Projektplan
+
+- Skapa huvudvy.
+
+- Mobilvy
+
+- Dagkomponent

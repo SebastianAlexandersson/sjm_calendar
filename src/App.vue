@@ -1,10 +1,20 @@
 <template>
   <div id="app">
     <main class="main-page">
-      <h1>hello</h1>
+      <Calendar />
     </main>
   </div>
 </template>
+
+<script>
+import Calendar from "./components/Calendar"
+
+export default {
+  components: {
+    Calendar
+  }
+}
+</script>
 
 <style>
 /* 1rem = 10px */
