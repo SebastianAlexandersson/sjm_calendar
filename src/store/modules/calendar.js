@@ -1,8 +1,8 @@
 import moment from "moment"
 
 const state = {
-  currentDay: moment(),
-  currentMonth: Number(moment().format("MM")),
+  currentDayNum: Number(moment().format("D")),
+  currentMonthStr: moment().format("MMMM"),
   months: [
     {
       month: "Januari",
@@ -41,7 +41,7 @@ const state = {
       ndays: 31
     },
     {
-      month: "Oktober",
+      month: "October",
       ndays: 30
     },
     {
