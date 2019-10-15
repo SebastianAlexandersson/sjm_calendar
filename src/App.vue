@@ -7,13 +7,15 @@
 </template>
 
 <script>
-import Calendar from "./components/Calendar"
-
+import Calendar from "./components/Calendar";
+fetch("http://localhost:4000/events")
+  .then(res => res.json())
+  .then(res => console.log(res));
 export default {
   components: {
     Calendar
   }
-}
+};
 </script>
 
 <style>
