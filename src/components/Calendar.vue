@@ -2,12 +2,12 @@
   <section>
     <div class="calendar">
       <div class="month">
-        <span>&#8592;</span>
-        <span>{{ displayedMonth }}</span>
-        <span>&#8594;</span>
+        <span @click="displayPreviousMonth" class="arrow">&#171;</span>
+        <span>{{ displayedMonth.month }}</span>
+        <span @click="displayNextMonth" class="arrow">&#187;</span>
       </div>
       <div class="days">
-        <div class="day"></div>
+        <div class="day" v-for="day in displayedMonth.ndays" :key="day">{{ day }}</div>
       </div>
     </div>
   </section>
@@ -17,11 +17,22 @@
 export default {
   name: "calendar",
   computed: {
-    state() {
-      return this.$store.state.calendar
+    months() {
+      return this.$store.state.calendar.months
+    },
+    index() {
+      return this.$store.state.calendar.currentMonthIndex
     },
     displayedMonth() {
-      return this.state.months[this.state.months.indexOf(this.state.currentMonth)]
+      return this.months[this.index]
+    }
+  },
+  methods: {
+    displayNextMonth() {
+      this.$store.commit("nextMonth")
+    },
+    displayPreviousMonth() {
+      this.$store.commit("previousMonth")
     }
   }
 }
@@ -29,11 +40,12 @@ export default {
 
 <style>
   .calendar {
+
   }
 
   .month {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     font-size: 2rem;
     padding: 2rem;
     margin-bottom: .5rem;
@@ -59,5 +71,10 @@ export default {
     font-size: 1.5rem;
     padding: 2rem;
     background-color: var(--blue)
+  }
+
+  .arrow {
+    font-weight: bold;
+    cursor: pointer;
   }
 </style>

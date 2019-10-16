@@ -3,10 +3,11 @@ import moment from "moment"
 const state = {
   currentDayNum: Number(moment().format("D")),
   currentMonthStr: moment().format("MMMM"),
+  currentMonthIndex: moment().format("M") - 1,
   months: [
     {
       month: "Januari",
-      ndays: 30
+      ndays: 31
     },
     {
       month: "Februari",
@@ -34,19 +35,19 @@ const state = {
     },
     {
       month: "Augusti",
-      ndays: 30
+      ndays: 31
     },
     {
       month: "September",
-      ndays: 31
-    },
-    {
-      month: "October",
       ndays: 30
     },
     {
-      month: "November",
+      month: "Oktober",
       ndays: 31
+    },
+    {
+      month: "November",
+      ndays: 30
     },
     {
       month: "December",
@@ -56,7 +57,18 @@ const state = {
 }
 
   const mutations = {
-
+    nextMonth(state) {
+      if(state.currentMonthIndex < 11) {
+        state.currentMonthIndex += 1
+      }
+      return
+    },
+    previousMonth(state) {
+      if(state.currentMonthIndex > 0) {
+        state.currentMonthIndex -= 1
+      }
+      return
+    }
   }
 
   const actions = {
@@ -72,5 +84,6 @@ const state = {
 export default {
   state,
   getters,
-  actions
+  actions,
+  mutations
 }
