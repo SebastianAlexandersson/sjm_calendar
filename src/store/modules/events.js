@@ -1,14 +1,5 @@
 import uuid from "uuid/v4"
 
-// Prototype object
-// id 
-// type
-// category i.e. green, rea
-// startTime
-// stopTime
-// deadlineTime
-// titleText
-// bodyText
 
 
 
