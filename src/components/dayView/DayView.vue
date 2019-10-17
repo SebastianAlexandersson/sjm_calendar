@@ -18,6 +18,7 @@
               <h5 class="start">End: {{event.end}}</h5>
               <p>{{event.body}}</p>
               <button v-on:click="test">Click</button>
+              <router-link :to="'event-form'">To the Form</router-link>
             </div>
           </Modal>
         </Shade>

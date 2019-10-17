@@ -11,5 +11,10 @@ export default new Router({
       name: 'DayView',
       component: () => import('./components/dayView/DayView'),
     },
+    {
+      path: '/event-form',
+      name: 'EventForm',
+      component: () => import('./components/eventForm/EventForm'),
+    },
   ],
 });
