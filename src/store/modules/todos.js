@@ -1,8 +1,7 @@
 import uuid from 'uuid/v4';
 
 const state = {
-  todos: [
-    {
+  todos: [{
       id: uuid(),
       text: 'Go Out with the dog',
       completed: false,
@@ -29,13 +28,15 @@ const getters = {
   allTodos: state => state.todos,
 };
 const actions = {
-
+  addTodo() {},
+  editTodo() {},
+  deleteTodo() {}
 
 
 };
 
 
-const mutaions = {
+const mutations = {
 
 };
 export default {
