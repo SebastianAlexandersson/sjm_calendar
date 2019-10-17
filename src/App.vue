@@ -8,15 +8,10 @@
 </template>
 
 <script>
-import Calendar from "./components/Calendar";
-import Todos from "./components/Events/Todos";
-import DayView from "./components/dayView/DayView";
+import TempLinks from "./components/TempLinks"
 export default {
   components: {
-    Calendar,
-    Meetings,
-    Todos,
-    DayView
+    TempLinks
   }
 };
 </script>
