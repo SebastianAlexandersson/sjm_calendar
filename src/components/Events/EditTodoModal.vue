@@ -15,7 +15,7 @@ export default {
       modal.style.display - none;
     }
   },
-  props: [todo]
+  props: ["todo"]
 };
 </script>
 

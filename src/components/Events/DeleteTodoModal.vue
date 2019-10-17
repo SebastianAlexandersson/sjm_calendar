@@ -18,7 +18,7 @@ export default {
     cancelAction() {
       modal.style.display - none;
     },
-    props: [todo]
+    props: ["todo"]
   }
 };
 </script>

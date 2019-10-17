@@ -7,7 +7,7 @@
     <deleteTodoModal v-if="showDeleteModal" v-on:close-modal="closeModal"></deleteTodoModal>
     <input type="button" v-on:click="showAddTodoModal" value="Add new todo" />
 
-    <div v-for="todo in this.$store.state.todos.todos" :key="todo.id">
+    <!-- <div v-for="todo in this.$store.state.todos.todos" :key="todo.id">
       <h3 class>
         {{todo.text}}
         <input
@@ -23,46 +23,44 @@
           value="Delete this Todo"
         />
       </h3>
-    </div>
+    </div>-->
   </div>
 </template>
 
 
 
 <script>
-import addTodoModal from './AddTodoModal'
-import editTodoModal from './EditTodoModal'
-import deleteTodoModal from './DeleteTodoModal'
+import addTodoModal from "./AddTodoModal";
+import editTodoModal from "./EditTodoModal";
+import deleteTodoModal from "./DeleteTodoModal";
 export default {
   name: "TodoList",
   data() {
     return {
-      showAddModal = false,
-      showEditModal = false,
-      showDeleteModal = false
-    }
+      //  showAddModal = false,
+      //  showEditModal = false,
+      //  showDeleteModal = false
+    };
   },
   methods: {
-    showAddTodoModal(){
-      showAddModal = true
+    showAddTodoModal() {
+      showAddModal = true;
     },
-    showeditTodoModal(){
-      showEditModal = true
+    showeditTodoModal() {
+      showEditModal = true;
     },
-    showDeleteTodoModal(){
-      showDeleteModal = true
+    showDeleteTodoModal() {
+      showDeleteModal = true;
     },
-    closeModal(){
-      showAddModal = false,
-      showEditModal = false,
-      showDeleteModal = false
-    },
-
+    closeModal() {
+      (showAddModal = false),
+        (showEditModal = false),
+        (showDeleteModal = false);
+    }
   },
-components: {
-  addTodoModal
-}
-
+  components: {
+    addTodoModal
+  }
 };
 </script>
 
