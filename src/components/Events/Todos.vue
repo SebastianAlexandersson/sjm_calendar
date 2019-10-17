@@ -1,65 +1,51 @@
 <template>
   <div class="todoList">
     <h1>Todos</h1>
+    <input type="button" value="Show red group" v-on:click="selectColor('red')" />
+    <input type="button" value="Show pink group" v-on:click="selectColor('pink')" />
+    <input type="button" value="Show all" v-on:click="selectColor" />
 
-    <addTodoModal v-if="showAddModal"></addTodoModal>
-    <editTodoModal v-if="showEditModal"></editTodoModal>
-    <deleteTodoModal v-if="showDeleteModal" v-on:close-modal="closeModal"></deleteTodoModal>
-    <input type="button" v-on:click="showAddTodoModal" value="Add new todo" />
-
-    <!-- <div v-for="todo in this.$store.state.todos.todos" :key="todo.id">
-      <h3 class>
-        {{todo.text}}
-        <input
-          type="button"
-          v-on:click="showeditTodoModal"
-          v-bind:todo="this.todo"
-          value="Edit this Todo"
-        />
-        <input
-          type="button"
-          v-on:click="showDeleteTodoModal"
-          v-bind:todo="this.todo"
-          value="Delete this Todo"
-        />
-      </h3>
-    </div>-->
+    <div
+      v-for="event in events"
+      :key="event.id"
+      class="todos"
+      v-bind:style="{backgroundColor:event.color}"
+    >
+      <div>{{ event.task }}</div>
+      <div>{{ event.body }}</div>
+      <div v-if="event.completed">Done!</div>
+      <div v-else>Not completed yet</div>
+      <div>{{ event.end }}</div>
+      <div>{{ event.label }}</div>
+    </div>
   </div>
 </template>
 
 
 
 <script>
-import addTodoModal from "./AddTodoModal";
-import editTodoModal from "./EditTodoModal";
-import deleteTodoModal from "./DeleteTodoModal";
 export default {
   name: "TodoList",
   data() {
-    return {
-      //  showAddModal = false,
-      //  showEditModal = false,
-      //  showDeleteModal = false
-    };
+    return {};
   },
   methods: {
-    showAddTodoModal() {
-      showAddModal = true;
-    },
-    showeditTodoModal() {
-      showEditModal = true;
-    },
-    showDeleteTodoModal() {
-      showDeleteModal = true;
-    },
-    closeModal() {
-      (showAddModal = false),
-        (showEditModal = false),
-        (showDeleteModal = false);
+    selectColor(color) {
+      console.log(color);
+      return this.events.filter(event => event.color === color);
     }
   },
-  components: {
-    addTodoModal
+  components: {},
+
+  computed: {
+    events() {
+      return this.$store.state.events.events.filter(
+        event => event.type === "Todo"
+      );
+    }
+  },
+  created() {
+    this.$store.dispatch("getEvents");
   }
 };
 </script>
@@ -68,17 +54,9 @@ export default {
 .todoList {
   padding: 3rem;
 }
+.todos {
+  padding: 1.1rem;
+  margin-bottom: 1rem;
+}
 </style>>
 
-
-
-
-// Prototype object
-// id 
-// type
-// category i.e. green, rea
-// startTime
-// stopTime
-// deadlineTime
-// titleText
-// bodyText
