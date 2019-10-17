@@ -1,13 +1,14 @@
 {
-  "events": [
-    {
+  "events": [{
       "id": 1,
       "task": "Go to the gym",
       "completed": false,
+      "room": "Ett",
       "type": "Todo",
       "body": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate ipsum maxime doloremque, magnam repellendus numquam inventore ipsa nostrum eligendi, pariatur qui minus necessitatibus ullam eius autem dolores incidunt id beatae!",
       "start": "2019-10-15",
       "end": "2019-10-27",
+      "color": "red",
       "label": [
         "free-time",
         "hobby"
@@ -17,10 +18,12 @@
       "id": 2,
       "task": "meeting with the boss",
       "completed": false,
+      "room": "Två",
       "type": "Meeting",
       "body": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate ipsum maxime doloremque, magnam repellendus numquam inventore ipsa nostrum eligendi, pariatur qui minus necessitatibus ullam eius autem dolores incidunt id beatae!",
       "start": "2019-10-15",
       "end": "2019-10-27",
+      "color": "green",
       "label": [
         "important",
         "work"
@@ -31,9 +34,11 @@
       "task": "Go out with the dog",
       "completed": false,
       "type": "Todo",
+      "room": "Tre",
       "body": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate ipsum maxime doloremque, magnam repellendus numquam inventore ipsa nostrum eligendi, pariatur qui minus necessitatibus ullam eius autem dolores incidunt id beatae!",
       "start": "2019-10-15",
       "end": "2019-10-27",
+      "color": "pink",
       "label": [
         "Home"
       ]

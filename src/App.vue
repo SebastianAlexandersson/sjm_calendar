@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <main class="main-page">
+      <TempLinks />
       <router-view></router-view>
     </main>
   </div>
@@ -8,7 +9,6 @@
 
 <script>
 import Calendar from "./components/Calendar";
-import Meetings from "./components/Events/Meetings";
 import Todos from "./components/Events/Todos";
 import DayView from "./components/dayView/DayView";
 export default {
