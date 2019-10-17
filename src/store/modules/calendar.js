@@ -1,9 +1,13 @@
 import moment from "moment"
 
 const state = {
+  currentYear: moment().format("Y"),
   currentDayNum: Number(moment().format("D")),
+  currentDayStr: moment().format("DDDD"),
+  currentMonthNum: moment().format("M"),
   currentMonthStr: moment().format("MMMM"),
   currentMonthIndex: moment().format("M") - 1,
+  moment,
   months: [
     {
       month: "Januari",
@@ -53,7 +57,7 @@ const state = {
       month: "December",
       ndays: 31
     }
-  ]
+  ],
 }
 
   const mutations = {
