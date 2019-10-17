@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <main class="main-page">
-      <Calendar />
+      <router-view></router-view>
     </main>
   </div>
 </template>
@@ -10,6 +10,8 @@
 import Calendar from "./components/Calendar";
 import Meetings from "./components/Events/Meetings";
 import Todos from "./components/Events/Todos";
+import DayView from "./components/dayView/DayView";
+
 fetch("http://localhost:4000/events")
   .then(res => res.json())
   .then(res => console.log(res));
@@ -17,7 +19,8 @@ export default {
   components: {
     Calendar,
     Meetings,
-    Todos
+    Todos,
+    DayView
   }
 };
 </script>
@@ -48,7 +51,7 @@ export default {
 }
 
 html {
-  @import url("https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro&display=swap")
+  @import url("https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro&display=swap");
 }
 
 body {
