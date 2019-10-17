@@ -11,10 +11,6 @@ import Calendar from "./components/Calendar";
 import Meetings from "./components/Events/Meetings";
 import Todos from "./components/Events/Todos";
 import DayView from "./components/dayView/DayView";
-
-fetch("http://localhost:4000/events")
-  .then(res => res.json())
-  .then(res => console.log(res));
 export default {
   components: {
     Calendar,

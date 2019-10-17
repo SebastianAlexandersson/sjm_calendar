@@ -7,7 +7,10 @@
         <span @click="displayNextMonth" class="arrow">&#187;</span>
       </div>
       <div class="days">
-        <div class="day" v-for="day in displayedMonth.ndays" :key="day">{{ day }}</div>
+        <div class="day" v-for="day in displayedMonth.ndays" :key="day">
+          <span>{{ day }}</span>
+          <span>{{ displayDayName(day, monthNum, year) }}</span>
+        </div>
       </div>
     </div>
   </section>
@@ -17,6 +20,9 @@
 export default {
   name: "calendar",
   computed: {
+    year() {
+      return this.$store.state.calendar.currentYear
+    },
     months() {
       return this.$store.state.calendar.months
     },
@@ -26,9 +32,12 @@ export default {
     displayedMonth() {
       return this.months[this.index]
     },
+    monthNum() {
+      return this.index + 1
+    },
     events() {
       return this.$store.state.events.events
-    }
+    },
   },
   methods: {
     displayNextMonth() {
@@ -36,6 +45,17 @@ export default {
     },
     displayPreviousMonth() {
       this.$store.commit("previousMonth")
+    },
+    displayDayName(day, month, year) {
+      if(month < 10) {
+        month = "0" + month
+      }
+      if(day < 10) {
+        day = "0" + day
+      }
+      const format = year + month + day
+
+      return this.$store.state.calendar.moment(format, "YYYYMMDD").format("dddd")
     }
   },
   created() {
@@ -46,7 +66,8 @@ export default {
 
 <style>
   .calendar {
-
+    color: #fff;
+    margin-top: 2rem;
   }
 
   .month {
@@ -55,7 +76,8 @@ export default {
     font-size: 2rem;
     padding: 2rem;
     margin-bottom: .5rem;
-    background-color: var(--blue)
+    background-color: var(--blue);
+    font-weight: bold; 
   }
 
   .month span {
@@ -74,9 +96,15 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     font-size: 1.5rem;
     padding: 2rem;
     background-color: var(--blue)
+  }
+
+  .day span:last-of-type {
+    font-size: 1rem;
+    margin-top: 1rem;
   }
 
   .arrow {
