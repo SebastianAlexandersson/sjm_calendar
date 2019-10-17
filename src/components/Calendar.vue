@@ -25,6 +25,9 @@ export default {
     },
     displayedMonth() {
       return this.months[this.index]
+    },
+    events() {
+      return this.$store.state.events.events
     }
   },
   methods: {
@@ -34,6 +37,9 @@ export default {
     displayPreviousMonth() {
       this.$store.commit("previousMonth")
     }
+  },
+  created() {
+    this.$store.dispatch("getEvents")
   }
 }
 </script>

@@ -68,17 +68,15 @@ const state = {
         state.currentMonthIndex -= 1
       }
       return
-    }
+    },
   }
 
   const actions = {
-    getMonths() {
-      return state.months
-    }
+   
   }
 
   const getters = {
-    allCalendar: state => state
+
   }
 
 export default {
