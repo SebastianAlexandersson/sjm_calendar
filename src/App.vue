@@ -1,20 +1,22 @@
 <template>
   <div id="app">
     <main class="main-page">
-      <Calendar />
+      <router-view></router-view>
     </main>
   </div>
 </template>
 
 <script>
 import Calendar from "./components/Calendar";
-fetch("http://localhost:4000/events")
-  .then(res => res.json())
-  .then(res => console.log(res));
-
+import Meetings from "./components/Events/Meetings";
+import Todos from "./components/Events/Todos";
+import DayView from "./components/dayView/DayView";
 export default {
   components: {
-    Calendar
+    Calendar,
+    Meetings,
+    Todos,
+    DayView
   }
 };
 </script>

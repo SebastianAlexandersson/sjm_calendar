@@ -2,12 +2,15 @@
   <section>
     <div class="calendar">
       <div class="month">
-        <span>&#8592;</span>
-        <span>{{ displayedMonth }}</span>
-        <span>&#8594;</span>
+        <span @click="displayPreviousMonth" class="arrow">&#171;</span>
+        <span>{{ displayedMonth.month }}</span>
+        <span @click="displayNextMonth" class="arrow">&#187;</span>
       </div>
       <div class="days">
-        <div class="day"></div>
+        <div class="day" v-for="day in displayedMonth.ndays" :key="day">
+          <span>{{ day }}</span>
+          <span>{{ displayDayName(day, monthNum, year) }}</span>
+        </div>
       </div>
     </div>
   </section>
@@ -17,27 +20,64 @@
 export default {
   name: "calendar",
   computed: {
-    state() {
-      return this.$store.state.calendar
+    year() {
+      return this.$store.state.calendar.currentYear
+    },
+    months() {
+      return this.$store.state.calendar.months
+    },
+    index() {
+      return this.$store.state.calendar.currentMonthIndex
     },
     displayedMonth() {
-      return this.state.months[this.state.months.indexOf(this.state.currentMonth)]
+      return this.months[this.index]
+    },
+    monthNum() {
+      return this.index + 1
+    },
+    events() {
+      return this.$store.state.events.events
+    },
+  },
+  methods: {
+    displayNextMonth() {
+      this.$store.commit("nextMonth")
+    },
+    displayPreviousMonth() {
+      this.$store.commit("previousMonth")
+    },
+    displayDayName(day, month, year) {
+      if(month < 10) {
+        month = "0" + month
+      }
+      if(day < 10) {
+        day = "0" + day
+      }
+      const format = year + month + day
+
+      return this.$store.state.calendar.moment(format, "YYYYMMDD").format("dddd")
     }
+  },
+  created() {
+    this.$store.dispatch("getEvents")
   }
 }
 </script>
 
 <style>
   .calendar {
+    color: #fff;
+    margin-top: 2rem;
   }
 
   .month {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     font-size: 2rem;
     padding: 2rem;
     margin-bottom: .5rem;
-    background-color: var(--blue)
+    background-color: var(--blue);
+    font-weight: bold; 
   }
 
   .month span {
@@ -56,8 +96,19 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     font-size: 1.5rem;
     padding: 2rem;
     background-color: var(--blue)
+  }
+
+  .day span:last-of-type {
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+
+  .arrow {
+    font-weight: bold;
+    cursor: pointer;
   }
 </style>
