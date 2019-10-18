@@ -2,11 +2,9 @@ import moment from "moment"
 
 const state = {
   currentYear: moment().format("Y"),
-  currentDayNum: Number(moment().format("D")),
-  currentDayStr: moment().format("DDDD"),
-  currentMonthNum: moment().format("M"),
-  currentMonthStr: moment().format("MMMM"),
-  currentMonthIndex: moment().format("M") - 1,
+  currentDay: moment().format("D"),
+  currentMonth: moment().format("MM"),
+  MonthIndex: moment().format("M") - 1,
   moment,
   months: [
     {
@@ -58,24 +56,33 @@ const state = {
       ndays: 31
     }
   ],
+  days: {
+    "Monday": 0,
+    "Tuesday": 1,
+    "Wednesday": 2,
+    "Thursday": 3,
+    "Friday": 4,
+    "Saturday": 5,
+    "Sunday": 6
+  },
 }
 
   const mutations = {
     nextMonth(state) {
-      if(state.currentMonthIndex < 11) {
-        state.currentMonthIndex += 1
+      if(state.MonthIndex < 11) {
+        state.MonthIndex += 1
       } else {
-        state.currentYear = Number(state.currentYear) + 1
-        state.currentMonthIndex = 0
+        state.currentYear = (Number(state.currentYear) + 1).toString()
+        state.MonthIndex = 0
       }
       return
     },
     previousMonth(state) {
-      if(state.currentMonthIndex > 0) {
-        state.currentMonthIndex -= 1
+      if(state.MonthIndex > 0) {
+        state.MonthIndex -= 1
       } else {
-        state.currentYear = Number(state.currentYear) - 1
-        state.currentMonthIndex = 11
+        state.currentYear = (Number(state.currentYear) - 1).toString()
+        state.MonthIndex = 11
       }
       return
     },

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Todos from './components/Events/Todos'
-import Calendar from './components/Calendar'
+import Calendar from './components/Calendar/Calendar'
 
 
 Vue.use(Router);
