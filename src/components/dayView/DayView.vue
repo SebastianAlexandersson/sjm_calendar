@@ -17,8 +17,9 @@
               <h5 class="start">Start: {{event.start}}</h5>
               <h5 class="start">End: {{event.end}}</h5>
               <p>{{event.body}}</p>
-              <button v-on:click="test">Click</button>
-              <router-link :to="'event-form'">To the Form</router-link>
+
+              <router-link :to="'event-form'" class="add-event">create new event</router-link>
+              <router-link :to="'event-form'" class="update-event">update event</router-link>
             </div>
           </Modal>
         </Shade>
@@ -139,6 +140,22 @@ export default {
 .modal .body p {
   font-size: 1.2rem;
   line-height: 2rem;
+  margin-bottom: 2rem;
+}
+.add-event,
+.update-event {
+  border: 2px solid var(--blue);
+  font-size: 1.2rem;
+  margin: 1rem 0.54rem;
+  padding: 0.2rem 0.8rem;
+  color: var(--dark-primary);
+  transition: all 300ms ease-in-out;
+}
+.update-event:hover,
+.add-event:hover {
+  color: var(--white);
+  background: var(--blue);
+  border: 2px solid var(--dark-primary);
 }
 </style>>
 
