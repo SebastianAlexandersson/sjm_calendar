@@ -64,12 +64,18 @@ const state = {
     nextMonth(state) {
       if(state.currentMonthIndex < 11) {
         state.currentMonthIndex += 1
+      } else {
+        state.currentYear = Number(state.currentYear) + 1
+        state.currentMonthIndex = 0
       }
       return
     },
     previousMonth(state) {
       if(state.currentMonthIndex > 0) {
         state.currentMonthIndex -= 1
+      } else {
+        state.currentYear = Number(state.currentYear) - 1
+        state.currentMonthIndex = 11
       }
       return
     },

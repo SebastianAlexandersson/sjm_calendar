@@ -3,15 +3,16 @@
     <div class="calendar">
       <div class="month">
         <span @click="displayPreviousMonth" class="arrow">&#171;</span>
-        <span>{{ displayedMonth.month }}</span>
+        <span>{{ displayedMonth.month }} {{ year }}</span>
         <span @click="displayNextMonth" class="arrow">&#187;</span>
       </div>
       <div class="days">
-        <div class="day" v-for="day in displayedMonth.ndays" :key="day">
+        <div class="day" v-for="placeholder in getPlaceholderDays" :key="placeholder + 'placeholder'"></div>
+        <div class="day" v-for="day in displayedMonth.ndays" :key="day" v-bind:class="{ highlight: highlightToday(day, monthNum) }">
           <span>{{ day }}</span>
           <span>{{ displayDayName(day, monthNum, year) }}</span>
         </div>
-      </div>
+    </div>
     </div>
   </section>
 </template>
@@ -35,6 +36,24 @@ export default {
     monthNum() {
       return this.index + 1
     },
+    whatDayIsTheFirst() {
+      const month = this.monthNum < 10 ? "0" + this.monthNum : this.monthNum
+      const format = `${this.year}${month}01`
+
+      return this.$store.state.calendar.moment(format, "YYYYMMDD").format("dddd")
+    },
+    getPlaceholderDays() {
+      const days = {
+        "Monday": 0,
+        "Tuesday": 1,
+        "Wednesday": 2,
+        "Thursday": 3,
+        "Friday": 4,
+        "Saturday": 5,
+        "Sunday": 6
+      }
+      return days[this.whatDayIsTheFirst]
+    },
     events() {
       return this.$store.state.events.events
     },
@@ -56,6 +75,11 @@ export default {
       const format = year + month + day
 
       return this.$store.state.calendar.moment(format, "YYYYMMDD").format("dddd")
+    },
+    highlightToday(day, month) {
+      const today = Number(this.$store.state.calendar.currentDayNum)
+      const thisMonth = Number(this.$store.state.calendar.moment().format("M"))
+      return Number(day) === today && Number(month) === thisMonth
     }
   },
   created() {
@@ -110,5 +134,9 @@ export default {
   .arrow {
     font-weight: bold;
     cursor: pointer;
+  }
+
+  .highlight {
+    opacity: .5;
   }
 </style>
