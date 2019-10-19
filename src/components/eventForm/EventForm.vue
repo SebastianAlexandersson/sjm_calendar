@@ -24,14 +24,17 @@
         </div>
 
         <div class="form-group checkbox-group">
-          <input type="checkbox" id="important" value="important" v-model="labels" />
-          <label for="checkbox">Important</label>
+          <label for="checkbox">
+            <input type="checkbox" id="important" value="important" v-model="labels" />
+          </label>
 
-          <input type="checkbox" id="hobby" value="hobby" v-model="labels" />
-          <label for="checkbox">Hobby</label>
+          <label for="checkbox">
+            <input type="checkbox" id="hobby" value="hobby" v-model="labels" />
+          </label>
 
-          <input type="checkbox" id="home" value="home" v-model="labels" />
-          <label for="checkbox">Home</label>
+          <label for="checkbox">
+            <input type="checkbox" id="home" value="home" v-model="labels" />
+          </label>
         </div>
 
         <div class="form-group">
@@ -88,13 +91,6 @@ export default {
 
 <style scoped>
 .wrapper {
-  /* background: var(--blue);
-  background: linear-gradient(
-    to bottom right,
-    var(--blue) 0%,
-    var(--blue-light) 100%
-  ); */
-
   width: 100%;
   height: 100%;
 }
@@ -111,6 +107,8 @@ export default {
   transition-timing-function: ease-in-put;
   font-weight: 200;
   text-transform: capitalize;
+  background: #53e3a6;
+  clip-path: polygon(12% 0, 100% 0%, 92% 100%, 4% 100%);
 }
 
 form {
@@ -171,21 +169,28 @@ form input[type="submit"] {
   font-size: 18px;
   transition-duration: 0.25s;
 }
-form button:hover {
-  background-color: #f5f7f9;
+form input[type="submit"]:hover {
+  background-color: #53e3a79c;
+  color: #fff;
 }
 /* TODO: here */
 .checkbox-group {
   display: flex;
-  width: 20px;
+  width: 2rem;
   position: relative;
-  margin: 20px auto;
+  margin: 2rem auto;
   justify-content: center;
 }
+
 .checkbox-group input[type="checkbox"] {
-  border: 2px solid var(--blue);
+  width: 4rem;
+  margin: 0 0.5rem;
+  border: 2px solid #53e3a746;
 }
-.checkbox-group label {
+
+input[type="checkbox"]:checked {
+  background: #53e3a746;
+  font-style: normal;
 }
 
 #body {

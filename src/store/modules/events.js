@@ -16,13 +16,18 @@ const actions = {
     const data = await res.json();
     commit('newEvent', data);
   },
+  async searchEvents({ commit }, text) {
+    const res = await fetch(`/logs?q=${text}`);
+    const data = await res.json();
+    commit('search_event', data);
+  },
 };
 
 const mutations = {
   setEvents(commit, data) {
     state.events = data;
   },
-  newEvent(state, event) {
+  search_event(commit, data) {
     state.events = data;
   },
 
