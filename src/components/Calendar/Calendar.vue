@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="calendar">
+    <div class='calendar'>
       <Month />
       <Days />
     </div>
@@ -8,32 +8,30 @@
 </template>
 
 <script>
-import Month from "./Month"
-import Days from "./Days"
+import Month from './Month';
+import Days from './Days';
 
 export default {
-  name: "calendar",
+  name: 'calendar',
   components: {
     Month,
     Days
   },
   computed: {
     state() {
-      return this.$store.state.calendar
+      return this.$store.state.calendar;
     }
   },
-  methods: {
-
-  },
+  methods: {},
   created() {
-    this.$store.dispatch("getEvents")
+    this.$store.dispatch('getEvents');
   }
-}
+};
 </script>
 
 <style>
-  .calendar {
-    color: #fff;
-    margin-top: 2rem;
-  }
+.calendar {
+  color: #fff;
+  margin-top: 2rem;
+}
 </style>

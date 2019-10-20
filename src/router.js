@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Todos from './components/Events/Todos'
-import Calendar from './components/Calendar/Calendar'
-
+import Todos from './components/Events/Todos.vue';
+import Calendar from './components/Calendar/Calendar.vue';
 
 Vue.use(Router);
 
 export default new Router({
-  routes: [{
+  routes: [
+    {
       path: '/day-view',
       name: 'DayView',
       component: () => import('./components/dayView/DayView'),
@@ -22,6 +22,5 @@ export default new Router({
       name: 'Calendar',
       component: Calendar,
     },
-
   ],
 });
