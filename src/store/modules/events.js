@@ -26,9 +26,14 @@ const actions = {
     commit('editEvent', data);
   },
   async searchEvents({ commit }, text) {
-    const res = await fetch(`/logs?q=${text}`);
+    const res = await fetch(`http://localhost:4000/events?q=${text}`);
     const data = await res.json();
-    commit('search_event', data);
+    commit('findEvent', data);
+  },
+
+  async deleteEvent({ commit }, id) {
+    await fetch(`http://localhost:4000/events/${id}`, { method: 'DELETE' });
+    commit('removeEvent', id);
   },
 };
 
@@ -36,7 +41,7 @@ const mutations = {
   setEvents(commit, data) {
     state.events = data;
   },
-  search_event(commit, data) {
+  findEvent(state, data) {
     state.events = data;
   },
   newEvent(state, event) {
@@ -45,6 +50,10 @@ const mutations = {
 
   editEvent(commit, data) {
 
+  },
+  removeEvent(state, payload) {
+    const removedEvent = state.events.filter(event => event.id !== payload.id);
+    return removedEvent;
   },
 
 };

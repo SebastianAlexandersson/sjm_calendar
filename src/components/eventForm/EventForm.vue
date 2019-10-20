@@ -84,16 +84,9 @@ export default {
         end: this.end,
         labels: this.labels
       };
-      console.log("PAYLOAD !!", payload);
+      // console.log("PAYLOAD !!", payload);
       this.$store.dispatch("addEvent", payload);
-      console.log(
-        this.task,
-        this.type,
-        this.body,
-        this.start,
-        this.end,
-        this.labels
-      );
+      this.$router.push("/day-view");
     }
   }
 };
