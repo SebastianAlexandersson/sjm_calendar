@@ -2,27 +2,35 @@
   <div class='days'>
     <div
       class='day fade'
-      v-for='prevDay in getNumPrevMonthFillerDays'
+      v-for='prevDay in get.prevMonthFillerDays'
       :key='`${prevDay}prevday`'
     >
-      <span>{{ prevDay + prevMonthFillerStartDate }}</span>
-      <span>{{ displayDayName(
-                prevDay + prevMonthFillerStartDate,
-                prevMonthNum,
-                prevMonthYear
-              )
-            }}
+      <span>{{ prevDay + get.prevMonthFillerStartDate }}</span>
+      <span>
+        {{ state.getNameOfDay(
+            get.prevMonthYear,
+            get.prevMonthNum,
+            state.addZero(prevDay + get.prevMonthFillerStartDate)
+          )
+        }}
       </span>
     </div>
     <div
       class='day'
-      v-for='day in displayedMonth.ndays'
+      v-for='day in get.displayedMonth.ndays'
       :key='day'
-      v-bind:class='{ highlight: highlightToday(day, monthNumTwoDigits) }'
-      :id='`${year}-${monthNumTwoDigits}-${getTwoDigitDay(day)}`'
+      v-bind:class='{ highlight: highlightToday(day, get.displayedMonthNum) }'
+      :id='`${state.currentYear}${get.displayedMonthNum}${state.addZero(day)}`'
     >
       <span>{{ day }}</span>
-      <span>{{ displayDayName(day, monthNumTwoDigits, year) }}</span>
+      <span>
+        {{ state.getNameOfDay(
+            state.currentYear,
+            get.displayedMonthNum,
+            state.addZero(day)
+          )
+        }}
+      </span>
     </div>
   </div>
 </template>
@@ -34,68 +42,16 @@ export default {
     state() {
       return this.$store.state.calendar;
     },
-    year() {
-      return this.state.currentYear;
-    },
-    months() {
-      return this.state.months;
-    },
-    currentDay() {
-      return this.state.currentDay;
-    },
-    currentMonth() {
-      return this.state.currentMonth;
-    },
-    index() {
-      return this.state.MonthIndex;
-    },
-    displayedMonth() {
-      return this.months[this.index];
-    },
-    monthNum() {
-      return this.index + 1;
-    },
-    monthNumTwoDigits() {
-      return this.monthNum < 10 ? `0${this.monthNum}` : this.monthNum;
-    },
-    whatDayIsTheFirst() {
-      const format = `${this.year}${this.monthNumTwoDigits}01`;
-
-      return this.state.moment(format, 'YYYYMMDD').format('dddd');
-    },
-    getNumPrevMonthFillerDays() {
-      return this.state.days[this.whatDayIsTheFirst];
-    },
-    prevMonthNumDays() {
-      return this.months[Number(this.prevMonthNum - 1)].ndays;
-    },
-    prevMonthYear() {
-      return this.index < 1 ? (Number(this.year) - 1).toString() : this.year;
-    },
-    prevMonthNum() {
-      const index = this.index < 1 ? 12 : this.index;
-      const prevIndex = index < 10 ? `0${index}` : index.toString();
-      return prevIndex;
-    },
-    prevMonthFillerStartDate() {
-      return this.prevMonthNumDays - this.getNumPrevMonthFillerDays;
+    get() {
+      return this.$store.getters;
     },
   },
   methods: {
-    displayDayName(day, month, year) {
-      const dayFormat = this.getTwoDigitDay(day);
-      const format = year + month + dayFormat;
-
-      return this.state.moment(format, 'YYYYMMDD').format('dddd');
-    },
     highlightToday(day, month) {
       return (
-        Number(day) === Number(this.currentDay)
-        && Number(month) === Number(this.currentMonth)
+        Number(day) === Number(this.state.currentDay)
+        && Number(month) === Number(this.state.currentMonth)
       );
-    },
-    getTwoDigitDay(day) {
-      return day < 10 ? `0${day}` : day;
     },
   },
 };

@@ -1,39 +1,30 @@
 <template>
-  <div class="month">
-    <span @click="displayPreviousMonth" class="arrow">&#171;</span>
+  <div class='month'>
+    <span @click='displayPreviousMonth' class='arrow'>&#171;</span>
     <span>{{ displayedMonth.month }} {{ year }}</span>
-    <span @click="displayNextMonth" class="arrow">&#187;</span>
+    <span @click='displayNextMonth' class='arrow'>&#187;</span>
   </div>
 </template>
 
 <script>
 export default {
-  name: "month",
+  name: 'month',
   computed: {
-    state() {
-      return this.$store.state.calendar;
-    },
     year() {
-      return this.state.currentYear;
-    },
-    months() {
-      return this.state.months;
-    },
-    index() {
-      return this.state.MonthIndex;
+      return this.$store.state.calendar.currentYear;
     },
     displayedMonth() {
-      return this.months[this.index];
-    }
+      return this.$store.getters.displayedMonth;
+    },
   },
   methods: {
     displayNextMonth() {
-      this.$store.commit("nextMonth");
+      this.$store.commit('nextMonth');
     },
     displayPreviousMonth() {
-      this.$store.commit("previousMonth");
-    }
-  }
+      this.$store.commit('previousMonth');
+    },
+  },
 };
 </script>
 
