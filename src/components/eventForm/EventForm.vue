@@ -76,6 +76,16 @@ export default {
   methods: {
     handleSubmit(e) {
       e.preventDefault();
+      const payload = {
+        task: this.task,
+        type: this.type,
+        body: this.body,
+        start: this.start,
+        end: this.end,
+        labels: this.labels
+      };
+      console.log("PAYLOAD !!", payload);
+      this.$store.dispatch("addEvent", payload);
       console.log(
         this.task,
         this.type,
