@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <main class="main-page">
+  <div id='app'>
+    <main class='main-page'>
       <TempLinks />
       <router-view></router-view>
     </main>
@@ -8,22 +8,23 @@
 </template>
 
 <script>
-import TempLinks from "./components/TempLinks";
+import TempLinks from './components/TempLinks.vue';
 
 export default {
   components: {
-    TempLinks
-  }
+    TempLinks,
+  },
 };
 </script>
 
 <style>
 /* 1rem = 10px */
 :root {
-  --font-secondary: "Source Sans Pro", sans-serif;
+  --font-secondary: 'Source Sans Pro', sans-serif;
   --dark-primary: #2a2c2b;
   --dark-secondary: #000000;
   --blue: #26a69a;
+  --blue-light: #53e3a6;
   --white: #fff;
   --danger: #dc3522;
   --XXL: 5rem;
@@ -43,13 +44,13 @@ export default {
 }
 
 html {
-  @import url("https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro&display=swap");
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro&display=swap');
 }
 
 body {
   box-sizing: border-box;
   font-size: 10px;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: var(--dark-primary);
   display: flex;
   flex-direction: column;
@@ -100,15 +101,15 @@ a {
   }
 }
 
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration {
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
   -webkit-appearance: none;
   -moz-appearance: none;
 }
 
-input[type="search"] {
+input[type='search'] {
   -webkit-appearance: none;
   -moz-appearance: none;
   -webkit-box-sizing: content-box;

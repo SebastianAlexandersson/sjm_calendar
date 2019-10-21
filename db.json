@@ -1,5 +1,40 @@
 {
+<<<<<<< HEAD
   "events": [{
+=======
+  "days": [
+    {
+      "id": 1,
+      "day": "Monday"
+    },
+    {
+      "id": 2,
+      "day": "Tuesday"
+    },
+    {
+      "id": 3,
+      "day": "Wednesday"
+    },
+    {
+      "id": 4,
+      "day": "Thursday"
+    },
+    {
+      "id": 5,
+      "day": "Friday"
+    },
+    {
+      "id": 6,
+      "day": "Saturday"
+    },
+    {
+      "id": 7,
+      "day": "Sunday"
+    }
+  ],
+  "events": [
+    {
+>>>>>>> masiu-dev-home
       "id": 1,
       "task": "Go to the gym",
       "completed": false,
@@ -42,6 +77,30 @@
       "label": [
         "Home"
       ]
+    },
+    {
+      "task": "apa",
+      "type": "Todo",
+      "body": "test",
+      "start": "2019-10-11",
+      "end": "2019-11-03",
+      "labels": [
+        "important",
+        "hobby"
+      ],
+      "id": 4
+    },
+    {
+      "task": "apa",
+      "type": "Meeting",
+      "body": "apan gillar att ata banan",
+      "start": "2019-08-28",
+      "end": "2019-10-13",
+      "labels": [
+        "hobby",
+        "home"
+      ],
+      "id": 5
     }
   ]
 }
