@@ -4,6 +4,7 @@
     <input type="button" value="Show red group" v-on:click="selectColor('red')" />
     <input type="button" value="Show pink group" v-on:click="selectColor('pink')" />
     <input type="button" value="Show all" v-on:click="selectColor" />
+    <input type="button" value="Add New Todo" v-on:click="callAddModal()" />
 
     <div
       v-for="event in events"
@@ -21,14 +22,20 @@
     <div>
       <PoseTransition>
         // Show event
-        <Shade v-on:click.native="closeModal" class="shade" v-if="isShowVisible">
-          <Modal class="modal" v-bind:todo="todoModal">
+        <Shade
+          v-on:click.native="closeModal"
+          class="shade"
+          v-if="isShowVisible"
+          v-bind:todo="todoModal"
+        >
+          <Modal class="modal">
             <div class="header">
               <h3>{{todo.task}}</h3>
             </div>
             <div class="body">
-              <h5 class="start">Start: {{todo.start}}</h5>
-              <h5 class="start">End: {{todo.end}}</h5>
+              <h5 class="start">Color group: {{todo.color}}</h5>
+              <h5 class="start">Labels: {{todo.lable}}</h5>
+              <h5 class="start">End date: {{todo.end}}</h5>
               <p>{{todo.body}}</p>
             </div>
           </Modal>
@@ -38,57 +45,69 @@
     <div>
       <PoseTransition>
         // Add event
-        <Shade v-on:click.native="isAddVisible = false" class="shade" v-if="isAddVisible">
+        <Shade v-on:click.native="closeModal()" class="shade" v-if="isAddVisible" v-bind="newTodo">
           <Modal class="modal">
             <div class="header">
-              <h3>{{event.task}}</h3>
+              <input v-model="newTodo.task" placeholder="Add a task name" />
+              <select v-model="newTodo.color">
+                <option disabled value>Choose a color</option>
+                <option>Red</option>
+                <option>Green</option>
+                <option>Yellow</option>
+                <option>Blue</option>
+                <option>Orange</option>
+              </select>
             </div>
             <div class="body">
-              <h5 class="room">Room:</h5>
-              <h5 class="start">Start: {{event.start}}</h5>
-              <h5 class="start">End: {{event.end}}</h5>
-              <p>{{event.body}}</p>
+              <input class="end" v-model="this.newTodo.end" placeholder="YYYYMMDD" />
+              <input v-model="this.newTodo.body" placeholder="Add text here" />
+              <button v-on:click="saveNewTodo(this.newTodo)">Save</button>
             </div>
           </Modal>
         </Shade>
       </PoseTransition>
     </div>
-    <div>
+    <!-- <div>
       <PoseTransition>
         // Edit event
         <Shade v-on:click.native="isEditVisible = false" class="shade" v-if="isEditVisible">
           <Modal class="modal">
             <div class="header">
-              <h3>{{event.task}}</h3>
+              <input v-model="this.event.task" placeholder="this.event.task" />
+              <select v-model="this.event.color">
+                <option disabled value>{{ this.event.color }}</option>
+                <option>Red</option>
+                <option>Green</option>
+                <option>Yellow</option>
+                <option>Blue</option>
+                <option>Orange</option>
+              </select>
             </div>
             <div class="body">
-              <h5 class="room">Room:</h5>
-              <h5 class="start">Start: {{event.start}}</h5>
-              <h5 class="start">End: {{event.end}}</h5>
-              <p>{{event.body}}</p>
+              <input class="end" v-model="this.event.end" placeholder="this.event.end" />
+              <input v-model="this.event.body" placeholder="this.event.body" />
+              <button v-on:click="editTodo(this.event)">Save</button>
             </div>
           </Modal>
         </Shade>
       </PoseTransition>
-    </div>
-    <div>
+    </div>-->
+    <!-- <div>
       <PoseTransition>
         // Delete event
         <Shade v-on:click.native="isDeleteVisible = false" class="shade" v-if="isDeleteVisible">
           <Modal class="modal">
             <div class="header">
+              <h1>Are you sure you want to delete this event?</h1>
               <h3>{{event.task}}</h3>
             </div>
             <div class="body">
-              <h5 class="room">Room:</h5>
-              <h5 class="start">Start: {{event.start}}</h5>
-              <h5 class="start">End: {{event.end}}</h5>
-              <p>{{event.body}}</p>
+              <button v-on:click="deleteTodo(this.event)">Delete</button>
             </div>
           </Modal>
         </Shade>
       </PoseTransition>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -96,17 +115,34 @@
 
 <script>
 import posed, { PoseTransition } from "vue-pose";
+import { number } from "style-value-types";
 export default {
   name: "TodoList",
-  data: () => (
-    { isAddVisible: Boolean },
-    { isEditVisible: Boolean },
-    { isDeleteVisible: Boolean },
-    { isShowVisible: Boolean },
-    { todoModal: {} }
-  ),
+  data: () => {
+    return {
+      isAddVisible: false,
+      isEditVisible: false,
+      isDeleteVisible: false,
+      isShowVisible: false,
+      todoModal: {},
+
+      newTodo: {
+        id: number,
+        task: "",
+        completed: false,
+        type: "Todo",
+        room: "",
+        body: "",
+        start: "",
+        end: "",
+        color: "",
+        label: []
+      }
+    };
+  },
   components: {
     PoseTransition,
+
     Shade: posed.div({
       enter: {
         opacity: 1,
@@ -133,12 +169,25 @@ export default {
       this.isShowVisible = true;
       console.log(this.isShowVisible, this.todo);
     },
+    callAddModal() {
+      this.isAddVisible = true;
+      console.log(this.isAddVisible, this.newTodo);
+    },
     closeModal() {
       this.isAddvisible = false;
       this.isEditVisible = false;
       this.isDeleteVisible = false;
       this.isShowVisible = false;
-      console.log("Closing");
+      console.log("Closing", this.isAddvisible);
+    },
+    saveNewTodo(todo) {
+      this.isAddvisible = false;
+    },
+    editTodo(todo) {
+      this.isEditVisible = false;
+    },
+    deleteTodo(todo) {
+      this.isDeleteVisible = false;
     }
   },
   computed: {
@@ -176,7 +225,6 @@ export default {
   background: rgba(0, 0, 0, 0.5);
   perspective: 500px;
   transform: translateZ(0);
-  z-index: 10;
 }
 
 .modal {
@@ -185,7 +233,6 @@ export default {
   background: white;
   border-radius: 10px;
   padding: 1rem 1.5rem;
-  z-index: 15;
 }
 
 .modal .header {
