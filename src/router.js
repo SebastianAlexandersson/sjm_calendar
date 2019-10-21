@@ -21,9 +21,6 @@ export default new Router({
       path: '/',
       name: 'Calendar',
       component: Calendar,
-      path: '/event-form',
-      name: 'EventForm',
-      component: () => import('./components/eventForm/EventForm'),
     },
   ],
 });
