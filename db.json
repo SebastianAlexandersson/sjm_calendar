@@ -1,7 +1,4 @@
 {
-<<<<<<< HEAD
-  "events": [{
-=======
   "days": [
     {
       "id": 1,
@@ -34,7 +31,6 @@
   ],
   "events": [
     {
->>>>>>> masiu-dev-home
       "id": 1,
       "task": "Go to the gym",
       "completed": false,
