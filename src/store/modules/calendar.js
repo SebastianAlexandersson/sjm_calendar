@@ -2,6 +2,7 @@ import moment from 'moment';
 
 const state = {
   currentYear: moment().format('Y'),
+<<<<<<< HEAD
   currentDay: moment().format('D'),
   currentMonth: moment().format('MM'),
 
@@ -19,6 +20,14 @@ const state = {
     return moment(`${year}${month}${day}`, 'YYYYMMDD').format('dddd');
   },
   weeks: 0,
+=======
+  currentDayNum: Number(moment().format('D')),
+  currentDayStr: moment().format('DDDD'),
+  currentMonthNum: moment().format('M'),
+  currentMonthStr: moment().format('MMMM'),
+  currentMonthIndex: moment().format('M') - 1,
+  moment,
+>>>>>>> masiu-dev-home
   months: [
     {
       month: 'Januari',
@@ -69,6 +78,7 @@ const state = {
       ndays: 31,
     },
   ],
+<<<<<<< HEAD
 
   // Lookup how many filler days from previous month to add.
 
@@ -81,10 +91,13 @@ const state = {
     Saturday: 5,
     Sunday: 6,
   },
+=======
+>>>>>>> masiu-dev-home
 };
 
 const mutations = {
   nextMonth(state) {
+<<<<<<< HEAD
     if (state.MonthIndex < 11) {
       state.MonthIndex += 1;
     } else {
@@ -98,10 +111,20 @@ const mutations = {
     } else {
       state.currentYear = (Number(state.currentYear) - 1).toString();
       state.MonthIndex = 11;
+=======
+    if (state.currentMonthIndex < 11) {
+      state.currentMonthIndex += 1;
+    }
+  },
+  previousMonth(state) {
+    if (state.currentMonthIndex > 0) {
+      state.currentMonthIndex -= 1;
+>>>>>>> masiu-dev-home
     }
   },
 };
 
+<<<<<<< HEAD
 const actions = {};
 
 const getters = {
@@ -167,6 +190,14 @@ const getters = {
       .format('W');
     return lastWeek;
   },
+=======
+const actions = {
+
+};
+
+const getters = {
+
+>>>>>>> masiu-dev-home
 };
 
 export default {

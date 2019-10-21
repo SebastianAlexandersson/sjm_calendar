@@ -24,6 +24,7 @@ export default {
   --dark-primary: #2a2c2b;
   --dark-secondary: #000000;
   --blue: #26a69a;
+  --blue-light: #53e3a6;
   --white: #fff;
   --danger: #dc3522;
   --XXL: 5rem;

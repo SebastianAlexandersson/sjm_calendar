@@ -1,27 +1,34 @@
 <template>
   <div class="day-wrapper">
-    <div class="row" v-for="d in data" v-bind:key="d.id">
-      <span class="time">{{d.time}}</span>
-      <h4 @click="isVisible = true">{{d.text}}</h4>
-      <span class="edit">X</span>
+    <div class="searchbar">
+      <label for="text">Search a event...</label>
+      <input type="text" @change="searchEvent" />
     </div>
     <div>
-      <PoseTransition>
-        <Shade v-on:click.native="isVisible = false" class="shade" v-if="isVisible">
-          <Modal class="modal" v-for="event in events">
-            <div class="header">
-              <h3>{{event.task}}</h3>
-            </div>
-            <div class="body">
-              <h5 class="room">Room:</h5>
-              <h5 class="start">Start: {{event.start}}</h5>
-              <h5 class="start">End: {{event.end}}</h5>
-              <p>{{event.body}}</p>
-              <button v-on:click="test">Click</button>
-            </div>
-          </Modal>
-        </Shade>
-      </PoseTransition>
+      <div class="row" v-for="d in data" v-bind:key="d.id">
+        <span class="time">{{d.time}}</span>
+        <h4 @click="isVisible = true">{{d.text}}</h4>
+        <span class="edit">X</span>
+      </div>
+      <div>
+        <PoseTransition>
+          <Shade v-on:click.native="isVisible = false" class="shade" v-if="isVisible">
+            <Modal class="modal" v-for="event in events" v-bind:key="event.id">
+              <div class="header">
+                <h3>{{event.task}}</h3>
+              </div>
+              <div class="body">
+                <h5 class="room">Room:</h5>
+                <h5 class="start">Start: {{event.start}}</h5>
+                <h5 class="start">End: {{event.end}}</h5>
+                <p>{{event.body}}</p>
+                <router-link :to="'event-form'" class="add-event">create new event</router-link>
+                <router-link :to="'event-form'" class="update-event">update event</router-link>
+              </div>
+            </Modal>
+          </Shade>
+        </PoseTransition>
+      </div>
     </div>
   </div>
 </template>
@@ -59,6 +66,9 @@ export default {
     },
     data() {
       return dayData;
+    },
+    filtredEvents() {
+      return this.$store.state.events.events;
     }
   },
   created() {
@@ -67,6 +77,9 @@ export default {
   methods: {
     test() {
       alert("click");
+    },
+    searchEvent(text) {
+      this.$store.dispatch("searchEvents", text);
     }
   }
 };
@@ -78,6 +91,30 @@ export default {
   box-shadow: 1px 1px 2px var(--dark-primay);
   min-height: 100%;
 }
+.searchbar {
+  padding: 1rem;
+}
+.searchbar label {
+  font-size: 1.2rem;
+}
+.searchbar input {
+  margin-top: 0.5rem;
+  margin-right: auto;
+  display: block;
+  width: 2%;
+  cursor: pointer;
+  border: 2px solid var(--dark-primary);
+  padding: 0.6rem 0.9rem;
+  border-radius: 1rem;
+  transition: all 300ms ease-in-out;
+}
+.searchbar input:focus {
+  width: 90%;
+  margin-left: 0 4rem;
+  border: 2px solid var(--blue);
+  transform: scale(1.1);
+}
+
 .row {
   display: flex;
   border: 2px solid var(--dark-primary);
@@ -85,7 +122,14 @@ export default {
   justify-content: space-between;
   padding: 1rem 1.5rem;
   margin: 0.12rem 0;
+  transition: all 300ms ease-in-out;
   box-shadow: 1px 1px 2px var(--dark-primary);
+}
+
+.row:hover {
+  background: rgba(20, 136, 97, 0.5);
+  box-shadow: 2px 2px 3px var(--dark-primary);
+  z-index: 2;
 }
 
 .time {
@@ -138,6 +182,22 @@ export default {
 .modal .body p {
   font-size: 1.2rem;
   line-height: 2rem;
+  margin-bottom: 2rem;
+}
+.add-event,
+.update-event {
+  border: 2px solid var(--blue);
+  font-size: 1.2rem;
+  margin: 1rem 0.54rem;
+  padding: 0.2rem 0.8rem;
+  color: var(--dark-primary);
+  transition: all 300ms ease-in-out;
+}
+.update-event:hover,
+.add-event:hover {
+  color: var(--white);
+  background: var(--blue);
+  border: 2px solid var(--dark-primary);
 }
 </style>>
 
