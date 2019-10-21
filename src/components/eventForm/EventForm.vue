@@ -63,6 +63,8 @@
 </template>
 
 <script>
+import moment from "moment";
+// moment().format('Y'),
 export default {
   name: "EventForm",
   data: () => ({
@@ -162,10 +164,10 @@ form input:focus {
 form input[type="submit"] {
   appearance: none;
   outline: 0;
-  background-color: #53e3a746;
+  background-color: #53e3a7ec;
   border: 0;
   padding: 10px 15px;
-  color: #53e3a6;
+  color: #333;
   border-radius: 3px;
   width: 250px;
   cursor: pointer;
@@ -173,7 +175,7 @@ form input[type="submit"] {
   transition-duration: 0.25s;
 }
 form input[type="submit"]:hover {
-  background-color: #53e3a79c;
+  background-color: #285542f6;
   color: #fff;
 }
 /* TODO: here */
@@ -189,6 +191,23 @@ form input[type="submit"]:hover {
   width: 4rem;
   margin: 0 0.5rem;
   border: 2px solid #53e3a746;
+}
+.checkbox-group input[value="important"]::after {
+  content: "VIP";
+  position: absolute;
+  top: -1.5rem;
+}
+.checkbox-group input[value="home"]::after {
+  content: "Home";
+  position: absolute;
+  top: -1.5rem;
+  right: 1rem;
+}
+.checkbox-group input[value="hobby"]::after {
+  content: "Home";
+  position: absolute;
+  top: -1.5rem;
+  right: 1rem;
 }
 
 input[type="checkbox"]:checked {

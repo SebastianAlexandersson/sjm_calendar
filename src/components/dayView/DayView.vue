@@ -24,7 +24,11 @@
                 <h5 class="start">End: {{event.end}}</h5>
                 <p>{{event.body}}</p>
                 <router-link :to="'event-form'" class="add-event">create new event</router-link>
-                <router-link :to="'update-event'" class="update-event">update event</router-link>
+                <a
+                  :to="'update-event'"
+                  @click="handleSetcurrent(event)"
+                  class="update-event"
+                >update event</a>
               </div>
             </Modal>
           </Shade>
@@ -211,6 +215,7 @@ export default {
   padding: 0.2rem 0.8rem;
   color: var(--dark-primary);
   transition: all 300ms ease-in-out;
+  cursor: pointer;
 }
 .update-event:hover,
 .add-event:hover {

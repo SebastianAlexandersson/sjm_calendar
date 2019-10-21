@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="form-wrapper">
-      <h1>add a avent</h1>
+      <h1>update your event</h1>
       <form>
         <div class="form-group">
           <input type="text" v-model="task" placeholder="task" />
@@ -63,6 +63,8 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
   name: "UpdateEvent",
   data: () => ({
@@ -92,15 +94,17 @@ export default {
     }
   },
   created() {
-    if (this.$store.events.current) {
-      this.task = this.$store.events.current.message;
-      this.type = this.$store.events.current.type;
-      this.body = this.$store.events.current.body;
-      this.start = this.$store.events.current.start;
-      this.end = this.$store.events.current.end;
-      this.labels = this.$store.events.current.labels;
+    console.log(this.getCurrentState);
+    if (this.getCurrentState) {
+      this.task = this.getCurrentState.task;
+      this.type = this.getCurrentState.type;
+      this.body = this.getCurrentState.body;
+      this.start = this.getCurrentState.start;
+      this.end = this.getCurrentState.end;
+      this.labels = this.getCurrentState.labels.map(l => l.toUpperCase());
     }
-  }
+  },
+  mounted() {}
 };
 </script>
 
@@ -174,10 +178,10 @@ form input:focus {
 form input[type="submit"] {
   appearance: none;
   outline: 0;
-  background-color: #53e3a746;
+  background-color: #53e3a7ec;
   border: 0;
   padding: 10px 15px;
-  color: #53e3a6;
+  color: #333;
   border-radius: 3px;
   width: 250px;
   cursor: pointer;
@@ -185,7 +189,7 @@ form input[type="submit"] {
   transition-duration: 0.25s;
 }
 form input[type="submit"]:hover {
-  background-color: #53e3a79c;
+  background-color: #285542f6;
   color: #fff;
 }
 /* TODO: here */

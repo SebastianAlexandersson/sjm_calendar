@@ -40,7 +40,7 @@
       "start": "2019-10-15",
       "end": "2019-10-27",
       "color": "red",
-      "label": [
+      "labels": [
         "free-time",
         "hobby"
       ]
@@ -55,7 +55,7 @@
       "start": "2019-10-15",
       "end": "2019-10-27",
       "color": "green",
-      "label": [
+      "labels": [
         "important",
         "work"
       ]
@@ -70,7 +70,7 @@
       "start": "2019-10-15",
       "end": "2019-10-27",
       "color": "pink",
-      "label": [
+      "labels": [
         "Home"
       ]
     },
