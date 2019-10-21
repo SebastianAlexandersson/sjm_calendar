@@ -39,7 +39,7 @@
       "body": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate ipsum maxime doloremque, magnam repellendus numquam inventore ipsa nostrum eligendi, pariatur qui minus necessitatibus ullam eius autem dolores incidunt id beatae!",
       "start": "2019-10-15",
       "end": "2019-10-27",
-      "color": "red",
+      "color": "Yellow",
       "label": [
         "free-time",
         "hobby"
@@ -69,22 +69,10 @@
       "body": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate ipsum maxime doloremque, magnam repellendus numquam inventore ipsa nostrum eligendi, pariatur qui minus necessitatibus ullam eius autem dolores incidunt id beatae!",
       "start": "2019-10-15",
       "end": "2019-10-27",
-      "color": "pink",
+      "color": "Pink",
       "label": [
         "Home"
       ]
-    },
-    {
-      "task": "apa",
-      "type": "Todo",
-      "body": "test",
-      "start": "2019-10-11",
-      "end": "2019-11-03",
-      "labels": [
-        "important",
-        "hobby"
-      ],
-      "id": 4
     },
     {
       "task": "apa",
@@ -97,6 +85,47 @@
         "home"
       ],
       "id": 5
+    },
+    {
+      "task": "dxcvx",
+      "completed": false,
+      "type": "Todo",
+      "room": "",
+      "body": "fgdfbsd",
+      "start": "",
+      "end": "34536",
+      "color": "Orange",
+      "label": [],
+      "id": 6
+    },
+    {
+      "task": "sdfgs",
+      "completed": false,
+      "type": "Todo",
+      "room": "",
+      "body": "dfgdfg",
+      "start": "",
+      "end": "3536",
+      "color": "Red",
+      "label": [],
+      "id": 7
+    },
+    {
+      "task": "3456",
+      "completed": false,
+      "type": "Todo",
+      "room": "",
+      "body": "sdfghjk",
+      "start": "",
+      "end": "234567",
+      "color": "Green",
+      "label": [
+        "sdfgh",
+        "sdfgh",
+        "poiuyt",
+        "qwert"
+      ],
+      "id": 8
     }
   ]
 }
