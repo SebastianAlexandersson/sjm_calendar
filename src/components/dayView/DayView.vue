@@ -2,7 +2,7 @@
   <div class="day-wrapper">
     <div class="searchbar">
       <label for="text">Search a event...</label>
-      <input type="text" @change="searchEvent" />
+      <input type="text" />
     </div>
     <div>
       <div class="row" v-for="d in data" v-bind:key="d.id">
@@ -15,15 +15,16 @@
           <Shade v-on:click.native="isVisible = false" class="shade" v-if="isVisible">
             <Modal class="modal" v-for="event in events" v-bind:key="event.id">
               <div class="header">
-                <h3>{{event.task}}</h3>
+                <h3 @click="handleSetcurrent(event)">{{event.task}}</h3>
               </div>
               <div class="body">
+                <span id="delete" @click="handleDelete(event.id)">Delete</span>
                 <h5 class="room">Room:</h5>
                 <h5 class="start">Start: {{event.start}}</h5>
                 <h5 class="start">End: {{event.end}}</h5>
                 <p>{{event.body}}</p>
                 <router-link :to="'event-form'" class="add-event">create new event</router-link>
-                <router-link :to="'event-form'" class="update-event">update event</router-link>
+                <router-link :to="'update-event'" class="update-event">update event</router-link>
               </div>
             </Modal>
           </Shade>
@@ -69,6 +70,9 @@ export default {
     },
     filtredEvents() {
       return this.$store.state.events.events;
+    },
+    getState() {
+      return this.$store.state.events;
     }
   },
   created() {
@@ -78,8 +82,15 @@ export default {
     test() {
       alert("click");
     },
-    searchEvent(text) {
-      this.$store.dispatch("searchEvents", text);
+    handleDelete(eventId) {
+      this.$store.dispatch("deleteEvent", eventId);
+    },
+    handleSearch(EventText) {
+      this.$store.dispatch("searchEvents", eventText);
+    },
+    handleSetcurrent(event) {
+      this.$store.dispatch("setCurrent", event);
+      this.$router.push("/update-event");
     }
   }
 };
@@ -162,6 +173,14 @@ export default {
   background: white;
   border-radius: 10px;
   padding: 1rem 1.5rem;
+  position: relative;
+}
+.modal #delete {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  cursor: pointer;
+  font-size: 1.1rem;
 }
 
 .modal .header {

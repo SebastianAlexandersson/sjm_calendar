@@ -1,6 +1,7 @@
 
 const state = {
   events: [],
+  current: null,
 };
 const getters = {
 
@@ -31,10 +32,13 @@ const actions = {
     commit('findEvent', data);
   },
 
-  async deleteEvent({ commit }, id) {
-    await fetch(`http://localhost:4000/events/${id}`, { method: 'DELETE' });
-    commit('removeEvent', id);
+  async deleteEvent({ commit }, eventId) {
+    await fetch(`http://localhost:4000/events/${eventId}`, { method: 'DELETE' });
+    commit('removeEvent', eventId);
   },
+  setCurrent({commit},event){
+    commit("setCurrentValue", event);
+  }
 };
 
 const mutations = {
@@ -48,13 +52,18 @@ const mutations = {
     state.events.unshift(event);
   },
 
-  editEvent(commit, data) {
-
+  editEvent(state, payload) {
+     state.events.map(event =>
+      event.id === payload.id ? payload : log
+    )
   },
   removeEvent(state, payload) {
     const removedEvent = state.events.filter(event => event.id !== payload.id);
     return removedEvent;
   },
+  setCurrentValue(state,payload){
+    state.current = payload
+  }
 
 };
 

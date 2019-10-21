@@ -87,16 +87,16 @@
       "id": 4
     },
     {
-      "task": "apa",
-      "type": "Meeting",
-      "body": "apan gillar att ata banan",
-      "start": "2019-08-28",
-      "end": "2019-10-13",
+      "task": "Hello Sebbe",
+      "type": "Todo",
+      "body": "How are you?",
+      "start": "2019-10-07",
+      "end": "2019-10-18",
       "labels": [
-        "hobby",
-        "home"
+        "important",
+        "hobby"
       ],
-      "id": 5
+      "id": 6
     }
   ]
 }
