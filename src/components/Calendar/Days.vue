@@ -34,6 +34,9 @@
         class="hasMeeting"
         v-if="dayHasMeeting(state.currentYear, get.displayedMonthNum, state.addZero(day))"
       >
+        <div class="meeting" v-for="meeting in meetings" :key="meeting.id">
+          {{ meeting.startTime }}
+        </div>
       </div>
       <router-link
         :to='`/day-view/${state.currentYear}-${get.displayedMonthNum}-${state.addZero(day)}`'
@@ -100,6 +103,8 @@ export default {
   position: relative;
   background-color: #fff;
   border-radius: 10px;
+  cursor: pointer;
+  transition: all ease .15s;
 }
 
 .day span:last-of-type {
@@ -107,19 +112,30 @@ export default {
   margin-top: 1rem;
 }
 
+.day:hover {
+  transform: scale(1.05);
+}
+
 .highlight {
-  border: 1px solid black;
+  border: 2px solid rgb(59, 59, 59);
 }
 
 .fade {
   opacity: .5;
 }
+
 .hasMeeting {
   position: absolute;
   top: 0;
   left: 0;
-  width: 1rem;
-  height: 1rem;
-  background-color: red;
+}
+
+.meeting {
+  background-color: var(--blue);
+  color: #fff;
+  padding: .2rem .5rem;
+  font-size: .8rem;
+  display: block;
+  margin-bottom: .2rem;
 }
 </style>

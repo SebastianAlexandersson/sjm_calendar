@@ -39,7 +39,6 @@ export default {
   color: #000;
   margin-top: 2rem;
   font-weight: bold;
-  overflow: hidden;
 }
 
 .days-and-weeks {

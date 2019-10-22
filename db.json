@@ -65,6 +65,40 @@
       ]
     },
     {
+      "id": 20,
+      "task": "meeting with the boss",
+      "completed": false,
+      "room": "Två",
+      "type": "Meeting",
+      "body": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate ipsum maxime doloremque, magnam repellendus numquam inventore ipsa nostrum eligendi, pariatur qui minus necessitatibus ullam eius autem dolores incidunt id beatae!",
+      "start": "2019-10-15",
+      "end": "2019-10-27",
+      "startTime": "03:00",
+      "endTime": "07:00",
+      "color": "green",
+      "labels": [
+        "important",
+        "work"
+      ]
+    },
+    {
+      "id": 21,
+      "task": "meeting with the boss",
+      "completed": false,
+      "room": "Två",
+      "type": "Meeting",
+      "body": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate ipsum maxime doloremque, magnam repellendus numquam inventore ipsa nostrum eligendi, pariatur qui minus necessitatibus ullam eius autem dolores incidunt id beatae!",
+      "start": "2019-10-15",
+      "end": "2019-10-27",
+      "startTime": "04:00",
+      "endTime": "07:00",
+      "color": "green",
+      "labels": [
+        "important",
+        "work"
+      ]
+    },
+    {
       "id": 3,
       "task": "Go out with the dog",
       "completed": false,
