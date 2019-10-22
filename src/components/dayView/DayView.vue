@@ -22,7 +22,7 @@
               <div class="header" v-if="currentTime === event.startTime">
                 <h3>{{event.task}}</h3>
               </div>
-              <div v-else>
+              <div v-else class="header-no-content">
                 <h3>Add a event</h3>
               </div>
               <div class="body" v-if="currentTime === event.startTime">
@@ -31,15 +31,15 @@
                 <h5 class="start">Start: {{event.start}}</h5>
                 <h5 class="start">End: {{event.end}}</h5>
                 <p>{{event.body}}</p>
-                <router-link :to="'event-form'" class="add-event">create new event</router-link>
+                <router-link :to="'/create-event'" class="add-event">create new event</router-link>
                 <a
-                  :to="'update-event'"
+                  :to="'/update-event'"
                   @click="handleSetcurrent(event)"
                   class="update-event"
                 >update event</a>
               </div>
               <div v-else class="no-event-body">
-                <router-link :to="'event-form'" class="add-event">create new event</router-link>
+                <router-link :to="'/create-event'" class="add-event">create new event</router-link>
               </div>
             </Modal>
           </Shade>
@@ -220,7 +220,8 @@ export default {
   font-size: 1.1rem;
 }
 
-.modal .header {
+.modal .header,
+.header-no-content {
   font-size: 2.1rem;
   text-transform: capitalize;
   border-bottom: 2px solid var(--dark-primary);
@@ -242,6 +243,13 @@ export default {
 }
 
 .modal .no-event-body {
+  display: flex;
+  height: 10rem;
+  align-items: flex-end;
+  position: relative;
+}
+.modal .no-event-body a {
+  margin-left: auto;
 }
 .add-event,
 .update-event {
