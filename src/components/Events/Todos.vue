@@ -1,53 +1,53 @@
 <template>
-  <div class="todoList">
+  <div class='todoList'>
     <h1>Todos</h1>
     <select>
       <option disabled value>Choose a color to sort from</option>
-      <option v-on:click="selectColor('')">Show all</option>
-      <option v-on:click="selectColor('Red')">Red</option>
-      <option v-on:click="selectColor('Green')">Green</option>
-      <option v-on:click="selectColor('Yellow')">Yellow</option>
-      <option v-on:click="selectColor('Blue')">Blue</option>
-      <option v-on:click="selectColor('Orange')">Orange</option>
-      <option v-on:click="selectColor('Pink')">Pink</option>
+      <option v-on:click='selectColor("")'>Show all</option>
+      <option v-on:click='selectColor("Red")'>Red</option>
+      <option v-on:click='selectColor("Green")'>Green</option>
+      <option v-on:click='selectColor("Yellow")'>Yellow</option>
+      <option v-on:click='selectColor("Blue")'>Blue</option>
+      <option v-on:click='selectColor("Orange")'>Orange</option>
+      <option v-on:click='selectColor("Pink")'>Pink</option>
     </select>
-    <input type="button" value="Add New Todo" v-on:click="callAddModal()" />
+    <input type='button' value='Add New Todo' v-on:click='callAddModal()' />
 
     <div
-      v-for="event in events"
-      :key="event.id"
-      class="todos"
-      v-bind:style="{backgroundColor:event.color}"
+      v-for='event in events'
+      :key='event.id'
+      class='todos'
+      v-bind:style='{backgroundColor:event.color}'
     >
-      <div v-on:click="callShowModal(event)">{{ event.task }}</div>
+      <div v-on:click='callShowModal(event)'>{{ event.task }}</div>
       <div>{{ event.body }}</div>
-      <div v-if="event.completed">Done!</div>
+      <div v-if='event.completed'>Done!</div>
       <div v-else>Not completed yet</div>
       <div>{{ event.end }}</div>
       <div>{{ event.label }}</div>
-      <button v-on:click="callEditModal(event)">Edit todo</button>
-      <button v-on:click="callDeleteModal(event)">Delete todo</button>
+      <button v-on:click='callEditModal(event)'>Edit todo</button>
+      <button v-on:click='callDeleteModal(event)'>Delete todo</button>
     </div>
     <div>
       <PoseTransition>
         <!-- // Show event -->
         <Shade
-          v-on:click.native="closeModal"
-          class="shade"
-          v-if="isShowVisible"
-          v-bind:todo="todoModal"
+          v-on:click.native='closeModal'
+          class='shade'
+          v-if='isShowVisible'
+          v-bind:todo='todoModal'
         >
-          <Modal class="modal">
-            <div class="header">
+          <Modal class='modal'>
+            <div class='header'>
               <h3>{{todo.task}}</h3>
             </div>
-            <div class="body">
-              <h5 class="start">Color group: {{todo.color}}</h5>
-              <h5 class="start">Labels: {{todo.lable}}</h5>
-              <h5 class="start">End date: {{todo.end}}</h5>
-              <h5 class="start">
+            <div class='body'>
+              <h5 class='start'>Color group: {{todo.color}}</h5>
+              <h5 class='start'>Labels: {{todo.lable}}</h5>
+              <h5 class='start'>End date: {{todo.end}}</h5>
+              <h5 class='start'>
                 Completed?:
-                <div v-if="todo.completed">Done!</div>
+                <div v-if='todo.completed'>Done!</div>
                 <div v-else>Not completed yet</div>
               </h5>
               <p>{{todo.body}}</p>
@@ -59,11 +59,11 @@
     <div>
       <PoseTransition>
         <!-- Add event -->
-        <Shade class="shade" v-if="isAddVisible" v-bind="newTodo">
-          <Modal class="modal">
-            <div class="header">
-              <input v-model="newTodo.task" placeholder="Add a task name" />
-              <select v-model="newTodo.color">
+        <Shade class='shade' v-if='isAddVisible' v-bind='newTodo'>
+          <Modal class='modal'>
+            <div class='header'>
+              <input v-model='newTodo.task' placeholder='Add a task name' />
+              <select v-model='newTodo.color'>
                 <option disabled value>Choose a color</option>
                 <option>Red</option>
                 <option>Green</option>
@@ -73,16 +73,16 @@
                 <option>Pink</option>
               </select>
             </div>
-            <div class="body">
-              <input class="end" v-model="newTodo.end" placeholder="YYYYMMDD" />
+            <div class='body'>
+              <input class='end' v-model='newTodo.end' placeholder='YYYYMMDD' />
               <input
-                v-model="addLable"
-                placeholder="Add text here"
-                v-on:keyup.enter="pushLable(addLable)"
+                v-model='addLable'
+                placeholder='Add text here'
+                v-on:keyup.enter='pushLable(addLable)'
               />
-              <input v-model="newTodo.body" placeholder="Add text here" />
-              <button v-on:click="saveNewTodo(newTodo)">Save</button>
-              <button v-on:click="closeModal">Cancel</button>
+              <input v-model='newTodo.body' placeholder='Add text here' />
+              <button v-on:click='saveNewTodo(newTodo)'>Save</button>
+              <button v-on:click='closeModal'>Cancel</button>
             </div>
           </Modal>
         </Shade>
@@ -91,11 +91,11 @@
     <div>
       <PoseTransition>
         <!-- Edit event -->
-        <Shade class="shade" v-if="isEditVisible" v-bind:todo="todoModal">
-          <Modal class="modal">
-            <div class="header">
-              <input v-model="todo.task" placeholder="todo.task" />
-              <select v-model="todo.color">
+        <Shade class='shade' v-if='isEditVisible' v-bind:todo='todoModal'>
+          <Modal class='modal'>
+            <div class='header'>
+              <input v-model='todo.task' placeholder='todo.task' />
+              <select v-model='todo.color'>
                 <option disabled value>{{ todo.color }}</option>
                 <option>Red</option>
                 <option>Green</option>
@@ -105,17 +105,17 @@
                 <option>Pink</option>
               </select>
             </div>
-            <div class="body">
-              <input type="radio" id="one" v-bind:value="true" v-model="todo.completed" />
-              <label for="one">Done</label>
+            <div class='body'>
+              <input type='radio' id='one' v-bind:value='true' v-model='todo.completed' />
+              <label for='one'>Done</label>
               <br />
-              <input type="radio" id="two" v-bind:value="false" v-model="todo.completed" />
-              <label for="two">Not yet.</label>
+              <input type='radio' id='two' v-bind:value='false' v-model='todo.completed' />
+              <label for='two'>Not yet.</label>
               <br />
-              <input class="end" v-model="todo.end" placeholder="todo.end" />
-              <input v-model="todo.body" placeholder="todo.body" />
-              <button v-on:click="editTodo(todo)">Save</button>
-              <button v-on:click="closeModal">Cancel</button>
+              <input class='end' v-model='todo.end' placeholder='todo.end' />
+              <input v-model='todo.body' placeholder='todo.body' />
+              <button v-on:click='editTodo(todo)'>Save</button>
+              <button v-on:click='closeModal'>Cancel</button>
             </div>
           </Modal>
         </Shade>
@@ -124,15 +124,15 @@
     <div>
       <PoseTransition>
         <!-- // Delete event -->
-        <Shade class="shade" v-if="isDeleteVisible" v-bind:todo="todoModal">
-          <Modal class="modal">
-            <div class="header">
+        <Shade class='shade' v-if='isDeleteVisible' v-bind:todo='todoModal'>
+          <Modal class='modal'>
+            <div class='header'>
               <h4>Are you sure you want to delete this event?</h4>
               <h3>{{todo.task}}</h3>
             </div>
-            <div class="body">
-              <button v-on:click="deleteTodo(todo)">Delete</button>
-              <button v-on:click="closeModal">Cancel</button>
+            <div class='body'>
+              <button v-on:click='deleteTodo(todo)'>Delete</button>
+              <button v-on:click='closeModal'>Cancel</button>
             </div>
           </Modal>
         </Shade>
@@ -141,14 +141,12 @@
   </div>
 </template>
 
-
-
 <script>
-import posed, { PoseTransition } from "vue-pose";
-import { number } from "style-value-types";
+import posed, { PoseTransition } from 'vue-pose';
+
 export default {
-  name: "TodoList",
-  data: () => {
+  name: 'TodoList',
+  data() {
     return {
       isAddVisible: false,
       isEditVisible: false,
@@ -157,18 +155,18 @@ export default {
       todoModal: {},
 
       newTodo: {
-        task: "",
+        task: '',
         completed: false,
-        type: "Todo",
-        room: "",
-        body: "",
-        start: "",
-        end: "",
-        color: "",
-        label: []
+        type: 'Todo',
+        room: '',
+        body: '',
+        start: '',
+        end: '',
+        color: '',
+        label: [],
       },
-      choosenColor: "",
-      addLable: ""
+      choosenColor: '',
+      addLable: '',
     };
   },
   components: {
@@ -178,18 +176,18 @@ export default {
       enter: {
         opacity: 1,
         beforeChildren: true,
-        transition: { duration: 200, ease: "linear" }
+        transition: { duration: 200, ease: 'linear' },
       },
       exit: {
         opacity: 0,
         afterChildren: true,
-        transition: { duration: 200, ease: "linear" }
-      }
+        transition: { duration: 200, ease: 'linear' },
+      },
     }),
     Modal: posed.div({
       enter: { opacity: 1, z: 0 },
-      exit: { opacity: 0, z: -150 }
-    })
+      exit: { opacity: 0, z: -150 },
+    }),
   },
   methods: {
     selectColor(color) {
@@ -223,49 +221,44 @@ export default {
       this.resetTodoObject();
     },
     saveNewTodo(payload) {
-      this.$store.dispatch("addEvent", payload);
+      this.$store.dispatch('addEvent', payload);
       this.isAddVisible = false;
-      alert("Todo is added!");
     },
     editTodo(payload) {
-      this.$store.dispatch("updateEvent", payload);
+      this.$store.dispatch('updateEvent', payload);
       this.isEditVisible = false;
-      alert("Todo is updated!");
     },
     deleteTodo(payload) {
-      this.$store.dispatch("deleteEvent", payload.id);
+      this.$store.dispatch('deleteEvent', payload.id);
       this.isDeleteVisible = false;
       this.resetTodoObject();
-      alert("Todo is deleted!");
     },
     resetTodoObject() {
-      this.newTodo.task = "";
+      this.newTodo.task = '';
       this.newTodo.completed = false;
-      this.newTodo.type = "Todo";
-      this.newTodo.room = "";
-      this.newTodo.body = "";
-      this.newTodo.start = "";
-      this.newTodo.end = "";
-      this.newTodo.color = "";
+      this.newTodo.type = 'Todo';
+      this.newTodo.room = '';
+      this.newTodo.body = '';
+      this.newTodo.start = '';
+      this.newTodo.end = '';
+      this.newTodo.color = '';
       this.newTodo.label = [];
     },
     pushLable(label) {
       this.newTodo.label.push(label);
-      this.addLable = "";
-    }
+      this.addLable = '';
+    },
   },
   computed: {
     events() {
       return this.$store.state.events.events.filter(
-        event =>
-          event.type === "Todo" &&
-          (event.color === this.choosenColor || this.choosenColor === "")
+        event => event.type === 'Todo' && (event.color === this.choosenColor || this.choosenColor === ''),
       );
-    }
+    },
   },
   created() {
-    this.$store.dispatch("getEvents");
-  }
+    this.$store.dispatch('getEvents');
+  },
   // }
 };
 </script>
@@ -321,4 +314,3 @@ export default {
   line-height: 2rem;
 }
 </style>>
-
