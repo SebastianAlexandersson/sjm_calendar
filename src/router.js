@@ -2,9 +2,10 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Todos from './components/Events/Todos.vue';
 import Calendar from './components/Calendar/Calendar.vue';
-import EventForm from './components/eventForm/EventForm.vue'
-import UpdateEvent from './components/eventForm/UpdateEvent.vue'
-import DayView from './components/dayView/DayView.vue'
+import EventForm from './components/eventForm/EventForm.vue';
+import UpdateEvent from './components/eventForm/UpdateEvent.vue';
+import DayView from './components/dayView/DayView.vue';
+
 Vue.use(Router);
 
 export default new Router({
@@ -12,7 +13,7 @@ export default new Router({
     {
       path: '/day-view/:date',
       name: 'DayView',
-      component: DayView
+      component: DayView,
     },
     {
       path: '/Todos',
