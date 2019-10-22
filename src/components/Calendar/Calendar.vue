@@ -2,25 +2,20 @@
   <section>
     <div class='calendar'>
       <Month />
-      <div class="days-and-weeks">
-        <Weeks />
-        <Days />
-      </div>
+      <DaysAndWeeks />
     </div>
   </section>
 </template>
 
 <script>
 import Month from './Month.vue';
-import Days from './Days.vue';
-import Weeks from './Weeks.vue';
+import DaysAndWeeks from './DaysAndWeeks.vue';
 
 export default {
   name: 'calendar',
   components: {
     Month,
-    Days,
-    Weeks,
+    DaysAndWeeks,
   },
   computed: {
     state() {
@@ -35,20 +30,15 @@ export default {
 </script>
 
 <style>
-.calendar {
-  color: #000;
-  margin-top: 2rem;
-  font-weight: bold;
-}
+  .calendar {
+    color: #000;
+    margin-top: 2rem;
+    font-weight: bold;
+  }
 
-.days-and-weeks {
-  display: flex;
-  max-width: 100%;
-}
-
-a,
-a:visited {
-  text-decoration: none;
-  color: #000;
-}
+  a,
+  a:visited {
+    text-decoration: none;
+    color: #000;
+  }
 </style>

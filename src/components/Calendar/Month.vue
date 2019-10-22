@@ -19,9 +19,11 @@ export default {
   },
   methods: {
     displayNextMonth() {
+      this.$emit('display-next-month');
       this.$store.commit('nextMonth');
     },
     displayPreviousMonth() {
+      this.$emit('display-previous-month');
       this.$store.commit('previousMonth');
     },
   },
