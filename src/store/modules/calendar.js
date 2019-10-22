@@ -19,8 +19,7 @@ const state = {
     return moment(`${year}${month}${day}`, 'YYYYMMDD').format('dddd');
   },
   weeks: 0,
-  months: [
-    {
+  months: [{
       month: 'Januari',
       ndays: 31,
     },
@@ -99,8 +98,10 @@ const mutations = {
       state.currentYear = (Number(state.currentYear) - 1).toString();
       state.MonthIndex = 11;
     }
-  },
-};
+  }
+}
+
+
 
 const actions = {};
 
@@ -139,9 +140,9 @@ const getters = {
   // to get correct dates.
 
   prevMonthYear(state, getters) {
-    return getters.prevMonth.month === 'December'
-      ? (Number(state.currentYear) - 1).toString()
-      : state.currentYear;
+    return getters.prevMonth.month === 'December' ?
+      (Number(state.currentYear) - 1).toString() :
+      state.currentYear;
   },
   prevMonthFillerDays(state, getters) {
     return state.days[getters.whatDayIsTheFirst];
@@ -157,13 +158,15 @@ const getters = {
   },
   getFirstWeek(state, getters) {
     const firstDay = getters.prevMonth.ndays - (getters.prevMonthFillerDays - 1);
-    const firstWeek = moment(`${getters.prevMonthYear}${getters.prevMonthNum}${state.addZero(firstDay)}`)
+    const firstWeek = moment(
+        `${getters.prevMonthYear}${getters.prevMonthNum}${state.addZero(firstDay)}`)
       .format('W');
     return firstWeek;
   },
   getLastWeek(state, getters) {
     const lastDay = getters.displayedMonth.ndays;
-    const lastWeek = moment(`${state.currentYear}${getters.displayedMonthNum}${state.addZero(lastDay)}`)
+    const lastWeek = moment(
+        `${state.currentYear}${getters.displayedMonthNum}${state.addZero(lastDay)}`)
       .format('W');
     return lastWeek;
   },
