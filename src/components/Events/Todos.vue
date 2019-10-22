@@ -1,7 +1,8 @@
 <template>
-  <div class='todoList'>
-    <h1>Todos</h1>
-    <select>
+<div>
+<div  class='todoList'>
+  <h1>Todos</h1>
+    <select class='eventSelector'>
       <option disabled value>Choose a color to sort from</option>
       <option v-on:click='selectColor("")'>Show all</option>
       <option v-on:click='selectColor("Red")'>Red</option>
@@ -11,22 +12,24 @@
       <option v-on:click='selectColor("Orange")'>Orange</option>
       <option v-on:click='selectColor("Pink")'>Pink</option>
     </select>
-    <input type='button' value='Add New Todo' v-on:click='callAddModal()' />
+  <button class='eventButton' v-on:click='callAddModal()'>Add New Todo</button>
+</div>
 
+<div>
     <div
       v-for='event in events'
       :key='event.id'
       class='todos'
-      v-bind:style='{backgroundColor:event.color}'
     >
-      <div v-on:click='callShowModal(event)'>{{ event.task }}</div>
-      <div>{{ event.body }}</div>
-      <div v-if='event.completed'>Done!</div>
-      <div v-else>Not completed yet</div>
-      <div>{{ event.end }}</div>
-      <div>{{ event.label }}</div>
-      <button v-on:click='callEditModal(event)'>Edit todo</button>
-      <button v-on:click='callDeleteModal(event)'>Delete todo</button>
+      <div class='eventColor' v-bind:style='{backgroundColor:event.color}'></div>
+      <div class='eventTask' v-on:click='callShowModal(event)'>{{ event.task }}</div>
+      <div class='eventCompleted' v-if='event.completed'>Done!</div>
+      <div class='eventCompleted' v-else>Not completed yet</div>
+      <div class='eventBody'>{{ event.body }}</div>
+      <div class='eventEndDate'>{{ event.end }}</div>
+      <div class='eventLabels'>{{ event.label }}</div>
+      <button class='eventButton' v-on:click='callEditModal(event)'>Edit todo</button>
+      <button class='eventButton' v-on:click='callDeleteModal(event)'>Delete todo</button>
     </div>
     <div>
       <PoseTransition>
@@ -139,6 +142,7 @@
       </PoseTransition>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -164,6 +168,8 @@ export default {
         end: '',
         color: '',
         label: [],
+        startTime: '',
+        endTime: '',
       },
       choosenColor: '',
       addLable: '',
@@ -243,6 +249,8 @@ export default {
       this.newTodo.end = '';
       this.newTodo.color = '';
       this.newTodo.label = [];
+      this.newTodo.startTime = '';
+      this.newTodo.endTime = '';
     },
     pushLable(label) {
       this.newTodo.label.push(label);
@@ -266,11 +274,50 @@ export default {
 <style scoped>
 .todoList {
   padding: 3rem;
+  text-align: center;
+  background-color: rgb(50, 99, 198);
+  color: white;
+}
+.eventSelector{
+  border-radius: 10px;
+  margin: 0.3rem 0.5rem;
 }
 .todos {
   padding: 1.1rem;
   margin-bottom: 1rem;
+  background-color: lightgray;
 }
+.todos .eventColor{
+  padding: 1.1rem;
+  margin-bottom: 1rem;
+}
+.todos .eventTask{
+  padding: 1.1rem;
+  margin-bottom: 1rem;
+}
+.todos .eventCompleted{
+  padding: 1.1rem;
+  margin-bottom: 1rem;
+}
+.todos .eventBody{
+  padding: 1.1rem;
+  margin-bottom: 1rem;
+}
+.todos .eventEnddate{
+  padding: 1.1rem;
+  margin-bottom: 1rem;
+}
+.todos .eventLabels{
+  padding: 1.1rem;
+  margin-bottom: 1rem;
+}
+.eventButton{
+  text-align: center;
+  border-radius: 10px;
+  padding: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+
 
 .shade {
   position: fixed;
