@@ -20,53 +20,53 @@ const state = {
   },
   weeks: 0,
   months: [{
-      month: 'Januari',
-      ndays: 31,
-    },
-    {
-      month: 'Februari',
-      ndays: 28,
-    },
-    {
-      month: 'Mars',
-      ndays: 31,
-    },
-    {
-      month: 'April',
-      ndays: 30,
-    },
-    {
-      month: 'Maj',
-      ndays: 31,
-    },
-    {
-      month: 'Juni',
-      ndays: 30,
-    },
-    {
-      month: 'Juli',
-      ndays: 31,
-    },
-    {
-      month: 'Augusti',
-      ndays: 31,
-    },
-    {
-      month: 'September',
-      ndays: 30,
-    },
-    {
-      month: 'Oktober',
-      ndays: 31,
-    },
-    {
-      month: 'November',
-      ndays: 30,
-    },
-    {
-      month: 'December',
-      ndays: 31,
-    },
+    month: 'Januari',
+    ndays: 31,
+  },
+  {
+    month: 'Februari',
+    ndays: 28,
+  },
+  {
+    month: 'Mars',
+    ndays: 31,
+  },
+  {
+    month: 'April',
+    ndays: 30,
+  },
+  {
+    month: 'Maj',
+    ndays: 31,
+  },
+  {
+    month: 'Juni',
+    ndays: 30,
+  },
+  {
+    month: 'Juli',
+    ndays: 31,
+  },
+  {
+    month: 'Augusti',
+    ndays: 31,
+  },
+  {
+    month: 'September',
+    ndays: 30,
+  },
+  {
+    month: 'Oktober',
+    ndays: 31,
+  },
+  {
+    month: 'November',
+    ndays: 30,
+  },
+  {
+    month: 'December',
+    ndays: 31,
+  },
   ],
 
   // Lookup how many filler days from previous month to add.
@@ -98,9 +98,8 @@ const mutations = {
       state.currentYear = (Number(state.currentYear) - 1).toString();
       state.MonthIndex = 11;
     }
-  }
-}
-
+  },
+};
 
 
 const actions = {};
@@ -140,9 +139,9 @@ const getters = {
   // to get correct dates.
 
   prevMonthYear(state, getters) {
-    return getters.prevMonth.month === 'December' ?
-      (Number(state.currentYear) - 1).toString() :
-      state.currentYear;
+    return getters.prevMonth.month === 'December'
+      ? (Number(state.currentYear) - 1).toString()
+      : state.currentYear;
   },
   prevMonthFillerDays(state, getters) {
     return state.days[getters.whatDayIsTheFirst];
@@ -159,14 +158,15 @@ const getters = {
   getFirstWeek(state, getters) {
     const firstDay = getters.prevMonth.ndays - (getters.prevMonthFillerDays - 1);
     const firstWeek = moment(
-        `${getters.prevMonthYear}${getters.prevMonthNum}${state.addZero(firstDay)}`)
-      .format('W');
+      `${getters.prevMonthYear}${getters.prevMonthNum}${state.addZero(firstDay)}`,
+    ).format('W');
     return firstWeek;
   },
   getLastWeek(state, getters) {
     const lastDay = getters.displayedMonth.ndays;
     const lastWeek = moment(
-        `${state.currentYear}${getters.displayedMonthNum}${state.addZero(lastDay)}`)
+      `${state.currentYear}${getters.displayedMonthNum}${state.addZero(lastDay)}`,
+    )
       .format('W');
     return lastWeek;
   },

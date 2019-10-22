@@ -1,48 +1,47 @@
-import moment from 'moment';
+// import moment from 'moment';
 
 const state = {
   events: [],
   current: null,
 };
-const getters = {
+// const getters = {};
 
-};
 const actions = {
   async getEvents({
-    commit
+    commit,
   }) {
     const res = await fetch('http://localhost:4000/events');
     const data = await res.json();
     commit('setEvents', data);
   },
   async addEvent({
-    commit
+    commit,
   }, event) {
     const res = await fetch('http://localhost:4000/events', {
       method: 'post',
       body: JSON.stringify(event),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     });
     const data = await res.json();
     commit('newEvent', data);
   },
   async updateEvent({
-    commit
+    commit,
   }, event) {
     const res = await fetch(`http://localhost:4000/events/${event.id}`, {
       method: 'PUT',
       body: JSON.stringify(event),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
     });
     const data = await res.json();
     commit('editEvent', data);
   },
   async searchEvents({
-    commit
+    commit,
   }, text) {
     const res = await fetch(`http://localhost:4000/events?q=${text}`);
     const data = await res.json();
@@ -50,17 +49,17 @@ const actions = {
   },
 
   async deleteEvent({
-    commit
+    commit,
   }, id) {
     await fetch(`http://localhost:4000/events/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
     });
     commit('removeEvent', id);
-    this.dispatch("getEvents")
+    this.dispatch('getEvents');
   },
-  setCurrent({commit},event){
-    commit("setCurrentValue", event);
-  }
+  setCurrent({ commit }, event) {
+    commit('setCurrentValue', event);
+  },
 };
 
 const mutations = {
@@ -75,17 +74,15 @@ const mutations = {
   },
 
   editEvent(state, payload) {
-     state.events.map(event =>
-      event.id === payload.id ? payload : log
-    )
+    state.events.map(event => (event.id === payload.id ? payload : event));
   },
   removeEvent(state, payload) {
     const removedEvent = state.events.filter(event => event.id !== payload.id);
     return removedEvent;
   },
-  setCurrentValue(state,payload){
-    state.current = payload
-  }
+  setCurrentValue(state, payload) {
+    state.current = payload;
+  },
 
 };
 
