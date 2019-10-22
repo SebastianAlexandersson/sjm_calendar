@@ -88,7 +88,6 @@ export default {
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(5, 1fr);
   grid-gap: 0.5rem;
-  background-color: #fff;
 }
 
 .day {
@@ -98,8 +97,9 @@ export default {
   flex-direction: column;
   font-size: 1.5rem;
   padding: 2rem;
-  background-color: var(--blue);
   position: relative;
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 .day span:last-of-type {
@@ -108,7 +108,7 @@ export default {
 }
 
 .highlight {
-  background-color: #156d64;
+  border: 1px solid black;
 }
 
 .fade {

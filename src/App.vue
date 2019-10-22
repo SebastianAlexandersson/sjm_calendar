@@ -23,7 +23,7 @@ export default {
   --font-secondary: 'Source Sans Pro', sans-serif;
   --dark-primary: #2a2c2b;
   --dark-secondary: #000000;
-  --blue: #26a69a;
+  --blue: rgb(50, 99, 198);
   --blue-light: #53e3a6;
   --white: #fff;
   --danger: #dc3522;
@@ -55,6 +55,7 @@ body {
   display: flex;
   flex-direction: column;
   line-height: 1;
+  background-color: rgb(231, 231, 231);
 }
 
 ul,
@@ -75,6 +76,10 @@ a {
   padding-left: 1rem;
   margin-right: auto;
   margin-left: auto;
+}
+
+.card {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 @media (min-width: 576px) {

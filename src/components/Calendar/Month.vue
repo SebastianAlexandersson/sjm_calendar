@@ -37,6 +37,8 @@ export default {
   margin-bottom: 0.5rem;
   background-color: var(--blue);
   font-weight: bold;
+  border-radius: 10px;
+  color: #fff;
 }
 
 .month span {

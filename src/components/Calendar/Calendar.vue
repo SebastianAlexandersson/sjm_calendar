@@ -36,18 +36,20 @@ export default {
 
 <style>
 .calendar {
-  color: #fff;
+  color: #000;
   margin-top: 2rem;
   font-weight: bold;
+  overflow: hidden;
 }
 
 .days-and-weeks {
   display: flex;
+  max-width: 100%;
 }
 
 a,
 a:visited {
   text-decoration: none;
-  color: #fff;
+  color: #000;
 }
 </style>
