@@ -159,7 +159,7 @@ const getters = {
   getFirstWeek(state, getters) {
     const firstDay = getters.prevMonth.ndays - (getters.prevMonthFillerDays - 1);
     const firstWeek = moment(
-        `${state.currentYear}${getters.prevMonthNum}${state.addZero(firstDay)}`)
+        `${getters.prevMonthYear}${getters.prevMonthNum}${state.addZero(firstDay)}`)
       .format('W');
     return firstWeek;
   },

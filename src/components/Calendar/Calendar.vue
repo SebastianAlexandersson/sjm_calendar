@@ -43,4 +43,10 @@ export default {
 .days-and-weeks {
   display: flex;
 }
+
+a,
+a:visited {
+  text-decoration: none;
+  color: #fff;
+}
 </style>
