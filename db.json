@@ -79,34 +79,6 @@
       "labels": [
         "Home"
       ]
-    },
-    {
-      "task": "apa",
-      "type": "Todo",
-      "body": "test",
-      "start": "2019-10-11",
-      "end": "2019-11-03",
-      "startTime": "18:00",
-      "endTime": "21:00",
-      "labels": [
-        "important",
-        "hobby"
-      ],
-      "id": 4
-    },
-    {
-      "task": "Hello Sebbe",
-      "type": "Todo",
-      "body": "How are you?",
-      "start": "2019-10-07",
-      "end": "2019-10-18",
-      "startTime": "13:00",
-      "endTime": "18:00",
-      "labels": [
-        "important",
-        "hobby"
-      ],
-      "id": 6
     }
   ]
 }
