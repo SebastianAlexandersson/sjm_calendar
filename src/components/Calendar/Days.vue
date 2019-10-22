@@ -5,7 +5,13 @@
       v-for='prevDay in get.prevMonthFillerDays'
       :key='`${prevDay}prevday`'
     >
-      <router-link :to='"/day-view/" + get.prevMonthYear + "-" + get.prevMonthNum + "-" + state.addZero(prevDay)'>
+      <router-link
+        :to='
+        `/day-view/${get.prevMonthYear}-` +
+        `${get.prevMonthNum}-` +
+        `${state.addZero(prevDay + get.prevMonthFillerStartDate)}`
+        '
+      >
         <span>{{ prevDay + get.prevMonthFillerStartDate }}</span>
       </router-link>
       <span>
@@ -24,7 +30,9 @@
       v-bind:class='{ highlight: highlightToday(day, get.displayedMonthNum) }'
       :id='`${state.currentYear}${get.displayedMonthNum}${state.addZero(day)}`'
     >
-      <router-link :to='"/day-view/" + state.currentYear + "-" + get.displayedMonthNum + "-" + state.addZero(day)'>
+      <router-link
+        :to='`/day-view/${state.currentYear}-${get.displayedMonthNum}-${state.addZero(day)}`'
+      >
         <span>{{ day }}</span>
       </router-link>
       <span>
