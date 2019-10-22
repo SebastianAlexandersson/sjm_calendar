@@ -38,6 +38,7 @@ export default {
 .calendar {
   color: #fff;
   margin-top: 2rem;
+  font-weight: bold;
 }
 
 .days-and-weeks {

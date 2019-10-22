@@ -2,36 +2,44 @@
   <div class="day-wrapper">
     <div class="searchbar">
       <label for="text">Search a event...</label>
-      <input type="text" />
+      <input type="text" @change="handleSearch" />
     </div>
     <div>
-      <div class="row" v-for="d in data" v-bind:key="d.id">
+      <div class="row" v-for="d in data" v-bind:key="d.id" @click="isVisible = true">
         <span class="time">{{d.time}}</span>
-        <h4 @click="isVisible = true">{{d.text}}</h4>
+        <!-- <h4 v-if="d.time === getDateFromParent">{{}}</h4> -->
+        <span v-for="event in events">
+          <span v-if="d.time === event.startTime">{{event.task}}</span>
+        </span>
         <span class="edit">X</span>
       </div>
       <div>
         <PoseTransition>
-          <Shade v-on:click.native="isVisible = false" class="shade" v-if="isVisible">
-            <Modal class="modal" v-for="event in events" v-bind:key="event.id">
-              <div class="header">
-                <h3 @click="handleSetcurrent(event)">{{event.task}}</h3>
-              </div>
-              <div class="body">
-                <span id="delete" @click="handleDelete(event.id)">Delete</span>
-                <h5 class="room">Room:</h5>
-                <h5 class="start">Start: {{event.start}}</h5>
-                <h5 class="start">End: {{event.end}}</h5>
-                <p>{{event.body}}</p>
-                <router-link :to="'event-form'" class="add-event">create new event</router-link>
-                <a
-                  :to="'update-event'"
-                  @click="handleSetcurrent(event)"
-                  class="update-event"
-                >update event</a>
-              </div>
-            </Modal>
-          </Shade>
+          <div v-for="d in data" v-bind:key="d.id">
+            <Shade v-on:click.native="isVisible = false" class="shade" v-if="isVisible">
+              <Modal class="modal" v-for="event in events" v-bind:key="event.id">
+                <div class="header">
+                  <h3
+                    @click="handleSetcurrent(event)"
+                    v-if="event.startTime == d.data"
+                  >{{event.task}}</h3>
+                </div>
+                <div class="body">
+                  <span id="delete" @click="handleDelete(event.id)">Delete</span>
+                  <h5 class="room">Room:</h5>
+                  <h5 class="start">Start: {{event.start}}</h5>
+                  <h5 class="start">End: {{event.end}}</h5>
+                  <p>{{event.body}}</p>
+                  <router-link :to="'event-form'" class="add-event">create new event</router-link>
+                  <a
+                    :to="'update-event'"
+                    @click="handleSetcurrent(event)"
+                    class="update-event"
+                  >update event</a>
+                </div>
+              </Modal>
+            </Shade>
+          </div>
         </PoseTransition>
       </div>
     </div>
@@ -77,15 +85,16 @@ export default {
     },
     getState() {
       return this.$store.state.events;
+    },
+    getDateFromParent() {
+      return this.$route.params.date;
     }
   },
   created() {
     this.$store.dispatch("getEvents");
   },
+
   methods: {
-    test() {
-      alert("click");
-    },
     handleDelete(eventId) {
       this.$store.dispatch("deleteEvent", eventId);
     },
@@ -137,6 +146,7 @@ export default {
   justify-content: space-between;
   padding: 1rem 1.5rem;
   margin: 0.12rem 0;
+  cursor: pointer;
   transition: all 300ms ease-in-out;
   box-shadow: 1px 1px 2px var(--dark-primary);
 }

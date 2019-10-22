@@ -5,7 +5,13 @@
       v-for='prevDay in get.prevMonthFillerDays'
       :key='`${prevDay}prevday`'
     >
-      <router-link :to='"/day-view/" + get.prevMonthYear + "-" + get.prevMonthNum + "-" + state.addZero(prevDay)'>
+      <router-link
+        :to='
+        `/day-view/${get.prevMonthYear}-` +
+        `${get.prevMonthNum}-` +
+        `${state.addZero(prevDay + get.prevMonthFillerStartDate)}`
+        '
+      >
         <span>{{ prevDay + get.prevMonthFillerStartDate }}</span>
       </router-link>
       <span>
@@ -24,7 +30,14 @@
       v-bind:class='{ highlight: highlightToday(day, get.displayedMonthNum) }'
       :id='`${state.currentYear}${get.displayedMonthNum}${state.addZero(day)}`'
     >
-      <router-link :to='"/day-view/" + state.currentYear + "-" + get.displayedMonthNum + "-" + state.addZero(day)'>
+      <div
+        class="hasMeeting"
+        v-if="dayHasMeeting(state.currentYear, get.displayedMonthNum, state.addZero(day))"
+      >
+      </div>
+      <router-link
+        :to='`/day-view/${state.currentYear}-${get.displayedMonthNum}-${state.addZero(day)}`'
+      >
         <span>{{ day }}</span>
       </router-link>
       <span>
@@ -49,6 +62,10 @@ export default {
     get() {
       return this.$store.getters;
     },
+    meetings() {
+      return this.$store.state.events.events
+        .filter(event => event.type === 'Meeting');
+    },
   },
   methods: {
     highlightToday(day, month) {
@@ -56,6 +73,10 @@ export default {
         Number(day) === Number(this.state.currentDay)
         && Number(month) === Number(this.state.currentMonth)
       );
+    },
+    dayHasMeeting(year, month, day) {
+      const formatDate = `${year}-${month}-${day}`;
+      return (this.meetings.filter(meeting => meeting.start === formatDate) || []).length > 0;
     },
   },
 };
@@ -78,6 +99,7 @@ export default {
   font-size: 1.5rem;
   padding: 2rem;
   background-color: var(--blue);
+  position: relative;
 }
 
 .day span:last-of-type {
@@ -91,5 +113,13 @@ export default {
 
 .fade {
   opacity: .5;
+}
+.hasMeeting {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1rem;
+  height: 1rem;
+  background-color: red;
 }
 </style>

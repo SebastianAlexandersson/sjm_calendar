@@ -1,5 +1,6 @@
 {
-  "days": [{
+  "days": [
+    {
       "id": 1,
       "day": "Monday"
     },
@@ -28,7 +29,8 @@
       "day": "Sunday"
     }
   ],
-  "events": [{
+  "events": [
+    {
       "id": 1,
       "task": "Go to the gym",
       "completed": false,
@@ -37,8 +39,10 @@
       "body": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate ipsum maxime doloremque, magnam repellendus numquam inventore ipsa nostrum eligendi, pariatur qui minus necessitatibus ullam eius autem dolores incidunt id beatae!",
       "start": "2019-10-15",
       "end": "2019-10-27",
+      "startTime": "02:00",
+      "endTime": "07:00",
       "color": "Yellow",
-      "label": [
+      "labels": [
         "free-time",
         "hobby"
       ]
@@ -52,6 +56,8 @@
       "body": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate ipsum maxime doloremque, magnam repellendus numquam inventore ipsa nostrum eligendi, pariatur qui minus necessitatibus ullam eius autem dolores incidunt id beatae!",
       "start": "2019-10-15",
       "end": "2019-10-27",
+      "startTime": "02:00",
+      "endTime": "07:00",
       "color": "green",
       "labels": [
         "important",
@@ -67,62 +73,40 @@
       "body": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate ipsum maxime doloremque, magnam repellendus numquam inventore ipsa nostrum eligendi, pariatur qui minus necessitatibus ullam eius autem dolores incidunt id beatae!",
       "start": "2019-10-15",
       "end": "2019-10-27",
-      "color": "Pink",
-      "label": [
+      "startTime": "15:00",
+      "endTime": "17:00",
+      "color": "pink",
+      "labels": [
         "Home"
       ]
     },
     {
       "task": "apa",
-      "type": "Meeting",
-      "body": "apan gillar att ata banan",
-      "start": "2019-08-28",
-      "end": "2019-10-13",
+      "type": "Todo",
+      "body": "test",
+      "start": "2019-10-11",
+      "end": "2019-11-03",
+      "startTime": "18:00",
+      "endTime": "21:00",
       "labels": [
         "important",
         "hobby"
       ],
-      "id": 5
+      "id": 4
     },
     {
-      "task": "dxcvx",
-      "completed": false,
+      "task": "Hello Sebbe",
       "type": "Todo",
-      "room": "",
-      "body": "fgdfbsd",
-      "start": "",
-      "end": "34536",
-      "color": "Orange",
-      "label": [],
-      "id": 6
-    },
-    {
-      "task": "sdfgs",
-      "completed": false,
-      "type": "Todo",
-      "room": "",
-      "body": "dfgdfg",
-      "start": "",
-      "end": "3536",
-      "color": "Red",
-      "label": [],
-      "id": 7
-    },
-    {
-      "task": "Berrra",
-      "completed": false,
-      "type": "Todo",
-      "room": "",
-      "body": "hbsdfds",
-      "start": "",
-      "end": "64543",
-      "color": "Green",
-      "label": [
-        "kjwdfh",
-        "sdfsdggh",
-        "sdfdfhghj,kkj"
+      "body": "How are you?",
+      "start": "2019-10-07",
+      "end": "2019-10-18",
+      "startTime": "13:00",
+      "endTime": "18:00",
+      "labels": [
+        "important",
+        "hobby"
       ],
-      "id": 8
+      "id": 6
     }
   ]
 }
