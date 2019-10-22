@@ -1,45 +1,48 @@
 <template>
   <div class="day-wrapper">
     <div class="searchbar">
-      <label for="text">Search a event...</label>
-      <input type="text" @change="handleSearch" />
+      <label for="text">
+        Search a event...
+        <input type="text" @change="handleSearch" />
+        <img src="../../images/search.svg" alt="searchIcon" />
+      </label>
     </div>
     <div>
-      <div class="row" v-for="d in data" v-bind:key="d.id" @click="isVisible = true">
+      <div class="row" v-for="d in data" v-bind:key="d.id" @click="handleClick(d.time)">
         <span class="time">{{d.time}}</span>
-        <!-- <h4 v-if="d.time === getDateFromParent">{{}}</h4> -->
-        <span v-for="event in events">
-          <span v-if="d.time === event.startTime">{{event.task}}</span>
-        </span>
+        <div v-for="event in events" v-bind:key="event.id">
+          <h3 v-if="d.time === event.startTime && getDateFromParent === event.start">{{event.task}}</h3>
+        </div>
         <span class="edit">X</span>
       </div>
       <div>
         <PoseTransition>
-          <div v-for="d in data" v-bind:key="d.id">
-            <Shade v-on:click.native="isVisible = false" class="shade" v-if="isVisible">
-              <Modal class="modal" v-for="event in events" v-bind:key="event.id">
-                <div class="header">
-                  <h3
-                    @click="handleSetcurrent(event)"
-                    v-if="event.startTime == d.data"
-                  >{{event.task}}</h3>
-                </div>
-                <div class="body">
-                  <span id="delete" @click="handleDelete(event.id)">Delete</span>
-                  <h5 class="room">Room:</h5>
-                  <h5 class="start">Start: {{event.start}}</h5>
-                  <h5 class="start">End: {{event.end}}</h5>
-                  <p>{{event.body}}</p>
-                  <router-link :to="'event-form'" class="add-event">create new event</router-link>
-                  <a
-                    :to="'update-event'"
-                    @click="handleSetcurrent(event)"
-                    class="update-event"
-                  >update event</a>
-                </div>
-              </Modal>
-            </Shade>
-          </div>
+          <Shade v-on:click.native="isVisible = false" class="shade" v-if="isVisible">
+            <Modal class="modal" v-for="event in events" v-bind:key="event.id">
+              <div class="header" v-if="currentTime === event.startTime">
+                <h3>{{event.task}}</h3>
+              </div>
+              <div v-else>
+                <h3>Add a event</h3>
+              </div>
+              <div class="body" v-if="currentTime === event.startTime">
+                <span id="delete" @click="handleDelete(event.id)">Delete</span>
+                <h5 class="room">Room:</h5>
+                <h5 class="start">Start: {{event.start}}</h5>
+                <h5 class="start">End: {{event.end}}</h5>
+                <p>{{event.body}}</p>
+                <router-link :to="'event-form'" class="add-event">create new event</router-link>
+                <a
+                  :to="'update-event'"
+                  @click="handleSetcurrent(event)"
+                  class="update-event"
+                >update event</a>
+              </div>
+              <div v-else class="no-event-body">
+                <router-link :to="'event-form'" class="add-event">create new event</router-link>
+              </div>
+            </Modal>
+          </Shade>
         </PoseTransition>
       </div>
     </div>
@@ -47,23 +50,24 @@
 </template>
 
 <script>
-import posed, { PoseTransition } from "vue-pose";
-import dayData from "./dayViewData";
+import posed, { PoseTransition } from 'vue-pose';
+import dayData from './dayViewData';
+
 export default {
-  name: "DayView",
-  data: () => ({ isVisible: false }),
+  name: 'DayView',
+  data: () => ({ isVisible: false, currentTime: null }),
   components: {
     PoseTransition,
     Shade: posed.div({
       enter: {
         opacity: 1,
         beforeChildren: true,
-        transition: { duration: 200, ease: "linear" }
+        transition: { duration: 200, ease: 'linear' }
       },
       exit: {
         opacity: 0,
         afterChildren: true,
-        transition: { duration: 200, ease: "linear" }
+        transition: { duration: 200, ease: 'linear' }
       }
     }),
     Modal: posed.div({
@@ -73,13 +77,18 @@ export default {
   },
   computed: {
     events() {
-      return this.$store.state.events.events.filter(
-        event => event.type === "Meeting"
-      );
+      return this.$store.state.events.events.filter(event => event.type === 'Meeting');
     },
     data() {
       return dayData;
     },
+
+    newDaydata(value) {
+      const timeArr = dayData.map(data => data.time);
+
+      return timeArr;
+    },
+
     filtredEvents() {
       return this.$store.state.events.events;
     },
@@ -91,19 +100,23 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("getEvents");
+    this.$store.dispatch('getEvents');
   },
 
   methods: {
     handleDelete(eventId) {
-      this.$store.dispatch("deleteEvent", eventId);
+      this.$store.dispatch('deleteEvent', eventId);
     },
     handleSearch(EventText) {
-      this.$store.dispatch("searchEvents", eventText);
+      this.$store.dispatch('searchEvents', eventText);
     },
     handleSetcurrent(event) {
-      this.$store.dispatch("setCurrent", event);
-      this.$router.push("/update-event");
+      this.$store.dispatch('setCurrent', event);
+      this.$router.push('/update-event');
+    },
+    handleClick(data) {
+      this.isVisible = true;
+      this.currentTime = data;
     }
   }
 };
@@ -121,7 +134,11 @@ export default {
 .searchbar label {
   font-size: 1.2rem;
 }
+.searchbar img {
+  width: 1.5rem;
+}
 .searchbar input {
+  position: relative;
   margin-top: 0.5rem;
   margin-right: auto;
   display: block;
@@ -149,6 +166,12 @@ export default {
   cursor: pointer;
   transition: all 300ms ease-in-out;
   box-shadow: 1px 1px 2px var(--dark-primary);
+}
+
+.row h3 {
+  font-size: 1.3rem;
+  letter-spacing: 0.5rem;
+  border-bottom: 1px solid var(--dark-primary);
 }
 
 .row:hover {
@@ -216,6 +239,9 @@ export default {
   font-size: 1.2rem;
   line-height: 2rem;
   margin-bottom: 2rem;
+}
+
+.modal .no-event-body {
 }
 .add-event,
 .update-event {

@@ -3,10 +3,14 @@
 const state = {
   events: [],
   current: null,
+  loading: false,
 };
 // const getters = {};
 
 const actions = {
+  setLoading({ commit }) {
+    commit('loading');
+  },
   async getEvents({
     commit,
   }) {
@@ -64,7 +68,9 @@ const actions = {
 
 const mutations = {
   setEvents(commit, data) {
+    state.loading = false;
     state.events = data;
+
   },
   findEvent(state, data) {
     state.events = data;
@@ -83,7 +89,9 @@ const mutations = {
   setCurrentValue(state, payload) {
     state.current = payload;
   },
-
+  loading(state, payload) {
+    return state.loading = true;
+  },
 };
 
 export default {
