@@ -10,7 +10,7 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: '/day-view',
+      path: '/day-view/:date',
       name: 'DayView',
       component: DayView
     },
