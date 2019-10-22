@@ -1,6 +1,5 @@
 {
-  "days": [
-    {
+  "days": [{
       "id": 1,
       "day": "Monday"
     },
@@ -29,8 +28,7 @@
       "day": "Sunday"
     }
   ],
-  "events": [
-    {
+  "events": [{
       "id": 1,
       "task": "Go to the gym",
       "completed": false,
@@ -39,13 +37,8 @@
       "body": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate ipsum maxime doloremque, magnam repellendus numquam inventore ipsa nostrum eligendi, pariatur qui minus necessitatibus ullam eius autem dolores incidunt id beatae!",
       "start": "2019-10-15",
       "end": "2019-10-27",
-<<<<<<< HEAD
-      "color": "red",
-      "labels": [
-=======
       "color": "Yellow",
       "label": [
->>>>>>> master
         "free-time",
         "hobby"
       ]
@@ -74,48 +67,21 @@
       "body": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate ipsum maxime doloremque, magnam repellendus numquam inventore ipsa nostrum eligendi, pariatur qui minus necessitatibus ullam eius autem dolores incidunt id beatae!",
       "start": "2019-10-15",
       "end": "2019-10-27",
-<<<<<<< HEAD
-      "color": "pink",
-      "labels": [
-=======
       "color": "Pink",
       "label": [
->>>>>>> master
         "Home"
       ]
     },
     {
       "task": "apa",
-<<<<<<< HEAD
-      "type": "Todo",
-      "body": "test",
-      "start": "2019-10-11",
-      "end": "2019-11-03",
-      "labels": [
-        "important",
-        "hobby"
-      ],
-      "id": 4
-    },
-    {
-      "task": "Hello Sebbe",
-      "type": "Todo",
-      "body": "How are you?",
-      "start": "2019-10-07",
-      "end": "2019-10-18",
-=======
       "type": "Meeting",
       "body": "apan gillar att ata banan",
       "start": "2019-08-28",
       "end": "2019-10-13",
->>>>>>> master
       "labels": [
         "important",
         "hobby"
       ],
-<<<<<<< HEAD
-      "id": 6
-=======
       "id": 5
     },
     {
@@ -157,7 +123,6 @@
         "sdfdfhghj,kkj"
       ],
       "id": 8
->>>>>>> master
     }
   ]
 }
