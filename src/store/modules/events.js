@@ -70,7 +70,6 @@ const mutations = {
   setEvents(commit, data) {
     state.loading = false;
     state.events = data;
-
   },
   findEvent(state, data) {
     state.events = data;

@@ -16,6 +16,14 @@
         </div>
 
         <div class="form-group">
+          <select name="startTime" id="startTime" v-model="startTime">
+            <option value disabled>Select A Time</option>
+            <option value="00:00">00:00</option>
+            <EventTimeUoption />
+          </select>
+        </div>
+
+        <div class="form-group">
           <input type="date" id="start" v-model="start" />
         </div>
 
@@ -63,18 +71,24 @@
 </template>
 
 <script>
-import moment from "moment";
+import moment from 'moment';
+import EventTimeOption from './EventTimeOption';
 // moment().format('Y'),
 export default {
-  name: "EventForm",
+  name: 'EventForm',
   data: () => ({
-    task: "",
-    type: "",
-    body: "",
+    task: '',
+    type: '',
+    body: '',
     start: new Date(),
     end: new Date(),
+    startTime: '',
+    endTime: '',
     labels: []
   }),
+  components: {
+    EventTimeOption
+  },
   methods: {
     handleSubmit(e) {
       e.preventDefault();
@@ -84,11 +98,12 @@ export default {
         body: this.body,
         start: this.start,
         end: this.end,
+        startTime: this.startTime,
         labels: this.labels
       };
       // console.log("PAYLOAD !!", payload);
-      this.$store.dispatch("addEvent", payload);
-      this.$router.push("/day-view");
+      this.$store.dispatch('addEvent', payload);
+      this.$router.push('/');
     }
   }
 };
@@ -144,8 +159,7 @@ form select {
   display: block;
   width: 30rem;
   margin: 0 auto;
-  font-family: "Open Sans", "Helvetica Neue", "Segoe UI", "Calibri", "Arial",
-    sans-serif;
+  font-family: 'Open Sans', 'Helvetica Neue', 'Segoe UI', 'Calibri', 'Arial', sans-serif;
   font-size: 18px;
   color: #60666d;
 }
@@ -161,7 +175,7 @@ form input:focus {
   color: #53e3a6;
 }
 
-form input[type="submit"] {
+form input[type='submit'] {
   appearance: none;
   outline: 0;
   background-color: #53e3a7ec;
@@ -174,7 +188,7 @@ form input[type="submit"] {
   font-size: 18px;
   transition-duration: 0.25s;
 }
-form input[type="submit"]:hover {
+form input[type='submit']:hover {
   background-color: #285542f6;
   color: #fff;
 }
@@ -187,30 +201,30 @@ form input[type="submit"]:hover {
   justify-content: center;
 }
 
-.checkbox-group input[type="checkbox"] {
+.checkbox-group input[type='checkbox'] {
   width: 4rem;
   margin: 0 0.5rem;
   border: 2px solid #53e3a746;
 }
-.checkbox-group input[value="important"]::after {
-  content: "VIP";
+.checkbox-group input[value='important']::after {
+  content: 'VIP';
   position: absolute;
   top: -1.5rem;
 }
-.checkbox-group input[value="home"]::after {
-  content: "Home";
+.checkbox-group input[value='home']::after {
+  content: 'Home';
   position: absolute;
   top: -1.5rem;
   right: 1rem;
 }
-.checkbox-group input[value="hobby"]::after {
-  content: "Home";
+.checkbox-group input[value='hobby']::after {
+  content: 'Home';
   position: absolute;
   top: -1.5rem;
   right: 1rem;
 }
 
-input[type="checkbox"]:checked {
+input[type='checkbox']:checked {
   background: #53e3a746;
   font-style: normal;
 }

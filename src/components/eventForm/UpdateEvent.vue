@@ -63,14 +63,14 @@
 </template>
 
 <script>
-import moment from "moment";
+import moment from 'moment';
 
 export default {
-  name: "UpdateEvent",
+  name: 'UpdateEvent',
   data: () => ({
-    task: "",
-    type: "",
-    body: "",
+    task: '',
+    type: '',
+    body: '',
     start: new Date(),
     end: new Date(),
     labels: []
@@ -78,6 +78,7 @@ export default {
   methods: {
     handleSubmit(e) {
       e.preventDefault();
+
       const payload = {
         task: this.task,
         type: this.type,
@@ -86,6 +87,7 @@ export default {
         end: this.end,
         labels: this.labels
       };
+      this.$store.dispatch('updateEvent', payload);
     }
   },
   computed: {
@@ -101,7 +103,7 @@ export default {
       this.body = this.getCurrentState.body;
       this.start = this.getCurrentState.start;
       this.end = this.getCurrentState.end;
-      this.labels = this.getCurrentState.labels.map(l => l.toUpperCase());
+      this.labels = this.getCurrentState.labels;
     }
   },
   mounted() {}
@@ -158,8 +160,7 @@ form select {
   display: block;
   width: 30rem;
   margin: 0 auto;
-  font-family: "Open Sans", "Helvetica Neue", "Segoe UI", "Calibri", "Arial",
-    sans-serif;
+  font-family: 'Open Sans', 'Helvetica Neue', 'Segoe UI', 'Calibri', 'Arial', sans-serif;
   font-size: 18px;
   color: #60666d;
 }
@@ -175,7 +176,7 @@ form input:focus {
   color: #53e3a6;
 }
 
-form input[type="submit"] {
+form input[type='submit'] {
   appearance: none;
   outline: 0;
   background-color: #53e3a7ec;
@@ -188,7 +189,7 @@ form input[type="submit"] {
   font-size: 18px;
   transition-duration: 0.25s;
 }
-form input[type="submit"]:hover {
+form input[type='submit']:hover {
   background-color: #285542f6;
   color: #fff;
 }
@@ -201,13 +202,13 @@ form input[type="submit"]:hover {
   justify-content: center;
 }
 
-.checkbox-group input[type="checkbox"] {
+.checkbox-group input[type='checkbox'] {
   width: 4rem;
   margin: 0 0.5rem;
   border: 2px solid #53e3a746;
 }
 
-input[type="checkbox"]:checked {
+input[type='checkbox']:checked {
   background: #53e3a746;
   font-style: normal;
 }
