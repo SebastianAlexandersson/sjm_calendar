@@ -1,4 +1,4 @@
-import moment from 'moment';
+import * as moment from 'moment';
 
 const state = {
   currentYear: moment().format('Y'),
@@ -20,15 +20,15 @@ const state = {
   },
   prevOrNext: '',
   months: [{
-    month: 'Januari',
+    month: 'January',
     ndays: 31,
   },
   {
-    month: 'Februari',
+    month: 'February',
     ndays: 28,
   },
   {
-    month: 'Mars',
+    month: 'March',
     ndays: 31,
   },
   {
@@ -36,19 +36,19 @@ const state = {
     ndays: 30,
   },
   {
-    month: 'Maj',
+    month: 'May',
     ndays: 31,
   },
   {
-    month: 'Juni',
+    month: 'June',
     ndays: 30,
   },
   {
-    month: 'Juli',
+    month: 'July',
     ndays: 31,
   },
   {
-    month: 'Augusti',
+    month: 'August',
     ndays: 31,
   },
   {
@@ -56,7 +56,7 @@ const state = {
     ndays: 30,
   },
   {
-    month: 'Oktober',
+    month: 'October',
     ndays: 31,
   },
   {
@@ -104,6 +104,10 @@ const mutations = {
   },
   setPrevTransition(state) {
     state.prevOrNext = 'slide-previous';
+  },
+  resetToToday(state) {
+    state.MonthIndex = Number(state.currentMonth - 1);
+    state.currentYear = moment().format('YYYY');
   },
 };
 

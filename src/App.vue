@@ -1,18 +1,18 @@
 <template>
   <div id='app'>
     <main class='main-page'>
-      <TempLinks />
+      <NavTabs />
       <router-view></router-view>
     </main>
   </div>
 </template>
 
 <script>
-import TempLinks from './components/TempLinks.vue';
+import NavTabs from './components/NavTabs.vue';
 
 export default {
   components: {
-    TempLinks,
+    NavTabs,
   },
 };
 </script>
@@ -76,6 +76,7 @@ a {
   padding-left: 1rem;
   margin-right: auto;
   margin-left: auto;
+  margin-top: 2rem;
 }
 
 @media (min-width: 576px) {

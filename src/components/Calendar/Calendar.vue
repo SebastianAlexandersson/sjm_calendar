@@ -42,11 +42,11 @@ export default {
 <style>
   .calendar {
     color: #000;
-    margin-top: 2rem;
     font-weight: bold;
-    padding: 0 .1rem;
+    padding: .1rem;
     position: relative;
     overflow: hidden;
+    margin-top: -2px;
   }
 
   a,
