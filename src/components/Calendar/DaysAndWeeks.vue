@@ -1,6 +1,5 @@
 <template>
-  <div
-    class="days-and-weeks">
+  <div class="days-and-weeks">
     <Weeks />
     <Days />
   </div>

@@ -18,7 +18,7 @@ const state = {
   getNameOfDay(year, month, day) {
     return moment(`${year}${month}${day}`, 'YYYYMMDD').format('dddd');
   },
-  weeks: 0,
+  prevOrNext: '',
   months: [{
     month: 'Januari',
     ndays: 31,
@@ -99,6 +99,12 @@ const mutations = {
       state.MonthIndex = 11;
     }
   },
+  setNextTransition(state) {
+    state.prevOrNext = 'slide-next';
+  },
+  setPrevTransition(state) {
+    state.prevOrNext = 'slide-previous';
+  },
 };
 
 
@@ -156,6 +162,10 @@ const getters = {
     return Math.ceil((getters.displayedMonth.ndays + getters.prevMonthFillerDays) / 7);
   },
   getFirstWeek(state, getters) {
+    if (getters.prevMonthFillerDays === 0) {
+      const firstWeek = moment(`${state.currentYear}${getters.displayedMonthNum}01`).format('W');
+      return firstWeek;
+    }
     const firstDay = getters.prevMonth.ndays - (getters.prevMonthFillerDays - 1);
     const firstWeek = moment(
       `${getters.prevMonthYear}${getters.prevMonthNum}${state.addZero(firstDay)}`,

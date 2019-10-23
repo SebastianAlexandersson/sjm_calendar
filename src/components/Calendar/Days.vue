@@ -96,7 +96,7 @@ export default {
     background-color: var(--blue);
     color: #fff;
     padding: .2rem .5rem;
-    font-size: .8rem;
+    font-size: .7rem;
     display: block;
     margin-bottom: .2rem;
   }
