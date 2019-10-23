@@ -61,5 +61,26 @@ export default {
     color: #fff;
   }
 
+  @media (max-width: 374px) {
+    nav {
+      width: 90%;
+    }
+
+    nav a {
+      font-size: .5rem;
+    }
+  }
+
+  @media (min-width: 375px) and (max-width: 424px) {
+    nav a {
+      font-size: .6rem;
+    }
+  }
+
+  @media (min-width: 425px) and (max-width: 767px) {
+    nav a {
+      font-size: .75rem;
+    }
+  }
 
 </style>

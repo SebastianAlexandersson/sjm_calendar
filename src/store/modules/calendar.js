@@ -18,6 +18,7 @@ const state = {
   getNameOfDay(year, month, day) {
     return moment(`${year}${month}${day}`, 'YYYYMMDD').format('dddd');
   },
+  windowWidth: window.innerWidth,
   prevOrNext: '',
   months: [{
     month: 'January',

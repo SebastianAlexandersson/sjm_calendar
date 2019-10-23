@@ -10,14 +10,15 @@
     >
       <div
         class="hasMeeting"
-        v-if="dayHasMeeting(state.currentYear, get.displayedMonthNum, state.addZero(day))"
+        v-if="dayHasMeeting(state.currentYear, get.displayedMonthNum, state.addZero(day))
+        && bigScreen"
       >
         <div class="meeting" v-for="meeting in meetings" :key="meeting.id">
           {{ meeting.startTime }}
         </div>
       </div>
       <span>{{ day }}</span>
-      <span>
+      <span v-if="bigScreen">
         {{
           state.getNameOfDay(
             state.currentYear,
@@ -45,11 +46,16 @@ export default {
       return this.$store.state.events.events
         .filter(event => event.type === 'Meeting');
     },
+    bigScreen() {
+      return this.$store.state.calendar.windowWidth >= 1024;
+    },
   },
   props: ['day', 'highlightToday', 'dayHasMeeting'],
 };
 </script>
 
 <style>
-
+  .smallScreenDay {
+    padding: .5rem;
+  }
 </style>

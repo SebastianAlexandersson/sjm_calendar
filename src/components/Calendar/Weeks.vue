@@ -42,9 +42,32 @@ export default {
   margin-bottom: 0;
 }
 
-.week:first-child::before {
-  content: 'Week';
-  position: absolute;
-  top: 0.5rem;
+@media (max-width: 374px) {
+  .week {
+    padding: .75rem !important;
+  }
 }
+
+@media (max-width: 425px) {
+  .weeks {
+    grid-gap: .25rem;
+    margin-right: -.25rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .week {
+    font-size: .75rem;
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .week {
+      font-size: 1rem;
+      padding: 2rem;
+    }
+}
+
+
 </style>
