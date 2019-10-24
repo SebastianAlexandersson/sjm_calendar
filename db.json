@@ -113,6 +113,25 @@
       "labels": [
         "Home"
       ]
+    },
+    {
+      "task": "Gå och fiska",
+      "completed": false,
+      "type": "Todo",
+      "room": "",
+      "body": "Fiska i havet",
+      "start": "",
+      "end": "20191123",
+      "color": "Green",
+      "labels": [
+        "Fiske",
+        "home",
+        "hobby",
+        "regn"
+      ],
+      "startTime": "",
+      "endTime": "",
+      "id": 4
     }
   ]
 }

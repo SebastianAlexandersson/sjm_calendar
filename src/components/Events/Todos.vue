@@ -2,16 +2,18 @@
 <div>
 <div  class='todoList'>
   <h1>Todos</h1>
-    <select class='eventSelector'>
-      <option disabled value>Choose a color to sort from</option>
-      <option v-on:click='selectColor("")'>Show all</option>
-      <option v-on:click='selectColor("Red")'>Red</option>
-      <option v-on:click='selectColor("Green")'>Green</option>
-      <option v-on:click='selectColor("Yellow")'>Yellow</option>
-      <option v-on:click='selectColor("Blue")'>Blue</option>
-      <option v-on:click='selectColor("Orange")'>Orange</option>
-      <option v-on:click='selectColor("Pink")'>Pink</option>
+    <select class='eventSelectorColor'>
+      <option v-on:click='selectColor("")'>Show all colors</option>
+      <option v-for='color in allColors'
+      :key='color.index'
+      v-on:click='selectColor(color)'> {{ color }} </option>
     </select>
+     <select class='eventSelectorLabel'>
+      <option v-on:click='selectLabel(true)'>Show all labels</option>
+      <option v-for='label in allLabels'
+      :key='label.index'
+      v-on:click='selectLabel(label)'> {{ label }} </option>
+     </select>
   <button class='eventButton' v-on:click='callAddModal()'>Add New Todo</button>
 </div>
 
@@ -26,10 +28,16 @@
       <div class='eventCompleted' v-if='event.completed'>Done!</div>
       <div class='eventCompleted' v-else>Not completed yet</div>
       <div class='eventBody'>{{ event.body }}</div>
-      <div class='eventEndDate'>{{ event.end }}</div>
-      <div class='eventLabels'>{{ event.label }}</div>
-      <button class='eventButton' v-on:click='callEditModal(event)'>Edit todo</button>
-      <button class='eventButton' v-on:click='callDeleteModal(event)'>Delete todo</button>
+      <div class='eventLabels' > Labels:
+        <div class='singleLabel'>
+          <div v-for="label in event.labels" :key='label.index'>{{ label }}</div>
+        </div>
+      </div>
+      <div class='eventEndDate'>Deadline: {{ event.end }}</div>
+      <div class='eventButtons'>
+        <button class='eventButton' v-on:click='callEditModal(event)'>Edit todo</button>
+        <button class='eventButton' v-on:click='callDeleteModal(event)'>Delete todo</button>
+      </div>
     </div>
     <div>
       <PoseTransition>
@@ -79,9 +87,9 @@
             <div class='body'>
               <input class='end' v-model='newTodo.end' placeholder='YYYYMMDD' />
               <input
-                v-model='addLable'
+                v-model='addLabel'
                 placeholder='Add text here'
-                v-on:keyup.enter='pushLable(addLable)'
+                v-on:keyup.enter='pushLabel(addLabel)'
               />
               <input v-model='newTodo.body' placeholder='Add text here' />
               <button v-on:click='saveNewTodo(newTodo)'>Save</button>
@@ -167,12 +175,15 @@ export default {
         start: '',
         end: '',
         color: '',
-        label: [],
+        labels: [],
         startTime: '',
         endTime: '',
       },
       choosenColor: '',
-      addLable: '',
+      choosenLabel: true,
+      addLabel: '',
+      allLabels: [],
+      allColors: [],
     };
   },
   components: {
@@ -198,26 +209,24 @@ export default {
   methods: {
     selectColor(color) {
       this.choosenColor = color;
-      console.log(this.choosenColor);
+    },
+    selectLabel(label) {
+      this.choosenLabel = label;
     },
     callShowModal(modalObject) {
       this.todo = modalObject;
       this.isShowVisible = true;
-      console.log(this.isShowVisible, this.todo);
     },
     callAddModal() {
       this.isAddVisible = true;
-      console.log(this.isAddVisible, this.newTodo);
     },
     callEditModal(modalObject) {
       this.todo = modalObject;
       this.isEditVisible = true;
-      console.log(this.isEditVisible, this.newTodo);
     },
     callDeleteModal(modalObject) {
       this.todo = modalObject;
       this.isDeleteVisible = true;
-      console.log(this.isDeleteVisible, this.newTodo);
     },
     closeModal() {
       this.isAddVisible = false;
@@ -227,15 +236,15 @@ export default {
       this.resetTodoObject();
     },
     saveNewTodo(payload) {
-      this.$store.dispatch('addEvent', payload);
+      this.$store.dispatch('addEvent', payload).then(this.searchLabels).then(this.searchColors);
       this.isAddVisible = false;
     },
     editTodo(payload) {
-      this.$store.dispatch('updateEvent', payload);
+      this.$store.dispatch('updateEvent', payload).then(this.searchLabels).then(this.searchColors);
       this.isEditVisible = false;
     },
     deleteTodo(payload) {
-      this.$store.dispatch('deleteEvent', payload.id);
+      this.$store.dispatch('deleteEvent', payload.id).then(this.searchLabels).then(this.searchColors);
       this.isDeleteVisible = false;
       this.resetTodoObject();
     },
@@ -248,76 +257,160 @@ export default {
       this.newTodo.start = '';
       this.newTodo.end = '';
       this.newTodo.color = '';
-      this.newTodo.label = [];
+      this.newTodo.labels = [];
       this.newTodo.startTime = '';
       this.newTodo.endTime = '';
     },
-    pushLable(label) {
-      this.newTodo.label.push(label);
-      this.addLable = '';
+    pushLabel(label) {
+      this.newTodo.labels.push(label);
+      this.addLabel = '';
+    },
+    searchLabels() {
+      this.allLabels = [];
+      console.log(this.events);
+      for (let a = 0; a < this.events.length; a += 1) {
+        for (let i = 0; i < this.events[a].labels.length; i += 1) {
+          if (!(this.allLabels.includes(this.events[a].labels[i]))) {
+            console.log(this.events[a].labels[i]);
+            this.allLabels.push(this.events[a].labels[i]);
+          }
+        }
+      }
+      console.log('this.allLabels');
+      console.log(this.allLabels);
+    },
+    searchColors() {
+      this.allColors = [];
+      for (let a = 0; a < this.events.length; a += 1) {
+        if (!(this.allColors.includes(this.events[a].color))) {
+          console.log(this.events[a].color);
+          this.allColors.push(this.events[a].color);
+        }
+      }
+      console.log('this.allColors');
+      console.log(this.allColors);
     },
   },
   computed: {
     events() {
       return this.$store.state.events.events.filter(
-        event => event.type === 'Todo' && (event.color === this.choosenColor || this.choosenColor === ''),
+        event => event.type === 'Todo'
+        && (event.color === this.choosenColor || this.choosenColor === '')
+        && (event.labels.includes(this.choosenLabel) || this.choosenLabel === true),
       );
     },
   },
   created() {
-    this.$store.dispatch('getEvents');
+    this.$store.dispatch('getEvents').then(this.searchLabels).then(this.searchColors);
   },
-  // }
 };
 </script>
 
 <style scoped>
 .todoList {
+  margin-top: 3rem;
+  border-radius: 1rem;
+  overflow: hidden;
   padding: 3rem;
   text-align: center;
-  background-color: rgb(50, 99, 198);
-  color: white;
+  background-color: var(--blue);
+  color: var(--white);
 }
-.eventSelector{
-  border-radius: 10px;
+.todoList h1{
+  font-size: var(--L);
+}
+.eventSelectorColor{
+  border-radius: 1rem;
+  margin: 0.3rem 0.5rem;
+}
+.eventSelectorLabel{
+  border-radius: 1rem;
   margin: 0.3rem 0.5rem;
 }
 .todos {
+  display: grid;
+  grid-template-columns: 10% auto 20%;
+  grid-template-rows: 20% 20% auto 20% 10%;
   padding: 1.1rem;
-  margin-bottom: 1rem;
-  background-color: lightgray;
+  margin-top: 1rem;
+  background-color: rgb(233, 233, 233);
+  border-radius: 1rem;
 }
 .todos .eventColor{
-  padding: 1.1rem;
-  margin-bottom: 1rem;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 6;
+
+  margin-right: 3rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
 }
 .todos .eventTask{
-  padding: 1.1rem;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  font-size: var(--M);
   margin-bottom: 1rem;
 }
+.todos .eventTask:hover{
+ cursor: pointer;
+}
 .todos .eventCompleted{
-  padding: 1.1rem;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 5;
+  font-size: var(--XS);
   margin-bottom: 1rem;
 }
 .todos .eventBody{
-  padding: 1.1rem;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
   margin-bottom: 1rem;
 }
-.todos .eventEnddate{
-  padding: 1.1rem;
+.todos .eventEndDate{
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  font-size: var(--S);
   margin-bottom: 1rem;
 }
 .todos .eventLabels{
-  padding: 1.1rem;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  font-size: var(--S);
   margin-bottom: 1rem;
 }
+.todos .eventLabels .singleLabel{
+  font-size:var(--xs);
+}
+.eventButtons{
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 5;
+  grid-row-end: 6;
+  display: block;
+}
 .eventButton{
+
+  display: inline-block;
+  height: 2rem;
+  width: 8rem;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 1rem;
   padding: 0.2rem;
   margin-bottom: 0.2rem;
 }
-
+.eventButton:hover{
+  cursor: pointer;
+}
 
 .shade {
   position: fixed;
