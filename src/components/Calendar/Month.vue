@@ -1,8 +1,16 @@
 <template>
   <div class='month'>
-    <span @click='displayPreviousMonth' class='arrow'>&#171;</span>
-    <span>{{ displayedMonth.month }} {{ year }}</span>
-    <span @click='displayNextMonth' class='arrow'>&#187;</span>
+    <div class="monthselector">
+      <span @click='displayPreviousMonth' class='arrow'>&#171;</span>
+      <span>{{ displayedMonth.month }} {{ year }}</span>
+      <span @click='displayNextMonth' class='arrow'>&#187;</span>
+    </div>
+    <button
+      class="button"
+      @click="resetToToday"
+    >
+      Today
+    </button>
   </div>
 </template>
 
@@ -19,10 +27,15 @@ export default {
   },
   methods: {
     displayNextMonth() {
+      this.$store.commit('setNextTransition');
       this.$store.commit('nextMonth');
     },
     displayPreviousMonth() {
+      this.$store.commit('setPrevTransition');
       this.$store.commit('previousMonth');
+    },
+    resetToToday() {
+      this.$store.commit('resetToToday');
     },
   },
 };
@@ -37,6 +50,8 @@ export default {
   margin-bottom: 0.5rem;
   background-color: var(--blue);
   font-weight: bold;
+  border-radius: 10px;
+  color: #fff;
 }
 
 .month span {
@@ -47,4 +62,28 @@ export default {
   font-weight: bold;
   cursor: pointer;
 }
+
+.arrow:hover {
+  transform: scale(1.1);
+}
+
+.button {
+  font-weight: bold;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+.monthselector {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
 </style>

@@ -1,18 +1,18 @@
 <template>
   <div id='app'>
     <main class='main-page'>
-      <TempLinks />
+      <NavTabs />
       <router-view></router-view>
     </main>
   </div>
 </template>
 
 <script>
-import TempLinks from './components/TempLinks.vue';
+import NavTabs from './components/NavTabs.vue';
 
 export default {
   components: {
-    TempLinks,
+    NavTabs,
   },
 };
 </script>
@@ -23,7 +23,7 @@ export default {
   --font-secondary: 'Source Sans Pro', sans-serif;
   --dark-primary: #2a2c2b;
   --dark-secondary: #000000;
-  --blue: #26a69a;
+  --blue: rgb(50, 99, 198);
   --blue-light: #53e3a6;
   --white: #fff;
   --danger: #dc3522;
@@ -55,6 +55,7 @@ body {
   display: flex;
   flex-direction: column;
   line-height: 1;
+  background-color: rgb(231, 231, 231);
 }
 
 ul,
@@ -75,6 +76,7 @@ a {
   padding-left: 1rem;
   margin-right: auto;
   margin-left: auto;
+  margin-top: 2rem;
 }
 
 @media (min-width: 576px) {

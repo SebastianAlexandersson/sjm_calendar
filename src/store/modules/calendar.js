@@ -1,4 +1,4 @@
-import moment from 'moment';
+import * as moment from 'moment';
 
 const state = {
   currentYear: moment().format('Y'),
@@ -18,17 +18,18 @@ const state = {
   getNameOfDay(year, month, day) {
     return moment(`${year}${month}${day}`, 'YYYYMMDD').format('dddd');
   },
-  weeks: 0,
+  windowWidth: window.innerWidth,
+  prevOrNext: '',
   months: [{
-    month: 'Januari',
+    month: 'January',
     ndays: 31,
   },
   {
-    month: 'Februari',
+    month: 'February',
     ndays: 28,
   },
   {
-    month: 'Mars',
+    month: 'March',
     ndays: 31,
   },
   {
@@ -36,19 +37,19 @@ const state = {
     ndays: 30,
   },
   {
-    month: 'Maj',
+    month: 'May',
     ndays: 31,
   },
   {
-    month: 'Juni',
+    month: 'June',
     ndays: 30,
   },
   {
-    month: 'Juli',
+    month: 'July',
     ndays: 31,
   },
   {
-    month: 'Augusti',
+    month: 'August',
     ndays: 31,
   },
   {
@@ -56,7 +57,7 @@ const state = {
     ndays: 30,
   },
   {
-    month: 'Oktober',
+    month: 'October',
     ndays: 31,
   },
   {
@@ -98,6 +99,16 @@ const mutations = {
       state.currentYear = (Number(state.currentYear) - 1).toString();
       state.MonthIndex = 11;
     }
+  },
+  setNextTransition(state) {
+    state.prevOrNext = 'slide-next';
+  },
+  setPrevTransition(state) {
+    state.prevOrNext = 'slide-previous';
+  },
+  resetToToday(state) {
+    state.MonthIndex = Number(state.currentMonth - 1);
+    state.currentYear = moment().format('YYYY');
   },
 };
 
@@ -156,6 +167,10 @@ const getters = {
     return Math.ceil((getters.displayedMonth.ndays + getters.prevMonthFillerDays) / 7);
   },
   getFirstWeek(state, getters) {
+    if (getters.prevMonthFillerDays === 0) {
+      const firstWeek = moment(`${state.currentYear}${getters.displayedMonthNum}01`).format('W');
+      return firstWeek;
+    }
     const firstDay = getters.prevMonth.ndays - (getters.prevMonthFillerDays - 1);
     const firstWeek = moment(
       `${getters.prevMonthYear}${getters.prevMonthNum}${state.addZero(firstDay)}`,

@@ -5,6 +5,7 @@ import Calendar from './components/Calendar/Calendar.vue';
 import EventForm from './components/eventForm/EventForm.vue';
 import UpdateEvent from './components/eventForm/UpdateEvent.vue';
 import DayView from './components/dayView/DayView.vue';
+
 Vue.use(Router);
 
 export default new Router({
