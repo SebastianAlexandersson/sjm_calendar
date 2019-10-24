@@ -4,7 +4,7 @@
         :to='`/day-view/${state.currentYear}-${get.displayedMonthNum}-${state.addZero(day)}`'
       >
     <div
-      class='day'
+      class='day day-pos'
       v-bind:class='{ highlight: highlightToday(day, get.displayedMonthNum) }'
       :id='`${state.currentYear}${get.displayedMonthNum}${state.addZero(day)}`'
     >
@@ -51,7 +51,5 @@ export default {
 </script>
 
 <style>
-  .smallScreenDay {
-    padding: .5rem;
-  }
+
 </style>

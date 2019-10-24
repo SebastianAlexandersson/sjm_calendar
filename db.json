@@ -49,57 +49,20 @@
     },
     {
       "id": 2,
-      "task": "meeting with the boss",
-      "completed": false,
-      "room": "Två",
+      "task": "meeting with the bossBoooiii",
       "type": "Meeting",
       "body": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate ipsum maxime doloremque, magnam repellendus numquam inventore ipsa nostrum eligendi, pariatur qui minus necessitatibus ullam eius autem dolores incidunt id beatae!",
       "start": "2019-10-15",
-      "end": "2019-10-27",
       "startTime": "02:00",
-      "endTime": "07:00",
-      "color": "green",
-      "labels": [
-        "important",
-        "work"
-      ]
-    },
-    {
-      "id": 20,
-      "task": "meeting with the boss",
-      "completed": false,
-      "room": "Två",
-      "type": "Meeting",
-      "body": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate ipsum maxime doloremque, magnam repellendus numquam inventore ipsa nostrum eligendi, pariatur qui minus necessitatibus ullam eius autem dolores incidunt id beatae!",
-      "start": "2019-10-15",
+      "endTime": "",
       "end": "2019-10-27",
-      "startTime": "03:00",
-      "endTime": "07:00",
-      "color": "green",
       "labels": [
         "important",
         "work"
       ]
     },
     {
-      "id": 21,
-      "task": "meeting with the boss",
-      "completed": false,
-      "room": "Två",
-      "type": "Meeting",
-      "body": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate ipsum maxime doloremque, magnam repellendus numquam inventore ipsa nostrum eligendi, pariatur qui minus necessitatibus ullam eius autem dolores incidunt id beatae!",
-      "start": "2019-10-15",
-      "end": "2019-10-27",
-      "startTime": "04:00",
-      "endTime": "07:00",
-      "color": "green",
-      "labels": [
-        "important",
-        "work"
-      ]
-    },
-    {
-      "id": 3,
+      "id": 6,
       "task": "Go out with the dog",
       "completed": false,
       "type": "Todo",
@@ -111,8 +74,34 @@
       "endTime": "17:00",
       "color": "pink",
       "labels": [
-        "Home"
+        "important",
+        "hobby"
       ]
+    },
+    {
+      "task": "tese",
+      "type": "Todo",
+      "body": "hello",
+      "start": "2019-10-13",
+      "end": "2019-10-06",
+      "labels": [
+        "important",
+        "hobby"
+      ],
+      "id": 7
+    },
+    {
+      "task": "new Teset",
+      "type": "Todo",
+      "body": "hello",
+      "start": "2019-10-05",
+      "end": "2019-10-13",
+      "startTime": "00:00",
+      "labels": [
+        "hobby",
+        "home"
+      ],
+      "id": 8
     },
     {
       "task": "Gå och fiska mest",
@@ -129,8 +118,8 @@
         "hobby",
         "regn"
       ],
-      "startTime": "",
-      "endTime": "",
+      "startTime": "04:00",
+      "endTime": "02:00",
       "id": 4
     }
   ]
