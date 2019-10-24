@@ -13,22 +13,22 @@ export default new Router({
     {
       path: '/day-view/:date',
       name: 'DayView',
-      component: DayView
+      component: DayView,
     },
     {
       path: '/Todos',
       name: 'Todos',
-      component: Todos
+      component: Todos,
     },
     {
       path: '/',
       name: 'Calendar',
-      component: Calendar
+      component: Calendar,
     },
     {
       path: '/create-event',
       name: 'EventForm',
-      component: EventForm
+      component: EventForm,
     },
     {
       path: '/update-event',
