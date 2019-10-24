@@ -175,7 +175,8 @@ export default {
 }
 
 .row:hover {
-  background: rgba(20, 136, 97, 0.5);
+  background: var(--blue);
+  color: var(--white);
   box-shadow: 2px 2px 3px var(--dark-primary);
   z-index: 2;
 }
