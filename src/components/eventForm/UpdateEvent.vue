@@ -73,7 +73,7 @@
         </div>
 
         <div class="form-group">
-          <input type="submit" value="Submit" v-on:click="handleSubmit" />
+          <input type="submit" value="Update" v-on:click="handleSubmit" />
         </div>
       </form>
     </div>
@@ -95,7 +95,6 @@
 
 <script>
 import moment from 'moment';
-import EventTimeOption from './EventTimeOption';
 export default {
   name: 'UpdateEvent',
   data: () => ({
@@ -108,14 +107,13 @@ export default {
     end: new Date(),
     labels: []
   }),
-  components: {
-    EventTimeOption
-  },
+  components: {},
   methods: {
     handleSubmit(e) {
       e.preventDefault();
 
       const payload = {
+        id: this.getCurrentState.id,
         task: this.task,
         type: this.type,
         body: this.body,
@@ -125,13 +123,17 @@ export default {
         end: this.end,
         labels: this.labels
       };
+      console.log(payload);
       this.$store.dispatch('updateEvent', payload);
-      // this.$router.push('/');
+      this.$router.push('/');
     }
   },
   computed: {
     getCurrentState() {
       return this.$store.state.events.current;
+    },
+    created() {
+      this.$store.dispatch('getEvents');
     }
   },
   created() {
@@ -185,7 +187,7 @@ form input {
   outline: 0;
   border: 3px solid var(--blue);
   background-color: rgba(5, 5, 5, 0.3);
-  border-radius: 3px;
+  border-radius: 0.5rem;
   padding: 10px 15px;
   margin: 5px auto 10px auto;
   display: block;
@@ -221,19 +223,21 @@ form input:focus {
 form input[type='submit'] {
   appearance: none;
   outline: 0;
-  background-color: rgb(50, 99, 198, 0.4);
+  background-color: rgb(50, 99, 198, 0.8);
   border: 0;
   padding: 10px 15px;
-  color: #333;
-  border-radius: 3px;
+  color: var(--white);
+  border-radius: 1rem;
   width: 250px;
   cursor: pointer;
   font-size: 18px;
   transition-duration: 0.25s;
+  /* transition: all 300ms ease-in-out; */
 }
 form input[type='submit']:hover {
-  background-color: var(--blue);
-  color: #333;
+  background-color: rgba(5, 5, 5, 0.8);
+  transform: scale(1.1);
+  z-index: 2;
 }
 /* TODO: here */
 .checkbox-group {
@@ -391,6 +395,15 @@ input[type='checkbox']:checked {
   100% {
     transform: translateY(-700px) rotate(600deg);
     transform: translateY(-700px) rotate(600deg);
+  }
+}
+@media (max-width: 510px) {
+  input[type='text'],
+  input[type='date'] {
+    width: 20rem;
+  }
+  select {
+    width: 20rem !important;
   }
 }
 </style>

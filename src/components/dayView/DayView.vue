@@ -1,9 +1,8 @@
 <template>
   <div class="day-wrapper">
     <div class="searchbar">
+      <input type="text" v-model="search" />
       <label for="text">
-        Search a event...
-        <input type="text" @change="handleSearch" />
         <img src="../../images/search.svg" alt="searchIcon" />
       </label>
     </div>
@@ -13,7 +12,7 @@
         <div v-for="event in events" v-bind:key="event.id">
           <h3 v-if="d.time === event.startTime && getDateFromParent === event.start">{{event.task}}</h3>
         </div>
-        <span class="edit">X</span>
+        <span class="edit"></span>
       </div>
       <div>
         <PoseTransition>
@@ -27,7 +26,7 @@
               </div>
               <div class="body" v-if="currentTime === event.startTime">
                 <span id="delete" @click="handleDelete(event.id)">Delete</span>
-                <h5 class="room">Room:</h5>
+                <!-- <h5 class="room">Room:</h5> -->
                 <h5 class="start">Start: {{event.start}}</h5>
                 <h5 class="start">End: {{event.end}}</h5>
                 <p>{{event.body}}</p>
@@ -55,7 +54,7 @@ import dayData from './dayViewData';
 
 export default {
   name: 'DayView',
-  data: () => ({ isVisible: false, currentTime: null }),
+  data: () => ({ isVisible: false, currentTime: null, search: '' }),
   components: {
     PoseTransition,
     Shade: posed.div({
@@ -75,6 +74,12 @@ export default {
       exit: { opacity: 0, z: -150 }
     })
   },
+  watch: {
+    search: function(newSearch, oldSearch) {
+      this.search = newSearch;
+      this.$store.dispatch('searchEvents', eventText);
+    }
+  },
   computed: {
     events() {
       return this.$store.state.events.events.filter(event => event.type === 'Meeting');
@@ -87,6 +92,11 @@ export default {
       const timeArr = dayData.map(data => data.time);
 
       return timeArr;
+    },
+    seacrhEvents() {
+      return this.events.filter(event =>
+        event.task.toLowerCase().includes(this.search.toLoweCase())
+      );
     },
 
     filtredEvents() {
@@ -133,27 +143,35 @@ export default {
 }
 .searchbar label {
   font-size: 1.2rem;
+  position: relative;
 }
-.searchbar img {
-  width: 1.5rem;
-}
+
 .searchbar input {
   position: relative;
   margin-top: 0.5rem;
   margin-right: auto;
   display: block;
-  width: 2%;
+  width: 4rem;
   cursor: pointer;
   border: 2px solid var(--dark-primary);
   padding: 0.6rem 0.9rem;
   border-radius: 1rem;
   transition: all 300ms ease-in-out;
 }
+.searchbar img {
+  width: 1.5rem;
+  position: absolute;
+  top: -0.8rem;
+  left: 1rem;
+}
 .searchbar input:focus {
   width: 90%;
   margin-left: 0 4rem;
   border: 2px solid var(--blue);
   transform: scale(1.1);
+}
+.searchbar input:focus + label img {
+  display: none;
 }
 
 .row {
@@ -164,8 +182,11 @@ export default {
   padding: 1rem 1.5rem;
   margin: 0.12rem 0;
   cursor: pointer;
+  background: var(--white);
   transition: all 300ms ease-in-out;
   box-shadow: 1px 1px 2px var(--dark-primary);
+  border-radius: 1rem;
+  color: var(--dark-primary);
 }
 
 .row h3 {
@@ -242,6 +263,10 @@ export default {
   line-height: 2rem;
   margin-bottom: 2rem;
 }
+.modal .body a,
+.no-event-body a {
+  border-radius: 1rem;
+}
 
 .modal .no-event-body {
   display: flex;
@@ -252,6 +277,15 @@ export default {
 .modal .no-event-body a {
   margin-left: auto;
 }
+.modal #delete {
+  transition: 300ms ease-in-out;
+  font-weight: 700;
+}
+.modal #delete:hover {
+  color: var(--danger);
+  transform: scale(1.1);
+}
+
 .add-event,
 .update-event {
   border: 2px solid var(--blue);

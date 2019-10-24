@@ -42,15 +42,16 @@ const actions = {
         'Content-Type': 'application/json',
       },
     });
+
     const data = await res.json();
-    commit('editEvent', data);
+    await commit('editEvent', data);
   },
   async searchEvents({
     commit,
   }, text) {
     const res = await fetch(`http://localhost:4000/events?q=${text}`);
     const data = await res.json();
-    commit('findEvent', data);
+    await commit('findEvent', data);
   },
 
   async deleteEvent({
