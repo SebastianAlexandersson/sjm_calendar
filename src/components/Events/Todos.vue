@@ -181,7 +181,7 @@ export default {
       },
       choosenColor: '',
       choosenLabel: true,
-      addLable: '',
+      addLabel: '',
       allLabels: [],
       allColors: [],
     };
@@ -236,16 +236,15 @@ export default {
       this.resetTodoObject();
     },
     saveNewTodo(payload) {
-      this.$store.dispatch('addEvent', payload);
+      this.$store.dispatch('addEvent', payload).then(this.searchLabels).then(this.searchColors);
       this.isAddVisible = false;
-      this.created();
     },
     editTodo(payload) {
-      this.$store.dispatch('updateEvent', payload);
+      this.$store.dispatch('updateEvent', payload).then(this.searchLabels).then(this.searchColors);
       this.isEditVisible = false;
     },
     deleteTodo(payload) {
-      this.$store.dispatch('deleteEvent', payload.id);
+      this.$store.dispatch('deleteEvent', payload.id).then(this.searchLabels).then(this.searchColors);
       this.isDeleteVisible = false;
       this.resetTodoObject();
     },
@@ -267,6 +266,8 @@ export default {
       this.addLabel = '';
     },
     searchLabels() {
+      this.allLabels = [];
+      console.log(this.events);
       for (let a = 0; a < this.events.length; a += 1) {
         for (let i = 0; i < this.events[a].labels.length; i += 1) {
           if (!(this.allLabels.includes(this.events[a].labels[i]))) {
@@ -279,6 +280,7 @@ export default {
       console.log(this.allLabels);
     },
     searchColors() {
+      this.allColors = [];
       for (let a = 0; a < this.events.length; a += 1) {
         if (!(this.allColors.includes(this.events[a].color))) {
           console.log(this.events[a].color);
@@ -299,9 +301,8 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('getEvents').then(this.searchLabels()).then(this.searchColors());
+    this.$store.dispatch('getEvents').then(this.searchLabels).then(this.searchColors);
   },
-  // }
 };
 </script>
 
@@ -313,7 +314,6 @@ export default {
   padding: 3rem;
   text-align: center;
   background-color: var(--blue);
-   /* rgb(50, 99, 198); */
   color: var(--white);
 }
 .todoList h1{

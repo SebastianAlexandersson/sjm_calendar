@@ -25,6 +25,7 @@ const actions = {
       },
     });
     const data = await res.json();
+    console.log('test2');
     commit('newEvent', data);
   },
   async updateEvent({
@@ -55,7 +56,7 @@ const actions = {
       method: 'DELETE',
     });
     commit('removeEvent', id);
-    this.dispatch('getEvents');
+    await this.dispatch('getEvents');
   },
   setCurrent({ commit }, event) {
     commit('setCurrentValue', event);
