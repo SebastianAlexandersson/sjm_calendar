@@ -17,9 +17,32 @@
 
         <div class="form-group">
           <select name="startTime" id="startTime" v-model="startTime">
-            <option value disabled>Select A Time</option>
+            <option value disabled>Update Your Time</option>
             <option value="00:00">00:00</option>
-            <EventTimeOption />
+            <option value="01:00">01:00</option>
+            <option value="02:00">02:00</option>
+            <option value="03:00">03:00</option>
+            <option value="04:00">04:00</option>
+            <option value="05:00">05:00</option>
+            <option value="06:00">06:00</option>
+            <option value="07:00">07:00</option>
+            <option value="08:00">08:00</option>
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+            <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+            <option value="17:00">17:00</option>
+            <option value="18:00">18:00</option>
+            <option value="19:00">19:00</option>
+            <option value="20:00">20:00</option>
+            <option value="21:00">21:00</option>
+            <option value="22:00">22:00</option>
+            <option value="23:00">23:00</option>
+            <option value="24:00">24:00</option>
           </select>
         </div>
 
@@ -144,8 +167,11 @@ export default {
   transition-timing-function: ease-in-put;
   font-weight: 200;
   text-transform: capitalize;
-  background: #53e3a6;
-  clip-path: polygon(12% 0, 100% 0%, 92% 100%, 4% 100%);
+  background: var(--blue);
+  border-radius: 2rem;
+  color: var(--white);
+  z-index: 5;
+  /* clip-path: polygon(2% 20%, 100% 0%, 92% 100%, 4% 100%); */
 }
 
 form {
@@ -157,7 +183,7 @@ form {
 form input {
   appearance: none;
   outline: 0;
-  border: 1px solid rgba(55, 55, 55, 0.3);
+  border: 3px solid var(--blue);
   background-color: rgba(5, 5, 5, 0.3);
   border-radius: 3px;
   padding: 10px 15px;
@@ -189,13 +215,13 @@ form input:hover {
 form input:focus {
   background-color: white;
   width: 300px;
-  color: #53e3a6;
+  color: var(--blue);
 }
 
 form input[type='submit'] {
   appearance: none;
   outline: 0;
-  background-color: #53e3a7ec;
+  background-color: rgb(50, 99, 198, 0.4);
   border: 0;
   padding: 10px 15px;
   color: #333;
@@ -206,8 +232,8 @@ form input[type='submit'] {
   transition-duration: 0.25s;
 }
 form input[type='submit']:hover {
-  background-color: #285542f6;
-  color: #fff;
+  background-color: var(--blue);
+  color: #333;
 }
 /* TODO: here */
 .checkbox-group {
@@ -221,11 +247,29 @@ form input[type='submit']:hover {
 .checkbox-group input[type='checkbox'] {
   width: 4rem;
   margin: 0 0.5rem;
-  border: 2px solid #53e3a746;
+  border: 2px solid var(--blue);
+}
+.checkbox-group input[value='important']::after {
+  content: 'VIP';
+  position: absolute;
+  top: -1.5rem;
+  right: 5rem;
+}
+.checkbox-group input[value='home']::after {
+  content: 'Home';
+  position: absolute;
+  top: -1.5rem;
+  left: -0.2rem;
+}
+.checkbox-group input[value='hobby']::after {
+  content: 'Hobby';
+  position: absolute;
+  top: -1.5rem;
+  left: 4rem;
 }
 
 input[type='checkbox']:checked {
-  background: #53e3a746;
+  background: var(--blue);
   font-style: normal;
 }
 
@@ -253,7 +297,7 @@ input[type='checkbox']:checked {
   display: block;
   width: 40px;
   height: 40px;
-  background-color: #2fe69a48;
+  background-color: rgba(50, 99, 198, 0.404);
   bottom: -160px;
   animation: square 15s infinite;
   animation: square 15s infinite;
@@ -282,7 +326,7 @@ input[type='checkbox']:checked {
   height: 60px;
   animation-duration: 22s;
   animation-duration: 22s;
-  background-color: #4ad69c8a;
+  background-color: rgba(50, 99, 198, 0.473);
 }
 .bg-bubbles li:nth-child(5) {
   left: 70%;
@@ -292,8 +336,9 @@ input[type='checkbox']:checked {
   width: 120px;
   height: 120px;
   animation-delay: 3s;
+  border-radius: 3rem;
   animation-delay: 3s;
-  background-color: #53e3a7c4;
+  background-color: rgba(50, 99, 198, 0.589);
 }
 .bg-bubbles li:nth-child(7) {
   left: 32%;
