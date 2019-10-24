@@ -71,7 +71,6 @@ const mutations = {
   setEvents(commit, data) {
     state.loading = false;
     state.events = data;
-
   },
   findEvent(state, data) {
     state.events = data;
@@ -90,8 +89,8 @@ const mutations = {
   setCurrentValue(state, payload) {
     state.current = payload;
   },
-  loading(state, payload) {
-    return state.loading = true;
+  loading(state) {
+    state.loading = true;
   },
 };
 
