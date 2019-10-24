@@ -19,7 +19,7 @@
           <select name="startTime" id="startTime" v-model="startTime">
             <option value disabled>Select A Time</option>
             <option value="00:00">00:00</option>
-            <EventTimeUoption />
+            <EventTimeOption />
           </select>
         </div>
 

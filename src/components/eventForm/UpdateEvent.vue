@@ -16,6 +16,14 @@
         </div>
 
         <div class="form-group">
+          <select name="startTime" id="startTime" v-model="startTime">
+            <option value disabled>Select A Time</option>
+            <option value="00:00">00:00</option>
+            <EventTimeOption />
+          </select>
+        </div>
+
+        <div class="form-group">
           <input type="date" id="start" v-model="start" />
         </div>
 
@@ -64,17 +72,22 @@
 
 <script>
 import moment from 'moment';
-
+import EventTimeOption from './EventTimeOption';
 export default {
   name: 'UpdateEvent',
   data: () => ({
     task: '',
     type: '',
     body: '',
+    startTime: '',
+    endTime: '',
     start: new Date(),
     end: new Date(),
     labels: []
   }),
+  components: {
+    EventTimeOption
+  },
   methods: {
     handleSubmit(e) {
       e.preventDefault();
@@ -84,10 +97,13 @@ export default {
         type: this.type,
         body: this.body,
         start: this.start,
+        startTime: this.startTime,
+        endTime: this.endTime,
         end: this.end,
         labels: this.labels
       };
       this.$store.dispatch('updateEvent', payload);
+      // this.$router.push('/');
     }
   },
   computed: {
@@ -96,12 +112,12 @@ export default {
     }
   },
   created() {
-    console.log(this.getCurrentState);
     if (this.getCurrentState) {
       this.task = this.getCurrentState.task;
       this.type = this.getCurrentState.type;
       this.body = this.getCurrentState.body;
       this.start = this.getCurrentState.start;
+      this.startTime = this.getCurrentState.startTime;
       this.end = this.getCurrentState.end;
       this.labels = this.getCurrentState.labels;
     }
