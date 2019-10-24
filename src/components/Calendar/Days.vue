@@ -12,6 +12,7 @@
       v-bind:highlightToday="highlightToday"
       v-bind:dayHasMeeting="dayHasMeeting"
     />
+    <div class="test">X</div>
   </div>
 </template>
 
@@ -85,7 +86,7 @@ export default {
   }
 
   .highlight {
-    
+    content: "";
   }
 
   .hasMeeting {
@@ -107,36 +108,4 @@ export default {
     opacity: .5;
   }
 
-  @media (max-width: 374px) {
-    .day span:last-of-type {
-      font-size: .5rem;
-    }
-  }
-
-  @media (max-width: 425px) {
-    .days {
-      grid-gap: .25rem;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .day {
-      padding: 1rem;
-    }
-
-    .day span:last-of-type {
-      margin: 0;
-      font-size: .75rem;
-    }
-  }
-
-  @media (min-width: 768px) and (max-width: 1023px) {
-    .day {
-      font-size: 1rem;
-    }
-
-    .day span:last-of-type {
-      margin: 0;
-    }
-  }
 </style>

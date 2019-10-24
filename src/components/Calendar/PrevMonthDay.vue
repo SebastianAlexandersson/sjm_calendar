@@ -10,7 +10,7 @@
       class='day fade'
     >
       <span>{{ prevDay + get.prevMonthFillerStartDate }}</span>
-      <span v-if="bigScreen">
+      <span>
         {{ state.getNameOfDay(
             get.prevMonthYear,
             get.prevMonthNum,
@@ -32,9 +32,6 @@ export default {
     },
     state() {
       return this.$store.state.calendar;
-    },
-    bigScreen() {
-      return this.$store.state.calendar.windowWidth >= 1024;
     },
   },
   props: ['prevDay'],

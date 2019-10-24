@@ -86,43 +86,4 @@ export default {
   width: 50%;
 }
 
-@media (max-width: 374px) {
-  .month {
-    padding: .5rem !important;
-    font-size: .75rem !important;
-  }
-
-  .button {
-    font-size: .5rem !important;
-    padding: .25rem;
-  }
-}
-
-@media (max-width: 767px) {
-  .month {
-    font-size: 1rem;
-    padding: 1rem;
-  }
-
-  .button {
-    padding: .25rem .5rem;
-    border-radius: 5px;
-    font-size: .75rem;
-  }
-
-  .monthselector {
-    width: 75%;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  .month {
-    font-size: 1.5rem;
-  }
-
-  .button {
-    padding: .5rem 1rem;
-    border-radius: 5px;
-  }
-}
 </style>

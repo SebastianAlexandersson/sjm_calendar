@@ -3,7 +3,6 @@
     <div
       class='calendar'>
       <Month />
-      <SmallScreenHeader v-if="smallScreen" />
       <SlideTransition v-bind:name="prevOrNext">
         <DaysAndWeeks :key="displayedMonth" />
       </SlideTransition>
@@ -15,7 +14,6 @@
 import Month from './Month.vue';
 import DaysAndWeeks from './DaysAndWeeks.vue';
 import SlideTransition from '../Transitions/SlideTransition.vue';
-import SmallScreenHeader from './SmallScreenHeader.vue';
 
 export default {
   name: 'calendar',
@@ -23,7 +21,6 @@ export default {
     Month,
     DaysAndWeeks,
     SlideTransition,
-    SmallScreenHeader,
   },
   computed: {
     state() {
