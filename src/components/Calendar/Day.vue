@@ -5,26 +5,26 @@
       >
     <div
       class='day day-pos'
-      v-bind:class='{ highlight: highlightToday(day, get.displayedMonthNum) }'
       :id='`${state.currentYear}${get.displayedMonthNum}${state.addZero(day)}`'
     >
       <div
         class="hasMeeting"
-        v-if="dayHasMeeting(state.currentYear, get.displayedMonthNum, state.addZero(day))"
+        v-if="dayHasMeeting(state.currentYear, get.displayedMonthNum, state.addZero(day))
+        && !get.smallViewPort"
       >
         <div class="meeting" v-for="meeting in meetings" :key="meeting.id">
           {{ meeting.startTime }}
         </div>
       </div>
-      <span>{{ day }}</span>
+      <div
+        class="hasMeeting meeting-small"
+        v-if="dayHasMeeting(state.currentYear, get.displayedMonthNum, state.addZero(day))
+        && get.smallViewPort"></div>
+      <span v-bind:class='{ highlight: highlightToday(day, get.displayedMonthNum) }'>
+        {{ day }}
+      </span>
       <span>
-        {{
-          state.getNameOfDay(
-            state.currentYear,
-            get.displayedMonthNum,
-            state.addZero(day)
-          )
-        }}
+        {{ getNameOfDay(state.currentYear, get.displayedMonthNum, day) }}
       </span>
     </div>
     </router-link>
@@ -47,9 +47,23 @@ export default {
     },
   },
   props: ['day', 'highlightToday', 'dayHasMeeting'],
+  methods: {
+    getNameOfDay(year, month, day) {
+      if (this.get.smallViewPort) {
+        return this.state.getNameOfDay(year, month, day).slice(0, 3);
+      }
+      return this.state.getNameOfDay(year, month, day);
+    },
+  },
 };
 </script>
 
 <style>
-
+  .highlight::before {
+    content: "";
+    width: 100%;
+    border: solid 1px var(--blue);
+    position: absolute;
+    bottom: -.3rem;
+  }
 </style>

@@ -38,6 +38,9 @@ export default {
   },
   created() {
     this.$store.dispatch('getEvents');
+    setInterval(() => {
+      this.$store.commit('setWindowWidth');
+    }, 2000);
   },
 };
 </script>
@@ -50,6 +53,9 @@ export default {
     position: relative;
     overflow: hidden;
     margin-top: -2px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    max-width: 1024px;
   }
 
   a,

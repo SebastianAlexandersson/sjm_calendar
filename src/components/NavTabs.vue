@@ -18,8 +18,8 @@ export default {
     },
     isTodosActive() {
       return this.$route.path === '/Todos';
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -59,11 +59,8 @@ nav > a.active-tab:visited {
 }
 
 @media (max-width: 374px) {
-  nav {
-    width: 90%;
-  }
-
   nav a {
+    margin-top: 1rem;
     font-size: 0.5rem;
   }
 }
@@ -74,9 +71,27 @@ nav > a.active-tab:visited {
   }
 }
 
+@media (max-width: 330px) {
+  nav {
+    width: 80%;
+  }
+}
+
+@media (min-width: 331px) and (max-width: 500px) {
+  nav {
+    width: 85%;
+  }
+}
+
 @media (min-width: 425px) and (max-width: 767px) {
   nav a {
     font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 501px) and (max-width: 1024px) {
+  nav {
+    width: 90%;
   }
 }
 </style>

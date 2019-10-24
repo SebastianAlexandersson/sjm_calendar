@@ -11,11 +11,8 @@
     >
       <span>{{ prevDay + get.prevMonthFillerStartDate }}</span>
       <span>
-        {{ state.getNameOfDay(
-            get.prevMonthYear,
-            get.prevMonthNum,
-            state.addZero(prevDay + get.prevMonthFillerStartDate)
-          )
+        {{
+          getNameOfDay(get.preMonthYear, get.prevMonthNum, prevDay + get.prevMonthFillerStartDate)
         }}
       </span>
     </div>
@@ -35,6 +32,14 @@ export default {
     },
   },
   props: ['prevDay'],
+  methods: {
+    getNameOfDay(year, month, day) {
+      if (this.get.smallViewPort) {
+        return this.state.getNameOfDay(year, month, day).slice(0, 3);
+      }
+      return this.state.getNameOfDay(year, month, day);
+    },
+  },
 };
 </script>
 

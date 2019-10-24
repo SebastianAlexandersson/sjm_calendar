@@ -16,7 +16,7 @@ const state = {
     return num < 10 ? `0${num}` : num;
   },
   getNameOfDay(year, month, day) {
-    return moment(`${year}${month}${day}`, 'YYYYMMDD').format('dddd');
+    return moment(`${year}${month}${state.addZero(day)}`, 'YYYYMMDD').format('dddd');
   },
   windowWidth: window.innerWidth,
   prevOrNext: '',
@@ -110,6 +110,9 @@ const mutations = {
     state.MonthIndex = Number(state.currentMonth - 1);
     state.currentYear = moment().format('YYYY');
   },
+  setWindowWidth(state) {
+    state.windowWidth = window.innerWidth;
+  },
 };
 
 
@@ -184,6 +187,12 @@ const getters = {
     )
       .format('W');
     return lastWeek;
+  },
+  smallViewPort(state) {
+    return state.windowWidth <= 650;
+  },
+  smallestViewPort(state) {
+    return state.windowWidth <= 424;
   },
 };
 

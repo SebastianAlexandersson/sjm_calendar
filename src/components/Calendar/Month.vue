@@ -86,4 +86,51 @@ export default {
   width: 50%;
 }
 
+@media (max-width: 424px) {
+  .month {
+    font-size: 1rem !important;
+    padding: 1rem .5rem !important;
+  }
+
+  span.arrow {
+    margin: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  button {
+    font-size: .5rem;
+  }.button {
+    padding: .5rem 1rem;
+    border-radius: 5px;
+  }
+}
+
+@media (max-width: 650px) {
+  .monthselector {
+    width: 75%;
+  }
+
+  .month {
+    padding: 1rem;
+    font-size: 1.3rem;
+  }
+
+  .button {
+    padding: .5rem 1rem;
+    border-radius: 5px;
+  }
+}
+
+@media (min-width: 651px) and (max-width: 767px) {
+  .month {
+    font-size: 1.5rem;
+  }
+
+  .button {
+    padding: .5rem 1rem;
+    border-radius: 5px;
+  }
+}
+
 </style>

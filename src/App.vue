@@ -56,6 +56,10 @@ body {
   flex-direction: column;
   line-height: 1;
   background-color: rgb(231, 231, 231);
+  width: 100vw;
+  max-width: 100vw;
+  margin-top: 2rem;
+  align-items: center;
 }
 
 ul,
@@ -70,7 +74,7 @@ a {
 #app {
   flex-grow: 1 auto;
 }
-.main-page {
+/* .main-page {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem;
@@ -101,7 +105,7 @@ a {
   .main-page {
     max-width: 1140px;
   }
-}
+} */
 
 input[type='search']::-webkit-search-cancel-button,
 input[type='search']::-webkit-search-decoration,
