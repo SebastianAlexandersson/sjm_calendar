@@ -1,9 +1,7 @@
 <template>
-  <div class="weeks">
-    <div class="week" v-for="week in get.numWeeks" :key="`${week}week`">
-      <span>{{ week + weekFormat > 52 ? 1 : week + weekFormat }}</span>
-    </div>
-  </div>
+  <div class="week" :style="{ 'grid-row': week}">
+  <span>{{ formatWeek(week) }}</span>
+</div>
 </template>
 
 <script>
@@ -16,30 +14,28 @@ export default {
     weekFormat() {
       return Number(this.get.getFirstWeek) - 1;
     },
+    lastWeek() {
+      return this.get.getLastWeek;
+    },
+  },
+  props: ['week'],
+  methods: {
+    formatWeek(week) {
+      if (Number(this.get.getLastWeek) === 53) {
+        return week + this.weekFormat > 53 ? 1 : week + this.weekFormat;
+      }
+      if (Number(this.get.getFirstWeek) === 53) {
+        return week === 1 ? 53 : week + this.weekFormat - 53;
+      }
+      if (Number(this.get.getFirstWeek) === 52) {
+        return week === 1 ? 52 : week + this.weekFormat - 52;
+      }
+      return week + this.weekFormat > 52 ? 1 : week + this.weekFormat;
+    },
   },
 };
 </script>
 
 <style>
-.weeks {
-  display: grid;
-  grid-gap: 0.5rem;
-}
-
-.week {
-  font-size: 1rem;
-  padding: 2em 3em;
-  background-color: #fff;
-  margin-right: 0.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  border-radius: 10px;
-}
-
-.week:nth-last-child() {
-  margin-bottom: 0;
-}
 
 </style>

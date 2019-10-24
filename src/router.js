@@ -33,7 +33,7 @@ export default new Router({
     {
       path: '/update-event',
       name: 'UpdateEvent',
-      component: UpdateEvent
-    }
-  ]
+      component: UpdateEvent,
+    },
+  ],
 });

@@ -7,7 +7,7 @@
         `${state.addZero(prevDay + get.prevMonthFillerStartDate)}`'
       >
     <div
-      class='day fade'
+      class='day fade day-pos'
     >
       <span>{{ prevDay + get.prevMonthFillerStartDate }}</span>
       <span>
