@@ -115,14 +115,14 @@
       ]
     },
     {
-      "task": "Gå och fiska",
-      "completed": false,
+      "task": "Gå och fiska mest",
+      "completed": true,
       "type": "Todo",
       "room": "",
-      "body": "Fiska i havet",
+      "body": "Fiska i bäcken",
       "start": "",
       "end": "20191123",
-      "color": "Green",
+      "color": "Blue",
       "labels": [
         "Fiske",
         "home",

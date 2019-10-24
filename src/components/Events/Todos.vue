@@ -25,13 +25,11 @@
     >
       <div class='eventColor' v-bind:style='{backgroundColor:event.color}'></div>
       <div class='eventTask' v-on:click='callShowModal(event)'>{{ event.task }}</div>
-      <div class='eventCompleted' v-if='event.completed'>Done!</div>
-      <div class='eventCompleted' v-else>Not completed yet</div>
       <div class='eventBody'>{{ event.body }}</div>
-      <div class='eventLabels' > Labels:
-        <div class='singleLabel'>
-          <div v-for="label in event.labels" :key='label.index'>{{ label }}</div>
-        </div>
+      <div class='eventLabels'> Labels:
+        <ul class='singleLabel'>
+          <li v-for="label in event.labels" :key='label.index'>{{ label }}</li>
+        </ul>
       </div>
       <div class='eventEndDate'>Deadline: {{ event.end }}</div>
       <div class='eventButtons'>
@@ -58,8 +56,8 @@
               <h5 class='start'>End date: {{todo.end}}</h5>
               <h5 class='start'>
                 Completed?:
-                <div v-if='todo.completed'>Done!</div>
-                <div v-else>Not completed yet</div>
+                <div class='eventCompleted' v-if='todo.completed'>Done!</div>
+                <div class='eventCompleted' v-else>Not completed yet</div>
               </h5>
               <p>{{todo.body}}</p>
             </div>
@@ -308,7 +306,6 @@ export default {
 
 <style scoped>
 .todoList {
-  margin-top: 3rem;
   border-radius: 1rem;
   overflow: hidden;
   padding: 3rem;
@@ -333,7 +330,7 @@ export default {
   grid-template-rows: 20% 20% auto 20% 10%;
   padding: 1.1rem;
   margin-top: 1rem;
-  background-color: rgb(233, 233, 233);
+  background-color: #fff;
   border-radius: 1rem;
 }
 .todos .eventColor{
@@ -362,7 +359,7 @@ export default {
   grid-column-end: 3;
   grid-row-start: 4;
   grid-row-end: 5;
-  font-size: var(--XS);
+  font-size: var(--xs);
   margin-bottom: 1rem;
 }
 .todos .eventBody{
@@ -371,6 +368,7 @@ export default {
   grid-row-start: 3;
   grid-row-end: 4;
   margin-bottom: 1rem;
+  font-size: var(--xs);
 }
 .todos .eventEndDate{
   grid-column-start: 2;
@@ -384,12 +382,14 @@ export default {
   grid-column-start: 3;
   grid-column-end: 4;
   grid-row-start: 2;
-  grid-row-end: 3;
+  grid-row-end: 6;
   font-size: var(--S);
   margin-bottom: 1rem;
+  margin-left: 1rem;
 }
 .todos .eventLabels .singleLabel{
   font-size:var(--xs);
+  margin-top: 1rem;
 }
 .eventButtons{
   grid-column-start: 2;
@@ -452,5 +452,48 @@ export default {
 .modal .body p {
   font-size: 1.2rem;
   line-height: 2rem;
+}
+
+@media (min-width: 0px) {
+.todos .eventColor{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 6;
+  width: 35px;
+  margin-right: 1rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+}
+
+@media (min-width: 576px) {
+.todos .eventColor{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 6;
+  margin-right: 1rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+}
+
+@media (min-width: 768px) {
+  .main-page {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .main-page {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .main-page {
+    max-width: 1140px;
+  }
 }
 </style>>
