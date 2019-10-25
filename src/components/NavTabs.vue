@@ -25,10 +25,11 @@ export default {
 
 <style>
 nav {
-  width: 95%;
+  width: 65%;
   margin: auto;
   z-index: 10;
   position: relative;
+  max-width: 1024px;
 }
 
 nav a {

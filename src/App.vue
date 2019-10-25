@@ -1,7 +1,7 @@
 <template>
   <div id='app'>
-    <main class='main-page'>
-      <NavTabs />
+    <main :class="{ 'wrapper': isCalendar, 'main-page': !isCalendar}">
+      <NavTabs v-if="isCalendar" />
       <router-view></router-view>
     </main>
   </div>
@@ -13,6 +13,11 @@ import NavTabs from './components/NavTabs.vue';
 export default {
   components: {
     NavTabs,
+  },
+  computed: {
+    isCalendar() {
+      return this.$route.path === '/';
+    },
   },
 };
 </script>
@@ -56,10 +61,6 @@ body {
   flex-direction: column;
   line-height: 1;
   background-color: rgb(231, 231, 231);
-  width: 100vw;
-  max-width: 100vw;
-  margin-top: 2rem;
-  align-items: center;
 }
 
 ul,
@@ -74,13 +75,23 @@ a {
 #app {
   flex-grow: 1 auto;
 }
-/* .main-page {
+.main-page {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem;
   margin-right: auto;
   margin-left: auto;
   margin-top: 2rem;
+}
+
+.wrapper {
+  width: 100vw;
+  max-width: 100vw;
+  margin-top: 2rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media (min-width: 576px) {
@@ -105,7 +116,7 @@ a {
   .main-page {
     max-width: 1140px;
   }
-} */
+}
 
 input[type='search']::-webkit-search-cancel-button,
 input[type='search']::-webkit-search-decoration,
