@@ -1,9 +1,9 @@
 <template>
   <div class='month'>
     <div class="monthselector">
-      <span @click='displayPreviousMonth' class='arrow'>&#171;</span>
+      <button @click='displayPreviousMonth' class='arrow'>&#171;</button>
       <span>{{ displayedMonth.month }} {{ year }}</span>
-      <span @click='displayNextMonth' class='arrow'>&#187;</span>
+      <button @click='displayNextMonth' class='arrow'>&#187;</button>
     </div>
     <button
       class="button"
@@ -61,6 +61,12 @@ export default {
 .arrow {
   font-weight: bold;
   cursor: pointer;
+  background-color: var(--blue);
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 0;
 }
 
 .arrow:hover {
@@ -92,15 +98,18 @@ export default {
     padding: 1rem .5rem !important;
   }
 
-  span.arrow {
+  .arrow {
+    font-size: 1rem !important;
+  }
+
+  button.arrow {
     margin: 0;
   }
 }
 
 @media (max-width: 500px) {
-  button {
+  .button {
     font-size: .5rem;
-  }.button {
     padding: .5rem 1rem;
     border-radius: 5px;
   }
@@ -116,6 +125,10 @@ export default {
     font-size: 1.3rem;
   }
 
+  .arrow {
+    font-size: 1.3rem;
+  }
+
   .button {
     padding: .5rem 1rem;
     border-radius: 5px;
@@ -123,7 +136,8 @@ export default {
 }
 
 @media (min-width: 651px) and (max-width: 767px) {
-  .month {
+  .month,
+  .arrow {
     font-size: 1.5rem;
   }
 
