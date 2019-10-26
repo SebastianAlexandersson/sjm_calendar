@@ -191,9 +191,6 @@ const getters = {
   smallViewPort(state) {
     return state.windowWidth <= 650;
   },
-  smallestViewPort(state) {
-    return state.windowWidth <= 424;
-  },
 };
 
 export default {
