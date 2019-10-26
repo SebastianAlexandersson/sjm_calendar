@@ -12,7 +12,7 @@
       <span>{{ prevDay + get.prevMonthFillerStartDate }}</span>
       <span>
         {{
-          getNameOfDay(get.preMonthYear, get.prevMonthNum, prevDay + get.prevMonthFillerStartDate)
+          getNameOfDay(get.prevMonthYear, get.prevMonthNum, prevDay + get.prevMonthFillerStartDate)
         }}
       </span>
     </div>
