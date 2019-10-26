@@ -63,4 +63,39 @@ export default {
     text-decoration: none;
     color: #000;
   }
+
+  nav {
+    max-width: 990px;
+  }
+
+  @media (max-width: 374px) {
+    nav a {
+      margin-top: 1rem;
+      font-size: 0.5rem;
+    }
+  }
+
+  @media (min-width: 375px) and (max-width: 424px) {
+    nav a {
+      font-size: 0.6rem;
+    }
+  }
+
+  @media (max-width: 330px) {
+    nav {
+      width: 80%;
+    }
+  }
+
+  @media (min-width: 331px) and (max-width: 500px) {
+    nav {
+      width: 85%;
+    }
+  }
+
+  @media (min-width: 425px) and (max-width: 767px) {
+    nav a {
+      font-size: 0.75rem;
+    }
+  }
 </style>
