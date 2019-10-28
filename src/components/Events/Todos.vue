@@ -37,122 +37,23 @@
         <button class='eventButton' v-on:click='callDeleteModal(event)'>Delete todo</button>
       </div>
     </div>
-    <div>
-      <PoseTransition>
-        <!-- // Show event -->
-        <Shade
-          v-on:click.native='closeModal'
-          class='shade'
-          v-if='isShowVisible'
-          v-bind:todo='todoModal'
-        >
-          <Modal class='modal'>
-            <div class='header'>
-              <h3>{{todo.task}}</h3>
-            </div>
-            <div class='body'>
-              <h5 class='start'>Color group: {{todo.color}}</h5>
-              <h5 class='start'>Labels: {{todo.lable}}</h5>
-              <h5 class='start'>End date: {{todo.end}}</h5>
-              <h5 class='start'>
-                Completed?:
-                <div class='eventCompleted' v-if='todo.completed'>Done!</div>
-                <div class='eventCompleted' v-else>Not completed yet</div>
-              </h5>
-              <p>{{todo.body}}</p>
-            </div>
-          </Modal>
-        </Shade>
-      </PoseTransition>
-    </div>
-    <div>
-      <PoseTransition>
-        <!-- Add event -->
-        <Shade class='shade' v-if='isAddVisible' v-bind='newTodo'>
-          <Modal class='modal'>
-            <div class='header'>
-              <input v-model='newTodo.task' placeholder='Add a task name' />
-              <select v-model='newTodo.color'>
-                <option disabled value>Choose a color</option>
-                <option>Red</option>
-                <option>Green</option>
-                <option>Yellow</option>
-                <option>Blue</option>
-                <option>Orange</option>
-                <option>Pink</option>
-              </select>
-            </div>
-            <div class='body'>
-              <input class='end' v-model='newTodo.end' placeholder='YYYYMMDD' />
-              <input
-                v-model='addLabel'
-                placeholder='Add text here'
-                v-on:keyup.enter='pushLabel(addLabel)'
-              />
-              <input v-model='newTodo.body' placeholder='Add text here' />
-              <button v-on:click='saveNewTodo(newTodo)'>Save</button>
-              <button v-on:click='closeModal'>Cancel</button>
-            </div>
-          </Modal>
-        </Shade>
-      </PoseTransition>
-    </div>
-    <div>
-      <PoseTransition>
-        <!-- Edit event -->
-        <Shade class='shade' v-if='isEditVisible' v-bind:todo='todoModal'>
-          <Modal class='modal'>
-            <div class='header'>
-              <input v-model='todo.task' placeholder='todo.task' />
-              <select v-model='todo.color'>
-                <option disabled value>{{ todo.color }}</option>
-                <option>Red</option>
-                <option>Green</option>
-                <option>Yellow</option>
-                <option>Blue</option>
-                <option>Orange</option>
-                <option>Pink</option>
-              </select>
-            </div>
-            <div class='body'>
-              <input type='radio' id='one' v-bind:value='true' v-model='todo.completed' />
-              <label for='one'>Done</label>
-              <br />
-              <input type='radio' id='two' v-bind:value='false' v-model='todo.completed' />
-              <label for='two'>Not yet.</label>
-              <br />
-              <input class='end' v-model='todo.end' placeholder='todo.end' />
-              <input v-model='todo.body' placeholder='todo.body' />
-              <button v-on:click='editTodo(todo)'>Save</button>
-              <button v-on:click='closeModal'>Cancel</button>
-            </div>
-          </Modal>
-        </Shade>
-      </PoseTransition>
-    </div>
-    <div>
-      <PoseTransition>
-        <!-- // Delete event -->
-        <Shade class='shade' v-if='isDeleteVisible' v-bind:todo='todoModal'>
-          <Modal class='modal'>
-            <div class='header'>
-              <h4>Are you sure you want to delete this event?</h4>
-              <h3>{{todo.task}}</h3>
-            </div>
-            <div class='body'>
-              <button v-on:click='deleteTodo(todo)'>Delete</button>
-              <button v-on:click='closeModal'>Cancel</button>
-            </div>
-          </Modal>
-        </Shade>
-      </PoseTransition>
-    </div>
+    <AddEvent  v-if='isAddVisible' v-on:close="closeModal" v-on:save='saveNewTodo'/>
+    <EditEvent  v-if='isEditVisible'
+    v-bind:editThisTodo='todo'
+    v-on:close='closeModal'
+    v-on:edit='editTodo'/>
+    <DeleteEvent  v-if='isDeleteVisible'
+    v-bind:deleteThisTodo='todo'
+    v-on:close='closeModal'
+    v-on:delete='deleteTodo'/>
   </div>
 </div>
 </template>
 
 <script>
-import posed, { PoseTransition } from 'vue-pose';
+import AddEvent from './AddEvent.vue';
+import EditEvent from './EditEvent.vue';
+import DeleteEvent from './DeleteEvent.vue';
 
 export default {
   name: 'TodoList',
@@ -162,8 +63,6 @@ export default {
       isEditVisible: false,
       isDeleteVisible: false,
       isShowVisible: false,
-      todoModal: {},
-
       newTodo: {
         task: '',
         completed: false,
@@ -185,24 +84,9 @@ export default {
     };
   },
   components: {
-    PoseTransition,
-
-    Shade: posed.div({
-      enter: {
-        opacity: 1,
-        beforeChildren: true,
-        transition: { duration: 200, ease: 'linear' },
-      },
-      exit: {
-        opacity: 0,
-        afterChildren: true,
-        transition: { duration: 200, ease: 'linear' },
-      },
-    }),
-    Modal: posed.div({
-      enter: { opacity: 1, z: 0 },
-      exit: { opacity: 0, z: -150 },
-    }),
+    AddEvent,
+    EditEvent,
+    DeleteEvent,
   },
   methods: {
     selectColor(color) {
@@ -234,6 +118,7 @@ export default {
       this.resetTodoObject();
     },
     saveNewTodo(payload) {
+      console.log(payload);
       this.$store.dispatch('addEvent', payload).then(this.searchLabels).then(this.searchColors);
       this.isAddVisible = false;
     },
@@ -244,7 +129,6 @@ export default {
     deleteTodo(payload) {
       this.$store.dispatch('deleteEvent', payload.id).then(this.searchLabels).then(this.searchColors);
       this.isDeleteVisible = false;
-      this.resetTodoObject();
     },
     resetTodoObject() {
       this.newTodo.task = '';
@@ -265,28 +149,21 @@ export default {
     },
     searchLabels() {
       this.allLabels = [];
-      console.log(this.events);
       for (let a = 0; a < this.events.length; a += 1) {
         for (let i = 0; i < this.events[a].labels.length; i += 1) {
           if (!(this.allLabels.includes(this.events[a].labels[i]))) {
-            console.log(this.events[a].labels[i]);
             this.allLabels.push(this.events[a].labels[i]);
           }
         }
       }
-      console.log('this.allLabels');
-      console.log(this.allLabels);
     },
     searchColors() {
       this.allColors = [];
       for (let a = 0; a < this.events.length; a += 1) {
         if (!(this.allColors.includes(this.events[a].color))) {
-          console.log(this.events[a].color);
           this.allColors.push(this.events[a].color);
         }
       }
-      console.log('this.allColors');
-      console.log(this.allColors);
     },
   },
   computed: {
@@ -351,9 +228,6 @@ export default {
   font-size: var(--M);
   margin-bottom: 1rem;
 }
-.todos .eventTask:hover{
- cursor: pointer;
-}
 .todos .eventCompleted{
   grid-column-start: 2;
   grid-column-end: 3;
@@ -410,48 +284,6 @@ export default {
 }
 .eventButton:hover{
   cursor: pointer;
-}
-
-.shade {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.5);
-  perspective: 500px;
-  transform: translateZ(0);
-}
-
-.modal {
-  max-width: 50rem;
-  min-height: 250px;
-  background: white;
-  border-radius: 10px;
-  padding: 1rem 1.5rem;
-}
-
-.modal .header {
-  font-size: 2.1rem;
-  text-transform: capitalize;
-  border-bottom: 2px solid var(--dark-primary);
-  margin: 0 0 2rem 0;
-}
-
-.modal .body {
-  padding: 1rem 0.6rem;
-}
-.modal .body h5 {
-  font-size: 1.2rem;
-  margin-right: auto;
-}
-
-.modal .body p {
-  font-size: 1.2rem;
-  line-height: 2rem;
 }
 
 @media (min-width: 0px) {

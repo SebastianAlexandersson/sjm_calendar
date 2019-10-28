@@ -1,7 +1,7 @@
 <template>
   <div id='app'>
     <main :class="{ 'wrapper': isCalendar, 'main-page': !isCalendar}">
-      <NavTabs v-if="isCalendar" />
+      <NavTabs v-if="isCalendar || isTodos" />
       <router-view></router-view>
     </main>
   </div>
@@ -17,6 +17,9 @@ export default {
   computed: {
     isCalendar() {
       return this.$route.path === '/';
+    },
+    isTodos() {
+      return this.$route.path === '/Todos';
     },
   },
 };

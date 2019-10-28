@@ -79,31 +79,6 @@
       ]
     },
     {
-      "task": "tese",
-      "type": "Todo",
-      "body": "hello",
-      "start": "2019-10-13",
-      "end": "2019-10-06",
-      "labels": [
-        "important",
-        "hobby"
-      ],
-      "id": 7
-    },
-    {
-      "task": "new Teset",
-      "type": "Todo",
-      "body": "hello",
-      "start": "2019-10-05",
-      "end": "2019-10-13",
-      "startTime": "00:00",
-      "labels": [
-        "hobby",
-        "home"
-      ],
-      "id": 8
-    },
-    {
       "task": "Gå och fiska mest",
       "completed": true,
       "type": "Todo",
