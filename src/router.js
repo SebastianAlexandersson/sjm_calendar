@@ -5,7 +5,7 @@ import Calendar from './components/Calendar/Calendar.vue';
 import EventForm from './components/eventForm/EventForm.vue';
 import UpdateEvent from './components/eventForm/UpdateEvent.vue';
 import DayView from './components/dayView/DayView.vue';
-import Season from './components/season/Season.vue';
+// import Season from './components/season/Season.vue';
 
 Vue.use(Router);
 
@@ -36,10 +36,10 @@ export default new Router({
       name: 'UpdateEvent',
       component: UpdateEvent,
     },
-    {
-      path: '/test',
-      name: 'Season',
-      component: Season,
-    },
+    // {
+    //   path: '/test',
+    //   name: 'Season',
+    //   component: Season,
+    // },
   ],
 });
