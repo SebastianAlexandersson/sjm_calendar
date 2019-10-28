@@ -1,11 +1,11 @@
 <template>
   <div class="day-wrapper">
-    <div class="searchbar">
+    <!-- <div class="searchbar">
       <input type="text" v-model="search" />
       <label for="text">
         <img src="../../images/search.svg" alt="searchIcon" />
       </label>
-    </div>
+    </div>-->
     <div>
       <div class="row" v-for="d in data" v-bind:key="d.id" @click="handleClick(d.time)">
         <span class="time">{{d.time}}</span>
@@ -27,8 +27,12 @@
               <div class="body" v-if="currentTime === event.startTime">
                 <span id="delete" @click="handleDelete(event.id)">Delete</span>
                 <!-- <h5 class="room">Room:</h5> -->
-                <h5 class="start">Start: {{event.start}}</h5>
-                <h5 class="start">End: {{event.end}}</h5>
+                <div class="card-info">
+                  <h5 class="start">Start: {{event.start}}</h5>
+                  <h5 class="start">End: {{event.end}}</h5>
+
+                  <Season />
+                </div>
                 <p>{{event.body}}</p>
                 <router-link :to="'/create-event'" class="add-event">create new event</router-link>
                 <a
@@ -54,7 +58,7 @@ import dayData from './dayViewData';
 
 export default {
   name: 'DayView',
-  data: () => ({ isVisible: false, currentTime: null, search: '' }),
+  data: () => ({ isVisible: false, currentTime: null, search: '', eventsData: [] }),
   components: {
     PoseTransition,
     Shade: posed.div({
@@ -84,6 +88,7 @@ export default {
     events() {
       return this.$store.state.events.events.filter(event => event.type === 'Meeting');
     },
+
     data() {
       return dayData;
     },
@@ -240,6 +245,13 @@ export default {
   right: 1.5rem;
   cursor: pointer;
   font-size: 1.1rem;
+}
+.modal .card-info h5 {
+  margin: 0.5rem 0rem;
+}
+.modal .location {
+  font-size: 1.1rem;
+  margin: 0.5rem 0rem;
 }
 
 .modal .header,
