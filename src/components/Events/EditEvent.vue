@@ -6,17 +6,19 @@
             <div class='header'>
               <div class='editEvent'>Edit this event?</div>
             </div>
-            <input class='todoTask' v-model='fixTodo.task' placeholder='todo.task' />
-            <select class='todoColor' v-model='fixTodo.color'>
-              <option disabled value>{{ fixTodo.color }}</option>
-              <option>Red</option>
-              <option>Green</option>
-              <option>Yellow</option>
-              <option>Blue</option>
-              <option>Orange</option>
-              <option>Pink</option>
-            </select>
             <div class='body'>
+              <input class='todoTask' v-model='fixTodo.task' placeholder='todo.task' />
+              <select class='todoColor' v-model='fixTodo.color'>
+                <option disabled value>{{ fixTodo.color }}</option>
+                <option>Red</option>
+                <option>Green</option>
+                <option>Yellow</option>
+                <option>Blue</option>
+                <option>Orange</option>
+                <option>Pink</option>
+              </select>
+              <input class='endDate' v-model='fixTodo.end' placeholder='todo.end' />
+              <textarea class='todoBody' v-model='fixTodo.body' placeholder='todo.body' />
               <div class='radioButtons'>
                 <input type='radio' id='one' v-bind:value='true' v-model='fixTodo.completed' />
                 <label for='one'>Done</label>
@@ -25,10 +27,22 @@
                 <label for='two'>Not yet.</label>
                 <br />
               </div>
-              <input class='endDate' v-model='fixTodo.end' placeholder='todo.end' />
-              <input class='todoBody' v-model='fixTodo.body' placeholder='todo.body' />
-              <button class="eventButton" v-on:click='editTodo(fixTodo)'>Save</button>
-              <button class="eventButton" id="cancel" v-on:click='closeModal'>Cancel</button>
+              <div id='taskLabelText'>Add a few labels</div>
+              <input
+                class='todoLabels'
+                v-model='addLabel'
+                v-on:keyup.enter='pushLabel(addLabel)'
+              />
+              <div class='newLabels'>
+                <div class='labels' v-for="label in fixTodo.labels"
+                v-bind:key='label.id'> {{ label }}
+                  <button v-on:click='removeLabel(label)'>X</button>
+                </div>
+              </div>
+              <div id='buttons'>
+                <button class="eventButton" v-on:click='editTodo(fixTodo)'>Save</button>
+                <button class="eventButton" id="cancel" v-on:click='closeModal'>Cancel</button>
+              </div>
             </div>
           </Modal>
         </Shade>
@@ -71,8 +85,11 @@ export default {
   },
   methods: {
     pushLabel(label) {
-      this.newTodo.labels.push(label);
+      this.fixTodo.labels.push(label);
       this.addLabel = '';
+    },
+    removeLabel(label) {
+      this.fixTodo.labels.splice(this.fixTodo.labels.indexOf(label), 1);
     },
     editTodo(payload) {
       this.$emit('edit', payload);
@@ -87,7 +104,6 @@ export default {
 
 <style scoped>
 
-
 .shade {
   position: fixed;
   top: 0;
@@ -99,15 +115,16 @@ export default {
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
   perspective: 500px;
+  z-index: 15;
   transform: translateZ(0);
 }
 
 .modal {
+  z-index: 20;
   max-width: 50rem;
   min-height: 250px;
   background: white;
   border-radius: 1rem;
-
 }
 
 .modal .header {
@@ -120,46 +137,120 @@ export default {
   color: var(--white);
   font-size: 2.1rem;
 }
-.modal .header .editEvent {
+
+.modal .body {
+  text-align: center;
   margin-bottom: 1rem;
-  font-weight: 800;
-  text-align: center;
-}
-.modal .todoTask {
-  margin-bottom: 2rem;
-  text-align: center;
-  padding: 1rem;
-  text-align: center;
-  font-size: 2rem;
-}
-.todoColor{
-    font-size: 2rem;
-}
-.body {
   padding: 1rem 0.6rem;
   display: grid;
+  width: 50rem;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr 0.5fr;
 
 }
-.radioButton{
-  display: inline-block;
+
+.todoTask {
+  text-align: center;
+  margin: 1rem;
+  font-size: 1.5rem;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
-.endDate{
-  font-size: 2rem;
-}
-.todoBody{
+
+.todoColor{
+  text-align: center;
+  height: 2rem;
+  width: auto;
   font-size: 1rem;
+  margin: 1rem;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.endDate{
+  text-align: center;
+  margin: 1rem;
+  font-size: 1rem;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+.todoBody{
+  resize: none;
+  height: 8rem;
+  max-width: 27rem;
+  font-size: 1rem;
+  margin: 1rem;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+
+.todoLabels{
+  margin: 1rem;
+  text-align: center;
+  width: auto;
+  font-size: 1rem;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.newLabels{
+  display: flex;
+  text-align: center;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  width: auto;
+  font-size: 1rem;
+  justify-content: center;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.newLabels .labels{
+  margin: 0.4rem;
+}
+.radioButtons{
+  text-align: center;
+  width: auto;
+  font-size: 1rem;
+  margin: 1rem;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 7;
+  grid-row-end: 8;
+}
+
+#buttons {
+  margin: 1rem;
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 8;
+  grid-row-end: 9;
 }
 .eventButton{
-
   display: inline-block;
-  height: 2rem;
-  width: 8rem;
   text-align: center;
-  border-radius: 1rem;
-  padding: 0.2rem;
+  border-radius: 0.5rem;
+  padding: 0.8rem 2rem;
+  margin-right: 0.2rem;
   margin-bottom: 0.2rem;
+  background-color: var(--blue);
+  color: var(--white);
 }
-.modal .body .eventButton:hover{
+.eventButton:hover{
   cursor: pointer;
 }
 #cancel {
@@ -171,33 +262,32 @@ export default {
   max-width: 30rem;
   min-width: 20rem;
 }
+.modal .body {
+  width: 30rem;
+}
 }
 
 @media (min-width: 576px) {
-.shade .modal {
-  max-width: 30rem;
-  min-width: 20rem;
+.modal .body {
+  width: 30rem;
 }
 }
 
 @media (min-width: 768px) {
-.shade .modal {
-  max-width: 40rem;
-  min-width: 30rem;
+.modal .body {
+  width: 30rem;
 }
 }
 
 @media (min-width: 992px) {
-.shade .modal {
-  max-width: 50rem;
-  min-width: 40rem;
+.modal .body {
+  width: 30rem;
 }
 }
 
 @media (min-width: 1200px) {
-.shade .modal {
-  max-width: 50rem;
-  min-width: 40rem;
+.modal .body {
+  width: 30rem;
 }
 }
 

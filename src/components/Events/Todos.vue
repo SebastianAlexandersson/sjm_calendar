@@ -1,20 +1,20 @@
 <template>
 <div>
-<div  class='todoList'>
+<div class='todoList'>
   <h1>Todos</h1>
-    <select class='eventSelectorColor'>
-      <option v-on:click='selectColor("")'>Show all colors</option>
-      <option v-for='color in allColors'
-      :key='color.index'
-      v-on:click='selectColor(color)'> {{ color }} </option>
-    </select>
-     <select class='eventSelectorLabel'>
-      <option v-on:click='selectLabel(true)'>Show all labels</option>
-      <option v-for='label in allLabels'
-      :key='label.index'
-      v-on:click='selectLabel(label)'> {{ label }} </option>
-     </select>
-  <button class='eventButton' v-on:click='callAddModal()'>Add New Todo</button>
+  <select class='eventSelectorColor'>
+    <option v-on:click='selectColor("")'>Show all colors</option>
+    <option v-for='color in allColors'
+    :key='color.index'
+    v-on:click='selectColor(color)'> {{ color }} </option>
+  </select>
+    <select class='eventSelectorLabel'>
+    <option v-on:click='selectLabel(true)'>Show all labels</option>
+    <option v-for='label in allLabels'
+    :key='label.index'
+    v-on:click='selectLabel(label)'> {{ label }} </option>
+  </select>
+  <button class='eventButton' id='addButton' v-on:click='callAddModal()'>Add New Todo</button>
 </div>
 
 <div>
@@ -34,7 +34,8 @@
       <div class='eventEndDate'>Deadline: {{ event.end }}</div>
       <div class='eventButtons'>
         <button class='eventButton' v-on:click='callEditModal(event)'>Edit todo</button>
-        <button class='eventButton' v-on:click='callDeleteModal(event)'>Delete todo</button>
+        <button class='eventButton' id='cancel'
+        v-on:click='callDeleteModal(event)'>Delete todo</button>
       </div>
     </div>
     <AddEvent  v-if='isAddVisible' v-on:close="closeModal" v-on:save='saveNewTodo'/>
@@ -203,8 +204,8 @@ export default {
 }
 .todos {
   display: grid;
-  grid-template-columns: 10% auto 20%;
-  grid-template-rows: 20% 20% auto 20% 10%;
+  grid-template-columns: 1fr 10fr 2fr;
+  grid-template-rows: 0.8fr 0.8fr 0.8fr 0.4fr 0.5fr;
   padding: 1.1rem;
   margin-top: 1rem;
   background-color: #fff;
@@ -275,18 +276,33 @@ export default {
 .eventButton{
 
   display: inline-block;
-  height: 2rem;
-  width: 8rem;
   text-align: center;
-  border-radius: 1rem;
-  padding: 0.2rem;
+  border-radius: 0.5rem;
+  padding: 0.8rem 2rem;
+  margin-right: 0.2rem;
   margin-bottom: 0.2rem;
+  background-color: var(--blue);
+  color: var(--white);
 }
 .eventButton:hover{
   cursor: pointer;
 }
+#addButton{
+  background-color: lightgray;
+  color: black;
+}
+#cancel {
+  background-color: var(--danger)
+}
 
 @media (min-width: 0px) {
+.todoList .eventButton{
+    padding: 0.6rem 1.8rem;
+}
+.todos{
+  grid-template-columns: 1fr 10fr 2fr;
+  grid-template-rows: 0.4fr 0.4fr 0.3fr 0.2fr 0.3fr;
+}
 .todos .eventColor{
   grid-column-start: 1;
   grid-column-end: 2;
@@ -300,6 +316,10 @@ export default {
 }
 
 @media (min-width: 576px) {
+.todos{
+  grid-template-columns: 1fr 10fr 2fr;
+  grid-template-rows: 0.4fr 0.4fr 0.3fr 0.2fr 0.3fr;
+}
 .todos .eventColor{
   grid-column-start: 1;
   grid-column-end: 2;
