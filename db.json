@@ -84,19 +84,15 @@
       "id": 4
     },
     {
-      "task": "dstf",
-      "completed": false,
-      "type": "Todo",
-      "room": "",
-      "body": "wrsrf",
-      "start": "",
-      "end": "2019-10-31",
-      "color": "Red",
+      "task": "vdsfdsasdv",
+      "type": "Meeting",
+      "body": "vfdgfsa",
+      "start": "2019-10-09",
+      "end": "",
+      "startTime": "04:00",
       "labels": [
-        "dada"
+        "important"
       ],
-      "startTime": "",
-      "endTime": "",
       "id": 7
     }
   ]

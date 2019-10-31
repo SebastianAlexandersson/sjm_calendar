@@ -8,18 +8,8 @@
       :id='`${state.currentYear}${get.displayedMonthNum}${state.addZero(day)}`'
     >
       <div
-        class="hasMeeting"
-        v-if="dayHasMeeting(state.currentYear, get.displayedMonthNum, state.addZero(day))
-        && !get.smallViewPort"
-      >
-        <div class="meeting" v-for="meeting in meetings" :key="meeting.id">
-          {{ meeting.startTime }}
-        </div>
-      </div>
-      <div
         class="hasMeeting meeting-small"
-        v-if="dayHasMeeting(state.currentYear, get.displayedMonthNum, state.addZero(day))
-        && get.smallViewPort"></div>
+        v-if="dayHasMeeting(state.currentYear, get.displayedMonthNum, state.addZero(day))"></div>
       <span v-bind:class='{ highlight: highlightToday(day, get.displayedMonthNum) }'>
         {{ day }}
       </span>
