@@ -82,6 +82,7 @@
       "id": 4
     },
     {
+<<<<<<< HEAD
       "task": "tessdf",
       "type": "Meeting",
       "body": "test",
@@ -92,6 +93,18 @@
         "home"
       ],
       "id": 21
+=======
+      "task": "vdsfdsasdv",
+      "type": "Meeting",
+      "body": "vfdgfsa",
+      "start": "2019-10-09",
+      "end": "",
+      "startTime": "04:00",
+      "labels": [
+        "important"
+      ],
+      "id": 7
+>>>>>>> bc1b5abb66dec8324c9be22b2c1528fbcd2b2a5d
     }
   ]
 }

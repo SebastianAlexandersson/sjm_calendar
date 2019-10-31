@@ -71,7 +71,7 @@ const mutations = {
     state.events = data;
   },
   newEvent(state, event) {
-    state.events.unshift(event);
+    state.events.push(event);
   },
 
   editEvent(state, payload) {

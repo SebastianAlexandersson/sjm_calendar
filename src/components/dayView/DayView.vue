@@ -30,8 +30,13 @@
                 <span id="delete" @click="handleDelete(event.id)">Delete</span>
                 <!-- <h5 class="room">Room:</h5> -->
                 <div class="card-info">
+<<<<<<< HEAD
                   <h5 class="start">Start: {{event.startTime}}</h5>
                   <h5 class="start">End: {{event.endTime}}</h5>
+=======
+                  <h5 class="start">Start: {{event.start}}</h5>
+                  <h5 class="start">End: {{event.end}}</h5>
+>>>>>>> bc1b5abb66dec8324c9be22b2c1528fbcd2b2a5d
                 </div>
                 <p>{{event.body}}</p>
                 <router-link :to="'/create-event'" class="add-event">create new event</router-link>
