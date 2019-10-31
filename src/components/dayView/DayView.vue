@@ -1,23 +1,25 @@
 <template>
   <div class="day-wrapper">
-    <!-- <div class="searchbar">
-      <input type="text" v-model="search" />
-      <label for="text">
-        <img src="../../images/search.svg" alt="searchIcon" />
-      </label>
-    </div>-->
     <div>
       <div class="row" v-for="d in data" v-bind:key="d.id" @click="handleClick(d.time)">
         <span class="time">{{d.time}}</span>
+
         <div v-for="event in events" v-bind:key="event.id">
           <h3 v-if="d.time === event.startTime && getDateFromParent === event.start">{{event.task}}</h3>
         </div>
+
         <span class="edit"></span>
       </div>
       <div>
         <PoseTransition>
-          <Shade v-on:click.native="isVisible = false" class="shade" v-if="isVisible">
-            <Modal class="modal" v-for="event in events" v-bind:key="event.id">
+          <Shade
+            v-on:click.native="isVisible = false"
+            v-for="event in events"
+            v-bind:key="event.id"
+            class="shade"
+            v-if="isVisible"
+          >
+            <Modal class="modal">
               <div class="header" v-if="currentTime === event.startTime">
                 <h3>{{event.task}}</h3>
               </div>
@@ -28,10 +30,8 @@
                 <span id="delete" @click="handleDelete(event.id)">Delete</span>
                 <!-- <h5 class="room">Room:</h5> -->
                 <div class="card-info">
-                  <h5 class="start">Start: {{event.start}}</h5>
-                  <h5 class="start">End: {{event.end}}</h5>
-
-                  <Season />
+                  <h5 class="start">Start: {{event.startTime}}</h5>
+                  <h5 class="start">End: {{event.endTime}}</h5>
                 </div>
                 <p>{{event.body}}</p>
                 <router-link :to="'/create-event'" class="add-event">create new event</router-link>
@@ -42,7 +42,11 @@
                 >update event</a>
               </div>
               <div v-else class="no-event-body">
-                <router-link :to="'/create-event'" class="add-event">create new event</router-link>
+                <router-link
+                  :to="'/create-event'"
+                  getDateFromParent="getDateFromParent"
+                  class="add-event"
+                >create new event</router-link>
               </div>
             </Modal>
           </Shade>
@@ -58,7 +62,7 @@ import dayData from './dayViewData';
 
 export default {
   name: 'DayView',
-  data: () => ({ isVisible: false, currentTime: null, search: '', eventsData: [] }),
+  data: () => ({ isVisible: false, currentTime: null }),
   components: {
     PoseTransition,
     Shade: posed.div({
@@ -78,16 +82,15 @@ export default {
       exit: { opacity: 0, z: -150 }
     })
   },
-  watch: {
-    search: function(newSearch, oldSearch) {
-      this.search = newSearch;
-      this.$store.dispatch('searchEvents', eventText);
-    }
-  },
+
   computed: {
     events() {
       return this.$store.state.events.events.filter(event => event.type === 'Meeting');
     },
+
+    // getDateFromStore(){
+    //   return this.$store.state.events.
+    // },
 
     data() {
       return dayData;
@@ -116,15 +119,18 @@ export default {
   },
   created() {
     this.$store.dispatch('getEvents');
+    this.$store.commit('setDateForDayView', this.getDateFromParent);
   },
 
   methods: {
     handleDelete(eventId) {
       this.$store.dispatch('deleteEvent', eventId);
     },
-    handleSearch(EventText) {
-      this.$store.dispatch('searchEvents', eventText);
+
+    handleToAddAvent() {
+      $this.$router.push('/create-event');
     },
+
     handleSetcurrent(event) {
       this.$store.dispatch('setCurrent', event);
       this.$router.push('/update-event');

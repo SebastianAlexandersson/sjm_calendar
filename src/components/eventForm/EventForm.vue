@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="form-wrapper">
-      <h1>add a avent</h1>
+      <h1>add an event</h1>
       <form>
         <div class="form-group">
           <input type="text" v-model="task" placeholder="task" />
@@ -17,7 +17,7 @@
 
         <div class="form-group">
           <select name="startTime" id="startTime" v-model="startTime">
-            <option value disabled>Select A Time</option>
+            <option value disabled>Select A Start Time</option>
             <option value="00:00">00:00</option>
             <option value="01:00">01:00</option>
             <option value="02:00">02:00</option>
@@ -47,12 +47,43 @@
         </div>
 
         <div class="form-group">
-          <input type="date" id="start" v-model="start" />
+          <select name="endTime" id="endTime" v-model="endTime">
+            <option value disabled>Select A End Time</option>
+            <option value="00:00">00:00</option>
+            <option value="01:00">01:00</option>
+            <option value="02:00">02:00</option>
+            <option value="03:00">03:00</option>
+            <option value="04:00">04:00</option>
+            <option value="05:00">05:00</option>
+            <option value="06:00">06:00</option>
+            <option value="07:00">07:00</option>
+            <option value="08:00">08:00</option>
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+            <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+            <option value="17:00">17:00</option>
+            <option value="18:00">18:00</option>
+            <option value="19:00">19:00</option>
+            <option value="20:00">20:00</option>
+            <option value="21:00">21:00</option>
+            <option value="22:00">22:00</option>
+            <option value="23:00">23:00</option>
+            <option value="24:00">24:00</option>
+          </select>
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
+          <input type="date" id="startTime" v-model="startTime" />
+        </div>-->
+
+        <!-- <div class="form-group">
           <input type="date" id="end" v-model="end" />
-        </div>
+        </div>-->
 
         <div class="form-group checkbox-group">
           <label for="checkbox">
@@ -98,14 +129,17 @@ import moment from 'moment';
 // moment().format('Y'),
 export default {
   name: 'EventForm',
+  props: {
+    getDateFromParent: String
+  },
   data: () => ({
     task: '',
     type: '',
     body: '',
-    start: new Date(),
-    end: new Date(),
-    startTime: '',
-    endTime: '',
+    // start: this.getDateFromParent,
+    // end: null,
+    startTime: null,
+    endTime: null,
     labels: []
   }),
   components: {},
@@ -120,9 +154,12 @@ export default {
         task: this.task,
         type: this.type,
         body: this.body,
-        start: this.start,
-        end: this.end,
+        // start: this.start,
+        // end: this.end,
+        // endTime: this.endTime,
         startTime: this.startTime,
+        start: this.$store.state.events.getDateForDayView,
+        endTime: this.endTime,
         labels: this.labels
       };
       // console.log("PAYLOAD !!", payload);

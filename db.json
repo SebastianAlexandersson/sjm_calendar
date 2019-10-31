@@ -1,6 +1,5 @@
 {
-  "days": [
-    {
+  "days": [{
       "id": 1,
       "day": "Monday"
     },
@@ -29,8 +28,7 @@
       "day": "Sunday"
     }
   ],
-  "events": [
-    {
+  "events": [{
       "id": 1,
       "task": "Go to the gymmet",
       "completed": false,
@@ -45,20 +43,6 @@
       "labels": [
         "free-time",
         "hobby"
-      ]
-    },
-    {
-      "id": 2,
-      "task": "meeting with the bossBoooiii",
-      "type": "Meeting",
-      "body": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate ipsum maxime doloremque, magnam repellendus numquam inventore ipsa nostrum eligendi, pariatur qui minus necessitatibus ullam eius autem dolores incidunt id beatae!",
-      "start": "2019-10-15",
-      "startTime": "02:00",
-      "endTime": "",
-      "end": "2019-10-27",
-      "labels": [
-        "important",
-        "work"
       ]
     },
     {
@@ -96,6 +80,18 @@
       "startTime": "04:00",
       "endTime": "02:00",
       "id": 4
+    },
+    {
+      "task": "tessdf",
+      "type": "Meeting",
+      "body": "test",
+      "startTime": "05:00",
+      "start": "2019-10-05",
+      "endTime": "23:00",
+      "labels": [
+        "home"
+      ],
+      "id": 21
     }
   ]
 }
