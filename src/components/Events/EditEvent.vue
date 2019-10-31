@@ -17,17 +17,22 @@
                 <option>Orange</option>
                 <option>Pink</option>
               </select>
-              <input class='endDate' v-model='fixTodo.end' placeholder='todo.end' />
+              <input type="date" class='endDate' v-model='fixTodo.end' placeholder='todo.end' />
               <textarea class='todoBody' v-model='fixTodo.body' placeholder='todo.body' />
               <div class='radioButtons'>
-                <input type='radio' id='one' v-bind:value='true' v-model='fixTodo.completed' />
-                <label for='one'>Done</label>
-                <br />
-                <input type='radio' id='two' v-bind:value='false' v-model='fixTodo.completed' />
-                <label for='two'>Not yet.</label>
-                <br />
+                <div class='todoCompleted'>Is this task completed?</div>
+                <div class='radioButton'>
+                  <input type='radio' id='one' v-bind:value='true' v-model='fixTodo.completed' />
+                  <label for='one'> Done!</label>
+                  <br />
+                </div>
+                <div class='radioButton'>
+                  <input type='radio' id='two' v-bind:value='false' v-model='fixTodo.completed' />
+                  <label for='two'> Not yet...</label>
+                  <br />
+                </div>
               </div>
-              <div id='taskLabelText'>Add a few labels</div>
+              <div id='taskLabelText'>Add new label</div>
               <input
                 class='todoLabels'
                 v-model='addLabel'
@@ -56,11 +61,17 @@ import posed, { PoseTransition } from 'vue-pose';
 export default {
   name: 'EditEvent',
   created() {
-    this.fixTodo = this.editThisTodo;
+    // Version 1   ---  this.fixTodo = this.editThisTodo;
+    // Version 2   ---  this.fixTodo = Object.assing({}, this.editThisTodo )
+    // Version 2.1 ---  this.fixTodo = { ...this.editThisTodo }; // Shorthand
+    // Version 3 Deep Clone
+    this.fixTodo = JSON.parse(JSON.stringify(this.editThisTodo));
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
   },
   data() {
     return {
       addLabel: '',
+      fixTodo: {},
     };
   },
   components: {
@@ -145,7 +156,7 @@ export default {
   display: grid;
   width: 50rem;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr 0.5fr;
+  grid-template-rows: 0.3fr 0.3fr 0.5fr 0.3fr 0.1fr 0.3fr 0.3fr 0.3fr 0.5fr;
 
 }
 
@@ -172,6 +183,7 @@ export default {
 }
 
 .endDate{
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
   margin: 1rem;
   font-size: 1rem;
@@ -182,6 +194,7 @@ export default {
 }
 
 .todoBody{
+  font-family: 'Open Sans', sans-serif;
   resize: none;
   height: 8rem;
   max-width: 27rem;
@@ -193,8 +206,8 @@ export default {
   grid-row-end: 5;
 }
 
-.todoLabels{
-  margin: 1rem;
+#taskLabelText {
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
   width: auto;
   font-size: 1rem;
@@ -202,6 +215,16 @@ export default {
   grid-column-end: 3;
   grid-row-start: 5;
   grid-row-end: 6;
+}
+.todoLabels{
+  margin: 1rem;
+  text-align: center;
+  width: auto;
+  font-size: 1rem;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 6;
+  grid-row-end: 7;
 }
 .newLabels{
   display: flex;
@@ -213,21 +236,29 @@ export default {
   justify-content: center;
   grid-column-start: 1;
   grid-column-end: 3;
-  grid-row-start: 6;
-  grid-row-end: 7;
+  grid-row-start: 7;
+  grid-row-end: 8;
 }
 .newLabels .labels{
   margin: 0.4rem;
 }
+
+.todoCompleted {
+  padding: 1rem 5rem;
+}
+
 .radioButtons{
   text-align: center;
   width: auto;
   font-size: 1rem;
   margin: 1rem;
-  grid-column-start: 1;
+  grid-column-start: 1  ;
   grid-column-end: 3;
-  grid-row-start: 7;
-  grid-row-end: 8;
+  grid-row-start: 8;
+  grid-row-end: 9;
+}
+.radioButton {
+  margin-bottom: 0.5rem;
 }
 
 #buttons {
@@ -237,8 +268,8 @@ export default {
   justify-content: center;
   grid-column-start: 1;
   grid-column-end: 3;
-  grid-row-start: 8;
-  grid-row-end: 9;
+  grid-row-start: 9;
+  grid-row-end: 10;
 }
 .eventButton{
   display: inline-block;

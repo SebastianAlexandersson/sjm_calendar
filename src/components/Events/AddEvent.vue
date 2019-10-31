@@ -219,6 +219,7 @@ export default {
   grid-row-end: 4;
 }
 .endDate{
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
   margin-bottom: 1rem;
   margin-right: 1rem;

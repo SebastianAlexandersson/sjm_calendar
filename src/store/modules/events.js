@@ -29,7 +29,6 @@ const actions = {
       },
     });
     const data = await res.json();
-    console.log('test2');
     commit('newEvent', data);
   },
   async updateEvent({
@@ -45,6 +44,7 @@ const actions = {
 
     const data = await res.json();
     await commit('editEvent', data);
+    await this.dispatch('getEvents');
   },
   async searchEvents({
     commit,

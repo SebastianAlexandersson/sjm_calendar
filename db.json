@@ -32,7 +32,7 @@
   "events": [
     {
       "id": 1,
-      "task": "Go to the gym",
+      "task": "Go to the gymmet",
       "completed": false,
       "room": "Ett",
       "type": "Todo",
@@ -41,7 +41,7 @@
       "end": "2019-10-27",
       "startTime": "02:00",
       "endTime": "07:00",
-      "color": "Yellow",
+      "color": "Green",
       "labels": [
         "free-time",
         "hobby"

@@ -103,7 +103,7 @@ export default {
     callAddModal() {
       this.isAddVisible = true;
     },
-    callEditModal(modalObject) {
+    callEditModal({ ...modalObject }) {
       this.todo = modalObject;
       this.isEditVisible = true;
     },
