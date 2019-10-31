@@ -5,44 +5,35 @@
         <span class="time">{{d.time}}</span>
 
         <div v-for="event in events" v-bind:key="event.id">
-          <h3 v-if="d.time === event.startTime && getDateFromParent === event.start">{{event.task}}</h3>
+          <h3
+            @click="setCurrentEvent(event)"
+            v-if="d.time === event.startTime && getDateFromParent === event.start"
+          >{{event.task}}</h3>
         </div>
 
         <span class="edit"></span>
       </div>
       <div>
-        <PoseTransition>
-          <Shade
-            v-on:click.native="isVisible = false"
-            v-for="event in events"
-            v-bind:key="event.id"
-            class="shade"
-            v-if="isVisible"
-          >
+        <PoseTransition v-if="isVisible">
+          <Shade v-on:click.native="isVisible = false" class="shade">
             <Modal class="modal">
-              <div class="header" v-if="currentTime === event.startTime">
-                <h3>{{event.task}}</h3>
+              <div class="header" v-if="currentTime === currentEvent.startTime">
+                <h3>{{currentEvent.task}}</h3>
               </div>
               <div v-else class="header-no-content">
-                <h3>Add a event</h3>
+                <h3>Add a Event</h3>
               </div>
-              <div class="body" v-if="currentTime === event.startTime">
-                <span id="delete" @click="handleDelete(event.id)">Delete</span>
-                <!-- <h5 class="room">Room:</h5> -->
+              <div class="body" v-if="currentTime === currentEvent.startTime">
+                <span id="delete" @click="handleDelete(currentEvent.id)">Delete</span>
                 <div class="card-info">
-<<<<<<< HEAD
-                  <h5 class="start">Start: {{event.startTime}}</h5>
-                  <h5 class="start">End: {{event.endTime}}</h5>
-=======
-                  <h5 class="start">Start: {{event.start}}</h5>
-                  <h5 class="start">End: {{event.end}}</h5>
->>>>>>> bc1b5abb66dec8324c9be22b2c1528fbcd2b2a5d
+                  <h5 class="start">Start: {{currentEvent.startTime}}</h5>
+                  <h5 class="start">End: {{currentEvent.endTime}}</h5>
                 </div>
-                <p>{{event.body}}</p>
+                <p>{{currentEvent.body}}</p>
                 <router-link :to="'/create-event'" class="add-event">create new event</router-link>
                 <a
                   :to="'/update-event'"
-                  @click="handleSetcurrent(event)"
+                  @click="handleSetcurrent(currentEvent)"
                   class="update-event"
                 >update event</a>
               </div>
@@ -67,7 +58,7 @@ import dayData from './dayViewData';
 
 export default {
   name: 'DayView',
-  data: () => ({ isVisible: false, currentTime: null }),
+  data: () => ({ isVisible: false, currentTime: null, currentEvent: null }),
   components: {
     PoseTransition,
     Shade: posed.div({
@@ -112,9 +103,9 @@ export default {
       );
     },
 
-    filtredEvents() {
-      return this.$store.state.events.events;
-    },
+    // filtredEvents() {
+    //   return this.$store.state.events.events;
+    // },
     getState() {
       return this.$store.state.events;
     },
@@ -143,6 +134,9 @@ export default {
     handleClick(data) {
       this.isVisible = true;
       this.currentTime = data;
+    },
+    setCurrentEvent(event) {
+      this.currentEvent = event;
     }
   }
 };

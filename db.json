@@ -1,5 +1,6 @@
 {
-  "days": [{
+  "days": [
+    {
       "id": 1,
       "day": "Monday"
     },
@@ -28,7 +29,8 @@
       "day": "Sunday"
     }
   ],
-  "events": [{
+  "events": [
+    {
       "id": 1,
       "task": "Go to the gymmet",
       "completed": false,
@@ -82,29 +84,19 @@
       "id": 4
     },
     {
-<<<<<<< HEAD
-      "task": "tessdf",
+      "task": "Gå och fiska mest",
+      "completed": true,
       "type": "Meeting",
-      "body": "test",
-      "startTime": "05:00",
-      "start": "2019-10-05",
-      "endTime": "23:00",
+      "room": "",
+      "body": "Fiska i bäcken",
+      "start": "2019-10-23",
       "labels": [
-        "home"
+        "home",
+        "hobby"
       ],
-      "id": 21
-=======
-      "task": "vdsfdsasdv",
-      "type": "Meeting",
-      "body": "vfdgfsa",
-      "start": "2019-10-09",
-      "end": "",
       "startTime": "04:00",
-      "labels": [
-        "important"
-      ],
-      "id": 7
->>>>>>> bc1b5abb66dec8324c9be22b2c1528fbcd2b2a5d
+      "endTime": "02:00",
+      "id": 4
     }
   ]
 }
