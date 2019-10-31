@@ -30,8 +30,6 @@
                 <div class="card-info">
                   <h5 class="start">Start: {{event.start}}</h5>
                   <h5 class="start">End: {{event.end}}</h5>
-
-                  <Season />
                 </div>
                 <p>{{event.body}}</p>
                 <router-link :to="'/create-event'" class="add-event">create new event</router-link>

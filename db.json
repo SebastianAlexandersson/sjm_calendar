@@ -96,6 +96,18 @@
       "startTime": "04:00",
       "endTime": "02:00",
       "id": 4
+    },
+    {
+      "task": "vdsfdsasdv",
+      "type": "Meeting",
+      "body": "vfdgfsa",
+      "start": "2019-10-09",
+      "end": "",
+      "startTime": "04:00",
+      "labels": [
+        "important"
+      ],
+      "id": 7
     }
   ]
 }

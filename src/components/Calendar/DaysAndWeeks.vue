@@ -121,9 +121,9 @@ export default {
   }
 
   .meeting-small {
-    background-color: var(--blue);
-    width: .4rem;
-    height: .4rem;
+    background-color: red;
+    width: .5rem;
+    height: .5rem;
   }
 
   .fade {
